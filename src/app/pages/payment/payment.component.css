@@ -1,0 +1,102 @@
+.form-group input::placeholder{
+  color: lightgray;
+  font-size: 14px;
+  font-weight:400;
+  font-family: sans-serif;
+}
+input:focus{
+  box-shadow: none;
+}
+
+/*  */
+
+.ng-select.ng-select-single .ng-select-container {
+  height: 49px !important;
+}
+
+/*  */
+.form-control:focus{
+  box-shadow: none !important;
+  border-color: grey !important;
+}
+input[type="text"] {
+  width: 100% !important;
+}
+.pay_head{
+  font-family: 'Product Sans';
+  font-weight: 600;
+}
+.form-control{
+  border-radius: 1px !important;
+  padding: 23px 10px;
+}
+.total-div{
+  padding: 25px 10px;
+  background-color: #d8d8d8;
+  border-radius: 5px;
+  font-family: sans-serif;
+}
+.total-div div:nth-child(1){
+  border-bottom: 1px solid grey;
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  font-family: sans-serif;
+}
+.total-div p{
+  margin: 0;
+  font-family: sans-serif;
+  font-size: 16px;
+}
+.subtotal{
+  font-size: 13px;
+  color: grey;
+  font-family: sans-serif;
+}
+.safe-data-div p{
+  color: lightgray;
+  margin: 0;
+}
+.pay_button{
+width: 100%;
+border: none;
+background: black;
+color: white;
+padding: 10px;
+margin-top: 20px;
+border-radius: 3px;
+}
+.cancel_button{
+width: 100%;
+border: none;
+background: white;
+color: black;
+padding: 10px;
+border-radius: 3px;
+}
+
+
+
+/* new css */
+
+.form_labell{
+  margin-bottom: 5px;
+    font-weight: 500;
+}
+.ng-input > input{
+  width: 100% !important;
+}
+.redeem-btn{
+  position: relative;
+    top: -33px;
+    float: right;
+    border: none;
+    background: transparent;
+    font-weight: 700;
+    font-size: 13px;
+}
+
+
+.ng-input input {
+  width: 100%  !important;
+  padding: 23px 10px !important;
+}

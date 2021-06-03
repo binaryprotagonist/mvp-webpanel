@@ -1,0 +1,143 @@
+<nav class="navbar navbar-expand-md navbar-light bg-white height_custom sticky-top">
+  <a class="navbar-brand" [routerLink]="['/quickAccess']">
+    <img src="../../../assets/images/header_logo.png" class="img_header" />
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <div class="form form-sear">
+          <input type="search" placeholder="Search" class="search_input" data-toggle="modal" (click)=searchmodal() />
+        </div>
+      </li>
+      <!-- <li class="nav-item">
+          <a class="nav-link" href="#">
+              <div class="line_noti">
+                  <img src="../../../assets/images/notification.svg" class="notification_images"/>
+              </div>
+          </a>
+      </li> -->
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <div class="line_header">
+          </div>
+        </a>
+      </li>
+      <div class="dropdown">
+        <li class="nav-item" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link" href="#">
+            <img *ngIf="profileImage==null" src="../../../assets/images/avtar.png" class="img_header_p" />
+            <img *ngIf="profileImage!=null" src="{{ profileImage}}" class="img_header_p" />
+            <i class="fa fa-angle-down font-angle"></i>
+          </a>
+          <div class="dropdown-menu custom_drop" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">
+              <div class="row">
+                <div class="col-3">
+                  <!-- <img src="{{ profileImage}}" class="avtar_img"/> -->
+                  <img *ngIf="profileImage==null" src="../../../assets/images/avtar.png" class="avtar_img" />
+                  <img *ngIf="profileImage!=null" src="{{ profileImage}}" class="avtar_img" />
+                </div>
+                <div class="col-9">
+                  <h4 class="head_member">{{firstName}}</h4>
+                  <p class="para_premium">{{PlanName}} Plan</p>
+                </div>
+              </div>
+            </a>
+            <a class="dropdown-item" routerLink='/myAccount'><img src="../../../assets/images/profile1.svg" /> My
+              Account</a>
+            <a class="dropdown-item" routerLink='/subscription'><img src="../../../assets/images/profile2.svg" />
+              Subscription</a>
+            <a class="dropdown-item disabled"><img src="../../../assets/images/profile2.svg" /> Help &
+              Support</a>
+            <a class="dropdown-item disabled"><img src="../../../assets/images/profile3.svg" /> Privacy & Terms of
+              use</a>
+            <a class="dropdown-item" (click)="signOut()"><img src="../../../assets/images/profile1.svg" /> Sign out</a>
+          </div>
+        </li>
+      </div>
+    </ul>
+  </div>
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+<div class="modal fade" id="searchmodal" tabindex="-1" role="dialog" aria-labelledby="searchmodal" aria-hidden="true">
+  <ngx-spinner></ngx-spinner>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content modal-customise-content">
+      <div class="">
+        <input type="search" [(ngModel)]="searchText" (keyup)="onSearch()" class="search-bar-pop" placeholder="what are you searching for" />
+        <!-- <button class="btn btn-info" (click)='onSearch()'>search</button> -->
+        <hr class="m-0" />
+      </div>
+      <div class="modal-body modal-color">
+        <nav class="w-100 bg-white">
+          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active search-head" id="nav-home-tab" data-toggle="tab" href="#nav-home"
+              role="tab" aria-controls="nav-home" aria-selected="true">Cue Points</a>
+            <a class="nav-item nav-link search-head" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
+              role="tab" aria-controls="nav-profile" aria-selected="false">Summary</a>
+          </div>
+        </nav>
+        <div class="tab-content tab-customise-content" id="nav-tabContent">
+          <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            <div class="row">
+              <div class="col-md-12" *ngFor="let element of cuesData">
+                <div class="content-box">
+                  <div class="d-flex justify-content-between border-bottom">
+                    <div>
+                      <p class="content-head">{{element.notesName}}<span class="content-date"> {{element.createdAt |
+                          date}}</span></p>
+                      <p class="content-subject">{{element.subjectName}}</p>
+                    </div>
+                    <a (click)="routeOnNotes(element.notesName,element.noteId)" class="content-click">View in Document</a>
+                  </div>
+                  <div class="list-box">
+                    <ol class="subject-content-list">
+                      <li>{{element.cuesText}}</li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            <!-- summary section -->
+            <div class="row">
+              <div class="col-md-12" *ngFor="let element of summariesData">
+                <div class="content-box">
+                  <div class="d-flex justify-content-between border-bottom">
+                    <div>
+                      <p class="content-head">{{element.notesName}}<span class="content-date"> {{element.createdAt |
+                          date}}</span></p>
+                      <p class="content-subject">{{element.subjectName}}</p>
+                    </div>
+                    <a (click)="routeOnNotes(element.notesName,element.noteId)" class="content-click">View in Document</a>
+                  </div>
+                  <div class="list-box">
+                    <ol class="subject-content-list">
+                      <li>{{element.summaryText}}</li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Summary end -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

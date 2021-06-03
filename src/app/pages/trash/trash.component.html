@@ -1,0 +1,152 @@
+<app-header></app-header>
+<section class="box_section_dash" style="background-color: #fff;">
+  <div class="d-flex justify-content-between">
+    <div class="quick_box">
+      <h3 class="head_quick">Trash</h3>
+    </div>
+    <div class="box_row_date">
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col notes_flex_grow custom_height" >
+
+    </div>
+    <div  *ngIf="deletedData?.length==0">Data Not Found</div>
+    <div class="col notes_flex_grow" *ngFor="let deleted of deletedData" >
+      <div class="box_list_subject" *ngIf=" checkKey(deleted,'subjectName')">
+        <div  >
+          <img src="../../../assets/images/file_entry.svg" >
+
+        </div>
+        <div class="box-bottom">
+          <div class="all_box_p">
+            <div class="box_custom_notes" >
+              <h3>{{deleted.subjectName}}</h3>
+            </div>
+            <div class="dropdown label_dropdown">
+              <button class="button_dash_n" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <img src="../../../assets/images/elipsis.JPG" class="img_elipsis" />
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" >
+                  <div class="box_drop" (click)="restoresubject(deleted._id)">
+                    <img src="../../../assets/images/delete.png" />
+                    Restore
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="box_list_subject" *ngIf=" checkKey(deleted,'notesName')">
+        <img src="../../../assets/images/doc3.png" >
+        <div class="box-bottom">
+          <div class="all_box_p">
+            <div class="">
+              <h3>{{deleted.notesName}}</h3>
+            </div>
+            <div class="dropdown label_dropdown">
+              <button class="button_dash_n" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <img src="../../../assets/images/elipsis.JPG" class="img_elipsis" />
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" >
+                  <div class="box_drop" (click)="restorNote(deleted._id)">
+                    <img src="../../../assets/images/delete.png" />
+                    Restore
+                  </div>
+                </a>
+              </div>
+            </div>
+            <!-- <div class="dropdown label_dropdown">
+              <button class="button_dash_n" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <img src="../../../assets/images/elipsis.JPG" class="img_elipsis" />
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" (click)="editNotes(note.notesName,note._id)" data-toggle="modal"
+                  data-target="#exampleModalCenter3">
+                  <div class="box_drop">
+                    <img src="../../../assets/images/edit_1.png" />
+                    Rename
+                  </div>
+                </a>
+                <a class="dropdown-item" (click)="deleteNotes(note._id)">
+                  <div class="box_drop">
+                    <img src="../../../assets/images/delete.png" />
+                    Move to trash
+                  </div>
+                </a>
+                <a class="dropdown-item" href="#">
+                  <div class="box_drop">
+                    <img src="../../../assets/images/share.png" />
+                    Open in new tab
+                  </div>
+                </a>
+              </div>
+            </div> -->
+          </div>
+
+
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</section>
+<ngx-spinner ></ngx-spinner>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="">
+        <h5 class="modal-title_dash" id="exampleModalCenterTitle">New Subject</h5>
+        <p class="para_modal_notes">Please enter name of the folder you like.</p>
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button> -->
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <input type="text" class="modal_form"  placeholder="Strength of mate" />
+        </div>
+      </div>
+      <div class="">
+        <button type="button" class="btn_crete" >Yes! Create</button>
+        <button type="button" class="btn_leave_it" data-dismiss="modal">Leave it!</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="">
+        <h5 class="modal-title_dash" id="exampleModalCenterTitle">Change Subject Name</h5>
+        <p class="para_modal_notes">Please enter name of the folder you like.</p>
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button> -->
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <input type="text" class="modal_form" placeholder="Subject Name" />
+        </div>
+      </div>
+      <div class="">
+        <button type="button" class="btn_crete" >Yes! Create</button>
+        <button type="button" class="btn_leave_it" data-dismiss="modal">Leave it!</button>
+      </div>
+    </div>
+  </div>
+</div>
+

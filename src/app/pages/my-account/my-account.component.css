@@ -1,0 +1,147 @@
+.Subs-Head{
+    font-size: 20px;
+    margin-bottom: 0;
+    font-family: ProductSans400;
+}
+.Subs-subHead{
+    font-size: 13px;
+    margin-bottom: 0;
+    color: gray;
+    font-family: ProductSans400;
+}
+.blue-box{
+    background: transparent linear-gradient(291deg, var(--unnamed-color-2b50ed) 0%, var(--unnamed-color-6b85f2) 100%) 0% 0% no-repeat padding-box;
+    background: transparent linear-gradient(291deg, #2B50ED 0%, #6B85F2 100%) 0% 0% no-repeat padding-box;
+    padding: 20px;
+    border-radius: 25px;
+    margin: 10px 0;
+}
+.blue-box p{
+    font-family: 'Product Sans';
+    color: white;
+    font-size: 13px;
+    font-weight: 300;
+}
+.subs-card{
+    width: 25%;
+    border-radius: 20px;
+    background-color: white;
+    padding: 10px 20px;
+    text-align: center;
+    transition: .2s;
+    cursor: pointer;
+}
+.subs-card:hover{
+    transform: scale(1.03);
+    transition: .2s;
+    background: transparent linear-gradient(291deg, var(--unnamed-color-2b50ed) 0%, var(--unnamed-color-6b85f2) 100%) 0% 0% no-repeat padding-box;
+    background: transparent linear-gradient(291deg, #2B50ED 0%, #6B85F2 100%) 0% 0% no-repeat padding-box;
+}
+.subs-card:hover .white{
+    color: white;
+}
+.subs-card:hover .plan-button{
+    background: white;
+    color: black;
+}
+.plan-name{
+    font-size: 14px;
+    font-weight: 600;
+    font-family: ProductSans400;
+    margin-bottom: 5px;
+}
+.plan-price{
+    font-size: 20px;
+    font-weight: 600;
+}
+.plan-month{
+    font-size: 14px;
+    color: gray;
+    font-weight: 300;
+}
+.plan-description{
+    font-family: ProductSans400;
+    font-size: 10px;
+    color: grey;
+}
+.plan-feature{
+    font-family: 'Product Sans';
+    font-size: 12px;
+    margin-bottom: 8px;
+    text-align: left;
+    padding-left: 15px;
+}
+.plan-button{
+    background: transparent linear-gradient(291deg, var(--unnamed-color-2b50ed) 0%, var(--unnamed-color-6b85f2) 100%) 0% 0% no-repeat padding-box;
+background: transparent linear-gradient(291deg, #2B50ED 0%, #6B85F2 100%) 0% 0% no-repeat padding-box;
+border: none;
+font-family: ProductSans400 ;
+font-size: 11px;
+color: white;
+width: 80%;
+margin-left: auto;
+margin-right: auto;
+height: 33px;
+border-radius: 8px;
+padding: 0 10px;
+margin-top: 15px;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.slidecontainer {
+    width: 100%;
+    padding-bottom: 25px;
+  }
+
+  .slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 10px;
+    border-radius: 5px;
+    background: white;
+    outline: none;
+    opacity:1;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+  }
+
+  .slider:hover {
+    opacity: 1;
+  }
+
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+    border:3px solid blue;
+  }
+
+  .slider::-moz-range-thumb {
+    width:20px;
+    height: 20px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+    border-color: blue;
+  }

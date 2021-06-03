@@ -1,0 +1,241 @@
+<app-header></app-header>
+<ngx-spinner></ngx-spinner>
+
+
+<section class="">
+</section>
+<section class="section_file box_section_dash">
+  <div class="row_subject_notes">
+    <h3 class="head_quick">{{subject |titlecase}} Notes</h3>
+    <div class="dropdown label_dropdown">
+      <img src="../../../assets/images/dots_3.png" type="button" id="dropdownMenuButton1" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false" class="img_subject_e" />
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <a class="dropdown-item" data-toggle="modal" (click)=cuesmodal()>
+          <div class="box_drop">
+            View only Cues
+          </div>
+        </a>
+        <a class="dropdown-item" data-toggle="modal" (click)=summarymodal() >
+          <div class="box_drop">
+            View only Summaries
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col custom_height notes_revert">
+      <div class="box_list_subject padding_custom_notes">
+        <img data-toggle="modal" data-target="#exampleModalCenter1" src="../../../assets/images/plus.png"
+          class="plus-icon" />
+        <h1>Add New Note</h1>
+        <p>Click to make new notes</p>
+      </div>
+    </div>
+    <div class="col notes_revert" *ngFor="let note of notes;">
+      <div class="box_list_subject" style="padding-top: 40px;">
+        <img (click)="routeOnNotes(note.notesName,note._id)" src="../../../assets/images/doc3.png"
+           />
+
+        <div class="box-bottom">
+          <div class="all_box_p">
+            <div class="box_custom_notes" (click)="routeOnNotes(note.notesName,note._id)">
+              <h3>{{note.notesName}}</h3>
+              <p>{{note.createdAt | date}}</p>
+            </div>
+            <div class="dropdown label_dropdown">
+              <button class="button_dash_n" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <img src="../../../assets/images/elipsis.JPG" class="img_elipsis" />
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" (click)="editNotes(note.notesName,note._id)" data-toggle="modal"
+                  data-target="#exampleModalCenter3">
+                  <div class="box_drop">
+                    <img src="../../../assets/images/edit_1.png" />
+                    Rename
+                  </div>
+                </a>
+                <a class="dropdown-item" (click)="deleteNotes(note._id)">
+                  <div class="box_drop">
+                    <img src="../../../assets/images/delete.png" />
+                    Move to trash
+                  </div>
+                </a>
+                <a class="dropdown-item" target="_blank" (click)="openNewTabnote(note._id)">
+                  <div class="box_drop">
+                    <img src="../../../assets/images/share.png" />
+                    Open in new tab
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="">
+        <h5 class="modal-title_dash" id="exampleModalCenterTitle">New Subject</h5>
+        <p class="para_modal_notes">Please enter name of the folder you like.</p>
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button> -->
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <input type="text" class="modal_form" placeholder="Strength of mate" />
+        </div>
+      </div>
+      <div class="">
+        <button type="button" class="btn_crete">Yes! Create</button>
+        <button type="button" class="btn_leave_it" data-dismiss="modal">Leave it!</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+
+      <div class="modal-body">
+
+        <div class="form-group">
+          <label class="lab_note">Note Title</label>
+          <input type="text" class="modal_form" [(ngModel)]="notesName" placeholder="Note Title" />
+        </div>
+      </div>
+      <div class="">
+        <button type="button" class="btn_crete" (click)='createNotes()'>Yes! Create</button>
+        <button type="button" class="btn_leave_it" data-dismiss="modal">Leave it!</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="exampleModalCenter3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="">
+        <h5 class="modal-title_dash" id="exampleModalCenterTitle">Change Notes Name</h5>
+        <p class="para_modal_notes">Please enter name of the Note you like.</p>
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button> -->
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <input type="text" class="modal_form" [(ngModel)]="noteTitle" placeholder="Notes Name" />
+        </div>
+      </div>
+      <div class="">
+        <button type="button" class="btn_crete" (click)="updateNote()">Yes! Create</button>
+        <button type="button" class="btn_leave_it" data-dismiss="modal">Leave it!</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- only cues -->
+<div class="modal fade" id="cuesmodal" tabindex="-1" role="dialog" aria-labelledby="cuesmodal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content modal-customise-content">
+      <div class="">
+        <!-- <input type="search" [(ngModel)]="searchText" class="search-bar-pop" placeholder="what are you searching for" /> -->
+        <!-- <button class="btn btn-info" (click)='onSearch()'>search</button> -->
+        <hr class="m-0" />
+      </div>
+      <div class="modal-body modal-color">
+        <nav class="w-100 bg-white">
+          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active search-head" id="nav-home-tab" data-toggle="tab" href="#nav-home"
+              role="tab" aria-controls="nav-home" aria-selected="true">Cue Points</a>
+          </div>
+        </nav>
+        <div class="tab-content tab-customise-content" id="nav-tabContent">
+          <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            <div class="row">
+              <div class="col-md-12" *ngFor="let element of notes">
+                <div class="content-box">
+                  <div class="d-flex justify-content-between border-bottom">
+                    <div>
+                      <p class="content-head">{{element.notesName}}<span class="content-date"> {{element.createdAt |
+                          date}}</span></p>
+                      <p class="content-subject">{{element.subjectName}}</p>
+                    </div>
+                    <a class="content-click" (click)="routeOnNotes(element.notesName,element._id)">View in Document</a>
+                  </div>
+                  <div class="list-box">
+                    <!-- <ol class="subject-content-list"> -->
+                  {{element.cues.cuesText}}
+                    <!-- </ol> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--summaries  -->
+<div class="modal fade" id="summarymodal" tabindex="-1" role="dialog" aria-labelledby="summarymodal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content modal-customise-content">
+      <div class="">
+        <!-- <input type="search" [(ngModel)]="searchText" class="search-bar-pop" placeholder="what are you searching for" /> -->
+        <!-- <button class="btn btn-info" (click)='onSearch()'>search</button> -->
+        <hr class="m-0" />
+      </div>
+      <div class="modal-body modal-color">
+        <nav class="w-100 bg-white">
+          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active search-head" id="nav-home-tab" data-toggle="tab" href="#nav-home"
+              role="tab" aria-controls="nav-home" aria-selected="true">Summary Points</a>
+          </div>
+        </nav>
+        <div class="tab-content tab-customise-content" id="nav-tabContent">
+          <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            <div class="row">
+              <div class="col-md-12" *ngFor="let element of notes">
+                <div class="content-box">
+                  <div class="d-flex justify-content-between border-bottom">
+                    <div>
+                      <p class="content-head">{{element.notesName}}<span class="content-date"> {{element.createdAt |
+                          date}}</span></p>
+                      <p class="content-subject">{{element.subjectName}}</p>
+                    </div>
+                    <a (click)="routeOnNotes(element.notesName,element._id)" class="content-click">View in Document</a>
+                  </div>
+                  <div class="list-box">
+                    <!-- <ol class="subject-content-list"> -->
+                      {{element.summaries.summaryText}}
+                    <!-- </ol> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->
+
+

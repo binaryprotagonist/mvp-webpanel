@@ -1,0 +1,152 @@
+
+
+
+
+.first-box{
+    text-align: center;
+    height: 19vh;
+    margin: 10px auto;
+    width: 80%;
+    transition: .2s;
+}
+.first-box:hover{
+    transition: .2s;
+}
+.second-box{
+    text-align: center;
+    height: 39vh;
+    margin: 10px auto;
+    width: 80%;
+    transition: .2s;
+}
+.second-box:hover{
+    transition: .2s;
+}
+
+.cms-head{
+    font-size: 20px;
+    font-family: ProductSans400;
+    font-weight: 600;
+    padding: 10px 0;
+}
+.border-div{
+    border: none ;
+    border-radius: 20px;
+    text-align: center;
+    transition: .2s;
+    cursor: pointer;
+}
+.border-div:hover{
+
+    transition: .2s;
+    transform: scale(1.05);
+}
+.border-div:hover p{
+    color: black !important;
+}
+.cx-icon-font{
+    font-size: 13px;
+    font-family: ProductSans400;
+    color: black;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+.icon-img{
+    width: 25px;
+    height: 26px;
+    margin-top: 6px;
+}
+.cx-form{
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid lightgrey;
+    font-size: 12px;
+    font-family: ProductSans400;
+    outline: none;
+    transition: .3s;
+}
+.cx-form input:focus{
+   height: 50px;
+   transition: .3s;
+}
+.cx-form input{
+    width: 100%;
+    border: none;
+    height: 35px;
+    background-color: transparent;
+    font-size: 15px;
+    font-family: 'Product Sans';
+    color: black;
+    padding: 0 30px;
+}
+.cx-form :focus{
+    outline: none;
+}
+.cx-form input::placeholder{
+   color: lightgrey;
+}
+.cs-check-label{
+    color: #3457d6;
+    font-family: 'Product Sans';
+    font-size: 14px;
+
+}
+.cx-form-button{
+    background-color: transparent;
+    border: 1px dashed #3457d6;
+    color: #3457d6;
+    font-size: 14px;
+    border-radius: 30px;
+    padding: 10px 20px;
+}
+.cx-form-button:hover{
+    border: 1px solid #3457d6;
+}
+
+.blue-back{
+    background: transparent linear-gradient(285deg, #2B50ED 0%, #6B85F2 100%) 0% 0% no-repeat padding-box !important;
+}
+.support-text{
+    font-size: 24px;
+    color: white;
+    margin-bottom: 0;
+    font-family: ProductSansBold;
+}
+.support-subtext{
+    font-size: 15px;
+    color: white;
+    margin-bottom: 0;
+    font-family: ProductSans400;
+}
+.follow-text{
+    font-size: 15px;
+    font-family: ProductSans400;
+    color: #3457d6;
+    margin-bottom: 0;
+
+}
+.help-social-icons{
+    margin-top: 20px;
+}
+.help-social-icons img{
+ width: 35px;
+ height: 35px;
+ margin-right: 25px;
+ filter: brightness(60%);
+ cursor: pointer;
+
+}
+
+.help-social-icons img:hover{
+    filter: brightness(100%);
+}
+.form-width{
+    width: 40%;
+}
+
+
+.tile-effect{
+    box-shadow: 0px 0px 5px lightgrey;
+    border-radius: 30px;
+    background: white;
+}

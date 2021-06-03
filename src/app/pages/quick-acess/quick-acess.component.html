@@ -1,0 +1,290 @@
+<app-header></app-header>
+<ngx-spinner></ngx-spinner>
+
+<section class="box_section_dash">
+  <div class="d-flex justify-content-between">
+    <div class="quick_box">
+      <h3 class="head_quick">My Subjects</h3>
+    </div>
+    <div class="box_row_date">
+      <div class="form-group mb-0 " style="width: 63%;">
+        <input type="text"  placeholder="Sort by date" class="form-control form_date_picker" bsDatepicker (bsValueChange)="onValueChange($event)">
+        <img src="../../../../assets/images/arrow_header.png" class="img_arrow_date">
+      </div>
+      <div class="dropdown label_dropdown">
+        <img src="../../../assets/images/dots_3.png" type="button" id="dropdownMenuButton1" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false" class="img_subject_e" />
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <a class="dropdown-item"[routerLink]="['/trash']">
+            <div class="box_drop">
+              Go to trash screen
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col notes_flex_grow custom_height" (click)="addModal()">
+      <div class="box_list_subject">
+        <img data-toggle="modal" data-target="#exampleModalCenter" src="../../../assets/images/plus.png" class="plus-icon" />
+        <h1>Add New Subject</h1>
+        <p>Click to make new subject</p>
+      </div>
+    </div>
+    <div class="col notes_flex_grow" *ngFor="let subject of subjects;">
+      <div class="box_list_subject">
+        <div>
+          <img src="../../../assets/images/file_entry.svg" (click)="routeOnSubject(subject.subjectName,subject._id)">
+
+        </div>
+        <div class="box-bottom">
+          <div class="all_box_p">
+            <div class="box_custom_notes" (click)="routeOnSubject(subject.subjectName,subject._id)">
+              <h3>{{subject.subjectName |titlecase}}</h3>
+              <p>{{ subject.createdAt | date }} </p>
+            </div>
+            <div class="dropdown label_dropdown">
+              <button class="button_dash_n" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <img src="../../../assets/images/elipsis.JPG" class="img_elipsis" />
+              </button>
+              <div class="dropdown-menu drop-menu-update" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" (click)="editSubject(subject.subjectName,subject._id)" data-toggle="modal"
+                  data-target="#exampleModalCenter2">
+                  <div class="box_drop">
+                    <img src="../../../assets/images/edit_1.png" />
+                    Rename
+                  </div>
+                </a>
+                <a class="dropdown-item" (click)="onDeleteSubject(subject._id)">
+                  <div class="box_drop">
+                    <img src="../../../assets/images/delete.png" />
+                    Move to trash
+                  </div>
+                </a>
+                <a class="dropdown-item" target="_blank" (click)="openNewTabSubject(subject._id)" >
+                  <div class="box_drop">
+                    <img src="../../../assets/images/share.png"  />
+                    Open in new tab
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section_file">
+  <div class="">
+    <h3 class="head_quick">My Notes</h3>
+  </div>
+  <div class="row">
+    <div class="col notes_flex_grow custom_height">
+      <div class="box_list_subject padding_custom_notes" style="padding-top: 40px !important;">
+        <img data-toggle="modal" (click)=addNotesModal() src="../../../assets/images/plus.png" class="plus-icon" />
+        <h1>Add New Note</h1>
+        <p>Click to make new notes</p>
+      </div>
+    </div>
+    <div class="col notes_flex_grow col" *ngFor="let note of notes;">
+      <div class="box_list_subject">
+        <img (click)="routeOnNotes(note.notesName,note._id)" src="../../../assets/images/doc3.png"  class=""/>
+        <div class="box-bottom">
+          <div class="all_box_p">
+            <div class="w-100" (click)="routeOnNotes(note.notesName,note._id)">
+              <div *ngIf="note.subjectId==null ;else other_content">
+                   </div>
+              <ng-template #other_content>
+                              <h3 class="mb-0">{{note.subjectId.subjectName}}</h3>
+
+              </ng-template>
+              <h3>{{note.notesName}}</h3>
+
+              <p>{{ note.createdAt | date }} </p>
+            </div>
+            <div class="dropdown label_dropdown">
+              <button class="button_dash_n" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false" style="margin-top: 19px !important">
+                <img src="../../../assets/images/elipsis.JPG" class="img_elipsis" />
+              </button>
+              <div class="dropdown-menu drop-menu-update" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" (click)="editNotes(note.notesName,note._id)" data-toggle="modal"
+                  data-target="#exampleModalCenter3">
+                  <div class="box_drop">
+                    <img src="../../../assets/images/edit_1.png" />
+                    Rename
+                  </div>
+                </a>
+                <a class="dropdown-item" (click)="movesNotes(note.notesName,note._id)" data-toggle="modal"
+                  data-target="#movenotesModalCenter3">
+                  <div class="box_drop">
+                    <img src="../../../assets/images/edit_1.png" />
+                    Move to Subject
+                                                      </div>
+                </a>
+                <a class="dropdown-item" (click)="onDeleteNotes(note._id)">
+                  <div class="box_drop">
+                    <img src="../../../assets/images/delete.png" />
+                    Move to trash
+                  </div>
+                </a>
+                <a class="dropdown-item" target="_blank" (click)="openNewTabnote(note._id)" >
+                  <div class="box_drop">
+                    <img src="../../../assets/images/share.png" />
+                    Open in new tab
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col custom_height">
+    </div>
+    <div class="col custom_height">
+    </div>
+    <div class="col custom_height">
+    </div>
+  </div>
+</section>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content p-3">
+      <div class="">
+        <h5 class="modal-title_dash" id="exampleModalCenterTitle">New Subject</h5>
+        <p class="para_modal_notes">Please enter name of the folder you like.</p>
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button> -->
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <input type="text" class="modal_form" [(ngModel)]="subjectTitle" placeholder="Subject Name" />
+        </div>
+      </div>
+      <div class="">
+        <button type="button" class="btn_crete" (click)="creteSubject()">Yes! Create</button>
+        <button type="button" class="btn_leave_it" data-dismiss="modal">Leave it!</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="">
+        <h5 class="modal-title_dash" id="exampleModalCenterTitle">Change Subject Name</h5>
+        <p class="para_modal_notes">Please enter name of the folder you like.</p>
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button> -->
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <input type="text" class="modal_form" [(ngModel)]="subjectTitle" placeholder="Subject Name" />
+        </div>
+      </div>
+      <div class="">
+        <button type="button" class="btn_crete" (click)="updateSubject()">Yes! Update</button>
+        <button type="button" class="btn_leave_it" data-dismiss="modal">Leave it!</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModalCenter3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="">
+        <h5 class="modal-title_dash" id="exampleModalCenterTitle">Change Notes Name</h5>
+        <p class="para_modal_notes">Please enter name of the Note you like.</p>
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button> -->
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <input type="text" class="modal_form" [(ngModel)]="noteTitle" placeholder="Notes Name" />
+
+        </div>
+      </div>
+      <div class="">
+        <button type="button" class="btn_crete" (click)="updateNote()">Yes! Update</button>
+        <button type="button" class="btn_leave_it" data-dismiss="modal">Leave it!</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- move notes -->
+<div class="modal fade" id="movenotesModalCenter3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="">
+        <h5 class="modal-title_dash" id="exampleModalCenterTitle">Change Notes Name</h5>
+        <p class="para_modal_notes">Please enter name of the Note you like.</p>
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button> -->
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <input type="text" class="modal_form" [(ngModel)]="noteTitle" placeholder="Notes Name" />
+          <label class="lab_note">Search Subjects</label>
+          <input type="text" (keyup)="searchSubject($event)" [(ngModel)]='selectedSub' class="modal_form p-l-dash"
+            placeholder="Search" style="padding-left: 53px;" />
+          <img src="../../../assets/images/search.svg" class="img_search" />
+          <ul id="myUL" *ngFor="let sub of searchSubjects;">
+            <li><a (click)="selectSubject(sub.subjectName,sub._id)">{{sub.subjectName}}</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="">
+        <button type="button" class="btn_crete" (click)="moveNote()">Yes! Move</button>
+        <button type="button" class="btn_leave_it" data-dismiss="modal">Leave it!</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->
+<div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content p-4">
+      <div class="">
+        <h5 class="modal-title_dash" id="exampleModalCenterTitle">For which subject do you want to make notes?</h5>
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button> -->
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="lab_note">Search Subjects</label>
+          <input type="text" (keyup)="searchSubject($event)" [(ngModel)]='selectedSub' class="modal_form p-l-dash"
+            placeholder="Search" style="padding-left: 53px;" />
+          <img src="../../../assets/images/search.svg" class="img_search" />
+          <ul id="myUL" *ngFor="let sub of searchSubjects;">
+            <li><a (click)="selectSubject(sub.subjectName,sub._id)">{{sub.subjectName}}</a></li>
+          </ul>
+        </div>
+        <div class="form-group">
+          <label class="lab_note">Note Title</label>
+          <input type="text" class="modal_form" [(ngModel)]="notesName" placeholder="Note Title" />
+        </div>
+      </div>
+      <div class="">
+        <button type="button" class="btn_crete" (click)='createNotes()'>Yes! Create</button>
+        <button type="button" class="btn_leave_it" data-dismiss="modal">Leave it!</button>
+        <button type="button" class="btn_add_new">Add New Subject</button>
+      </div>
+    </div>
+  </div>
+</div>

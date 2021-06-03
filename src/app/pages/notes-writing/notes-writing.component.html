@@ -1,0 +1,902 @@
+<html lang="en">
+
+<head>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/<version>/slimselect.min.js"></script>
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/<version>/slimselect.min.css">
+</head>
+
+<body>
+  <ngx-spinner></ngx-spinner>
+  <nav class="navbar navbar-expand-md navbar-light bg-white height_custom sticky-top">
+
+    <a class="navbar-brand" [routerLink]="['/quickAccess']">
+      <img src="/assets/images/header_logo.png" />
+      <span class="svg_box_circle">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20"
+          viewBox="0 0 20 20">
+          <defs>
+            <style>
+              .a,
+              .c {
+                fill: #979797;
+              }
+
+              .a {
+                stroke: #707070;
+              }
+
+              .b {
+                clip-path: url(#a);
+              }
+            </style>
+            <clipPath id="a">
+              <rect class="a" width="20" height="20" transform="translate(1 1)" />
+            </clipPath>
+          </defs>
+          <g class="b" transform="translate(-1 -1)">
+            <g transform="translate(1.633 4.761)">
+              <path class="c"
+                d="M.3,11.2h0L5.554,5.965a1.006,1.006,0,0,1,1.42,1.426L3.444,10.9H17.728a1.006,1.006,0,0,1,0,2.013H3.444l3.53,3.513a1.006,1.006,0,0,1-1.42,1.426L.3,12.624h0A1.007,1.007,0,0,1,.3,11.2Z"
+                transform="translate(0 -5.672)" />
+            </g>
+          </g>
+        </svg>
+      </span>
+    </a>
+    <div class="d-flex" style="margin-left: -35px;">
+      <!-- <p (keyup)="get Name($event.target.innerHTML)" contenteditable class="note-name" [innerHTML]="notesName"></p> -->
+      <input type="text" (keyup)="getContent()" type="text" (keyup)="getContent()" autoSizeInput
+        [includePadding]="false" [includeBorders]="false" [(ngModel)]="notesName" class="note-name">
+
+      <div class="dropdown">
+        <button class="pop-button dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-folder-open-o ml-3 mt-1 icon-color-change"></i>
+        </button>
+        <div class="dropdown-menu pop-div" aria-labelledby="dropdownMenuButton">
+          <ul class="under_cost_list_button">
+            <li *ngFor="let subject of subjects;">
+              <a (click)="getSubjectsId(subject._id)"><svg _ngcontent-cqy-c87="" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" xml:space="preserve"
+                  style="enable-background: new 0 0 512 512;">
+                  <path _ngcontent-cqy-c87="" d="M441.412,140.235v338.781c0,18.219-14.778,32.983-32.983,32.983H103.572
+              c-18.219,0-32.983-14.764-32.983-32.983V32.983C70.588,14.764,85.352,0,103.572,0h197.605L441.412,140.235z"
+                    style="fill: #518EF8;"></path>
+                  <g _ngcontent-cqy-c87="">
+                    <rect _ngcontent-cqy-c87="" x="161.18" y="257.054" width="189.626" height="21.071"
+                      style="fill: #FFFFFF;"></rect>
+                    <rect _ngcontent-cqy-c87="" x="161.18" y="304.112" width="189.626" height="21.071"
+                      style="fill: #FFFFFF;"></rect>
+                    <rect _ngcontent-cqy-c87="" x="161.18" y="351.171" width="189.626" height="21.071"
+                      style="fill: #FFFFFF;"></rect>
+                    <rect _ngcontent-cqy-c87="" x="161.18" y="398.23" width="134.855" height="21.071"
+                      style="fill: #FFFFFF;"></rect>
+                  </g>
+                  <polygon _ngcontent-cqy-c87=""
+                    points="320.31,137.188 441.412,187.079 441.412,140.235 372.751,119.962 " style="fill: #3A5BBC;">
+                  </polygon>
+                  <path _ngcontent-cqy-c87=""
+                    d="M441.412,140.235H334.16c-18.22,0-32.983-14.764-32.983-32.983V0L441.412,140.235z"
+                    style="fill: #ACD1FC;"></path>
+                  <g _ngcontent-cqy-c87=""></g>
+                  <g _ngcontent-cqy-c87=""></g>
+                  <g _ngcontent-cqy-c87=""></g>
+                  <g _ngcontent-cqy-c87=""></g>
+                  <g _ngcontent-cqy-c87=""></g>
+                  <g _ngcontent-cqy-c87=""></g>
+                  <g _ngcontent-cqy-c87=""></g>
+                  <g _ngcontent-cqy-c87=""></g>
+                  <g _ngcontent-cqy-c87=""></g>
+                  <g _ngcontent-cqy-c87=""></g>
+                  <g _ngcontent-cqy-c87=""></g>
+                  <g _ngcontent-cqy-c87=""></g>
+                  <g _ngcontent-cqy-c87=""></g>
+                  <g _ngcontent-cqy-c87=""></g>
+                  <g _ngcontent-cqy-c87=""></g>
+                </svg> {{subject.subjectName |titlecase}}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="pop-button dropdown-toggle" type="button" id="dropdownMenuButton1" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-cloud ml-2 mt-1 icon-color-change"></i>
+        </button>
+        <div class="dropdown-menu pop-div" aria-labelledby="dropdownMenuButton">
+          <div class="pop-top-div">
+            <p> <span><i class="fa fa-cloud mr-3"></i></span> All changes saved to drive</p>
+          </div>
+          <div class="pop-bottom-div">
+            <p class="font-weight-bold"> <span><i class="fa fa-exclamation-triangle mr-3"></i></span>This Document
+              is not ready for offline use </p>
+            <p class="">If you lose an internet connection, you can't edit this document. To access your documents
+              without an internet connection, turn on offline</p>
+            <button class="pop-button-on mt-5">Turn on</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- <button type="button" class="pop-button" data-toggle="popover" title="Popover title"
+            data-content="And here's some amazing content. It's very engaging. Right?">
+            <i class="fa fa-folder-open-o ml-3 mt-1" ></i>
+            </button> -->
+
+
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item active">
+          <button class="btn_headershare btn-share" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            <img src="../../../assets/images/btn_headershare.png" />
+            Share
+          </button>
+          <!--  -->
+          <div class="dropdown show">
+            <div class="dropdown-menu user-delete-dropdown-box drop-menu-share" aria-labelledby="dropdownMenuLink">
+              <a class="dropdown-item" (click)='savePdf(0)'><span><img src="assets/images/download.png"
+                    class="block-img" /></span>Download Pdf</a>
+              <!-- <a class="dropdown-item" data-toggle="modal" data-target="#sharemail"
+                        aria-expanded="false"><span><img src="assets/images/share.png" class="block-img" /></span>share
+                        with mail</a> -->
+              <a class="dropdown-item" data-toggle="modal" data-target="#sharemail" aria-expanded="false"><span><img
+                    src="assets/images/share.png" class="block-img" /></span>Share
+                with EMail </a>
+            </div>
+          </div>
+          <!--  -->
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <div class="line_header">
+            </div>
+          </a>
+        </li>
+        <div class="dropdown dropdown_second">
+          <li class="nav-item" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            <a class="nav-link" href="#">
+              <img *ngIf="profileImage==null" src="../../../assets/images/avtar.png" class="img_header_p" />
+              <img *ngIf="profileImage!=null" src="{{ profileImage}}" class="img_header_p" /> </a>
+            <div class="dropdown-menu custom_drop" aria-labelledby="dropdownMenuButton" style="z-index: 9999;">
+              <a class="dropdown-item" href="#">
+                <div class="row">
+                  <div class="col-3">
+                    <img src="../../../assets/images/avtar.png" class="avtar_img" />
+                  </div>
+                  <div class="col-9">
+                    <h4 class="head_member">{{firstName}} {{lastName}}</h4>
+                    <p class="para_premium">{{PlanName}}</p>
+                  </div>
+                </div>
+              </a>
+              <a class="dropdown-item" routerLink='/myAccount'><img src="../../../assets/images/profile1.svg" /> My
+                Account</a>
+              <a class="dropdown-item" routerLink='/subscription'><img src="../../../assets/images/profile2.svg" />
+                Subscription</a>
+              <a class="dropdown-item" href="#"><img src="../../../assets/images/profile3.svg" /> Privacy & Terms
+                of use</a>
+              <a (click)="signOut()" class="dropdown-item"><img src="../../../assets/images/profile1.svg" /> Sign
+                out</a>
+            </div>
+          </li>
+        </div>
+      </ul>
+    </div>
+
+    <header class="sticky-top-c">
+      <ul class="under_list_notes">
+        <li>
+          <!-- dropdown -->
+          <nav class="navbar navbar-expand-md navbar-light bg-light">
+            <div class="collapse navbar-collapse heading-collapse" id="navbarNavDropdown">
+              <ul class="navbar-nav">
+                <li class="nav-item dropdown nav-item-1">
+                  <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    File
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-edit" aria-labelledby="navbarDropdownMenuLink">
+
+
+                    <li class="dropdown-submenu"><a data-toggle="modal" (click)=addNotesModal()
+                        class="dropdown-item dropdown-toggle">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 134.51 134.51">
+                          <defs>
+                            <style>
+                              .cls-1 {
+                                fill: #231f20;
+                              }
+
+                              .cls-2 {
+                                fill: none;
+                                stroke: #fff;
+                                stroke-miterlimit: 10;
+                                stroke-width: 10px;
+                              }
+                            </style>
+                          </defs>
+                          <g id="Layer_2" data-name="Layer 2">
+                            <g id="Layer_1-2" data-name="Layer 1">
+                              <rect class="cls-1" width="134.51" height="134.51" rx="16.6" />
+                              <line class="cls-2" x1="28.82" y1="36.83" x2="105.69" y2="36.83" />
+                              <line class="cls-2" x1="28.82" y1="67.26" x2="105.69" y2="67.26" />
+                              <line class="cls-2" x1="28.82" y1="97.68" x2="74.18" y2="97.68" />
+                            </g>
+                          </g>
+                        </svg>
+                        New</a>
+
+                    </li>
+
+                    <li class="d-p"><a class="dropdown-item" (click)=openModel()>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 172.67 197.33">
+                          <defs>
+                            <style>
+                              .cls-1 {
+                                fill: #010101;
+                              }
+                            </style>
+                          </defs>
+                          <g id="Layer_2" data-name="Layer 2">
+                            <g id="Layer_1-2" data-name="Layer 1">
+                              <g id="_3" data-name="3">
+                                <path class="cls-1"
+                                  d="M129.5,0h-74c-13,0-24.67,12-24.67,24.67l-7.13.16c-13,0-23.7,11.81-23.7,24.5V172.67c0,12.69,11.62,24.66,24.67,24.66h92.5c13,0,24.66-12,24.66-24.66H148c13.05,0,24.67-12,24.67-24.67V49.48ZM117.17,185H24.67c-6.48,0-12.34-6.05-12.34-12.33V49.33c0-6.28,5.28-12.13,11.75-12.13l6.75-.2V148c0,12.7,11.62,24.67,24.67,24.67h74C129.5,179,123.64,185,117.17,185Zm43.16-37c0,6.28-5.86,12.33-12.33,12.33H55.5c-6.48,0-12.33-6.05-12.33-12.33V24.67c0-6.29,5.85-12.34,12.33-12.34h61.67c-.1,14.21,0,24.82,0,24.82,0,12.82,11.53,24.52,24.66,24.52h18.5Zm-18.5-98.67c-6.56,0-12.33-11.93-12.33-18.33V12.52h0l30.83,36.82ZM129.5,86.44H74a6.17,6.17,0,1,0,0,12.33h55.5a6.17,6.17,0,1,0,0-12.33Zm0,30.81H74a6.16,6.16,0,1,0,0,12.32h55.5a6.16,6.16,0,1,0,0-12.32Z" />
+                              </g>
+                            </g>
+                          </g>
+                        </svg>
+                        Make a copy</a></li>
+
+                    <li class="dropdown-submenu"><a data-toggle="modal" data-target="#sharemail" aria-expanded="false"
+                        class="dropdown-item dropdown-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 194.69 148.3">
+                          <defs>
+                            <style>
+                              .cls-1 {
+                                fill: #010101;
+                              }
+                            </style>
+                          </defs>
+                          <g id="Layer_2" data-name="Layer 2">
+                            <g id="Layer_1-2" data-name="Layer 1">
+                              <path class="cls-1"
+                                d="M177.58,0H17.11A17.14,17.14,0,0,0,0,17.11V131.19A17.14,17.14,0,0,0,17.11,148.3H177.58a17.14,17.14,0,0,0,17.11-17.11V17.11A17.14,17.14,0,0,0,177.58,0Zm-2.37,11.41L97.71,88.92,19.53,11.41ZM11.41,128.82V19.42L66.35,73.89Zm8.06,8.07,55-55L93.71,101a5.7,5.7,0,0,0,8.05,0l18.78-18.78,54.67,54.67Zm163.81-8.07L128.61,74.15l54.67-54.68Z" />
+                            </g>
+                          </g>
+                        </svg>
+                        Email</a>
+                      <!-- <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Email as Pdf</a></li>
+                        <li><a class="dropdown-item" href="#">Email as Url</a></li>
+                      </ul> -->
+                    </li>
+                    <li class="d-p"><a class="dropdown-item" (click)='savePdf(0)'>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+                          <defs>
+                            <style>
+                              .cls-1 {
+                                fill: #010101;
+                              }
+                            </style>
+                          </defs>
+                          <g id="Layer_2" data-name="Layer 2">
+                            <g id="Layer_1-2" data-name="Layer 1">
+                              <g id="Solid">
+                                <path class="cls-1"
+                                  d="M92.68,155.59a10.34,10.34,0,0,0,14.63,0h0l39-39A10.34,10.34,0,0,0,131.7,102L110.34,123.3v-113a10.34,10.34,0,0,0-20.68,0v113L68.3,102a10.34,10.34,0,0,0-14.63,14.63Z" />
+                                <path class="cls-1"
+                                  d="M189.65,89.66A10.34,10.34,0,0,0,179.31,100v79.31H20.69V100A10.35,10.35,0,0,0,0,100v82.76A17.24,17.24,0,0,0,17.24,200H182.76A17.24,17.24,0,0,0,200,182.76V100A10.34,10.34,0,0,0,189.65,89.66Z" />
+                              </g>
+                            </g>
+                          </g>
+                        </svg>
+                        Download</a></li>
+                    <li class="d-p"><a class="dropdown-item" data-toggle="modal" data-target="#exampleModalCenter3">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 199.99">
+                          <defs>
+                            <style>
+                              .cls-1 {
+                                fill: #010101;
+                              }
+                            </style>
+                          </defs>
+                          <g id="Layer_2" data-name="Layer 2">
+                            <g id="Layer_1-2" data-name="Layer 1">
+                              <path class="cls-1"
+                                d="M158.33,100a8.33,8.33,0,0,0-8.33,8.34V175a8.35,8.35,0,0,1-8.33,8.34H25A8.35,8.35,0,0,1,16.67,175V58.33A8.34,8.34,0,0,1,25,50H91.67a8.33,8.33,0,0,0,0-16.66H25a25,25,0,0,0-25,25V175a25,25,0,0,0,25,25H141.67a25,25,0,0,0,25-25V108.33A8.33,8.33,0,0,0,158.33,100Z" />
+                              <path class="cls-1"
+                                d="M78.13,92.4A4.31,4.31,0,0,0,77,94.53L71.1,124a4.17,4.17,0,0,0,4.09,5,3.88,3.88,0,0,0,.82-.09L105.47,123a4.19,4.19,0,0,0,2.13-1.14l65.93-65.93L144.08,26.47Z" />
+                              <path class="cls-1"
+                                d="M193.9,6.09a20.86,20.86,0,0,0-29.46,0L152.91,17.63l29.46,29.46L193.9,35.55a20.83,20.83,0,0,0,0-29.46Z" />
+                            </g>
+                          </g>
+                        </svg>
+                        Rename</a></li>
+                    <li class="d-p"><a class="dropdown-item" data-toggle="modal" data-target="#exampleModalCenter4">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 159.33 196.1">
+                          <defs>
+                            <style>
+                              .cls-1 {
+                                fill: #010101;
+                              }
+                            </style>
+                          </defs>
+                          <g id="Layer_2" data-name="Layer 2">
+                            <g id="Layer_1-2" data-name="Layer 1">
+                              <path class="cls-1"
+                                d="M144,24.51h-33.7V18.38A18.41,18.41,0,0,0,91.92,0H67.41A18.4,18.4,0,0,0,49,18.38v6.13H15.32A15.34,15.34,0,0,0,0,39.83V61.28a6.12,6.12,0,0,0,6.13,6.13H9.48l5.29,111.18A18.37,18.37,0,0,0,33.14,196.1H126.2a18.36,18.36,0,0,0,18.36-17.51l5.3-111.18h3.35a6.12,6.12,0,0,0,6.12-6.13V39.83A15.34,15.34,0,0,0,144,24.51ZM61.28,18.38a6.13,6.13,0,0,1,6.13-6.12H91.92a6.13,6.13,0,0,1,6.13,6.12v6.13H61.28Zm-49,21.45a3.06,3.06,0,0,1,3.06-3.06H144a3.07,3.07,0,0,1,3.07,3.06V55.15H12.26ZM132.32,178a6.13,6.13,0,0,1-6.12,5.84H33.14A6.13,6.13,0,0,1,27,178L21.75,67.41H137.59Z" />
+                              <path class="cls-1"
+                                d="M79.67,171.59a6.12,6.12,0,0,0,6.12-6.13V85.79a6.13,6.13,0,0,0-12.25,0v79.67A6.12,6.12,0,0,0,79.67,171.59Z" />
+                              <path class="cls-1"
+                                d="M110.31,171.59a6.13,6.13,0,0,0,6.13-6.13V85.79a6.13,6.13,0,0,0-12.26,0v79.67A6.12,6.12,0,0,0,110.31,171.59Z" />
+                              <path class="cls-1"
+                                d="M49,171.59a6.12,6.12,0,0,0,6.12-6.13V85.79a6.13,6.13,0,0,0-12.25,0v79.67A6.12,6.12,0,0,0,49,171.59Z" />
+                            </g>
+                          </g>
+                        </svg>
+                        Move
+                        to Trash</a></li>
+                    <li (click)="getDetails()" class="d-p"><a class="dropdown-item" data-toggle="modal">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+                          <defs>
+                            <style>
+                              .cls-1 {
+                                fill: #010101;
+                              }
+                            </style>
+                          </defs>
+                          <g id="Layer_2" data-name="Layer 2">
+                            <g id="Layer_1-2" data-name="Layer 1">
+                              <path class="cls-1"
+                                d="M100,0A100,100,0,1,0,200,100,99.95,99.95,0,0,0,100,0Zm0,184.38A84.38,84.38,0,1,1,184.37,100,84.33,84.33,0,0,1,100,184.38Z" />
+                              <path class="cls-1"
+                                d="M100,83.72a7.82,7.82,0,0,0-7.81,7.82v50.3a7.81,7.81,0,1,0,15.62,0V91.54A7.82,7.82,0,0,0,100,83.72Z" />
+                              <circle class="cls-1" cx="100" cy="63.61" r="10.55" />
+                            </g>
+                          </g>
+                        </svg>
+                        Document details</a>
+
+                    </li>
+
+                    <li class="d-p"><button printSectionId="print-section" ngxPrint><a
+                          style="color: #fff !important; margin-left: -29px;">Print</a></button></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </nav>
+          <!-- Dropdown ends -->
+        </li>
+
+        <li>
+          <!-- dropdown -->
+          <nav class="navbar navbar-expand-md navbar-light bg-light">
+            <div class="collapse navbar-collapse heading-collapse" id="navbarNavDropdown">
+              <ul class="navbar-nav">
+                <li class="nav-item dropdown nav-item-1">
+                  <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Edit
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-edit" aria-labelledby="navbarDropdownMenuLink">
+                    <li class="d-p"><a onclick="document.execCommand('undo',false,'')" class="dropdown-item">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 156.09 200">
+                          <defs>
+                            <style>
+                              .cls-1 {
+                                fill: #010101;
+                              }
+                            </style>
+                          </defs>
+                          <g id="Layer_2" data-name="Layer 2">
+                            <g id="Layer_1-2" data-name="Layer 1">
+                              <path class="cls-1"
+                                d="M156.09,124.81A75.28,75.28,0,0,1,80.9,200H54.29a8,8,0,0,1-8-8v-2.67a8,8,0,0,1,8-8H80.9a56.56,56.56,0,1,0,0-113.11H31.8l33.82,33.82a9.32,9.32,0,0,1,0,13.17,9.55,9.55,0,0,1-13.18,0L2.73,65.53a9.31,9.31,0,0,1,0-13.17L52.45,2.64a9.53,9.53,0,0,1,13.17,0,9.32,9.32,0,0,1,0,13.17L31.8,49.63H80.9A75.27,75.27,0,0,1,156.09,124.81Z" />
+                            </g>
+                          </g>
+                        </svg>
+                        Undo</a></li>
+                    <li class="d-p"><a onclick="document.execCommand('redo',false,'')" class="dropdown-item">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 156.09 200">
+                          <defs>
+                            <style>
+                              .cls-1 {
+                                fill: #010101;
+                              }
+                            </style>
+                          </defs>
+                          <g id="Layer_2" data-name="Layer 2">
+                            <g id="Layer_1-2" data-name="Layer 1">
+                              <path class="cls-1"
+                                d="M0,124.81A75.28,75.28,0,0,0,75.19,200H101.8a8,8,0,0,0,8-8v-2.67a8,8,0,0,0-8-8H75.19a56.56,56.56,0,1,1,0-113.11h49.1L90.47,102.08a9.32,9.32,0,0,0,0,13.17,9.54,9.54,0,0,0,13.17,0l49.72-49.72a9.31,9.31,0,0,0,0-13.17L103.64,2.64a9.53,9.53,0,0,0-13.17,0,9.32,9.32,0,0,0,0,13.17l33.82,33.82H75.19A75.27,75.27,0,0,0,0,124.81Z" />
+                            </g>
+                          </g>
+                        </svg>
+                        Redo</a></li>
+                    <li class="d-p"><a class="dropdown-item" (click)="execCommand($event,'paste', false)">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 172.67 197.33">
+                          <defs>
+                            <style>
+                              .cls-1 {
+                                fill: #010101;
+                              }
+                            </style>
+                          </defs>
+                          <g id="Layer_2" data-name="Layer 2">
+                            <g id="Layer_1-2" data-name="Layer 1">
+                              <g id="_3" data-name="3">
+                                <path class="cls-1"
+                                  d="M129.5,0h-74c-13,0-24.67,12-24.67,24.67l-7.13.16c-13,0-23.7,11.81-23.7,24.5V172.67c0,12.69,11.62,24.66,24.67,24.66h92.5c13,0,24.66-12,24.66-24.66H148c13.05,0,24.67-12,24.67-24.67V49.48ZM117.17,185H24.67c-6.48,0-12.34-6.05-12.34-12.33V49.33c0-6.28,5.28-12.13,11.75-12.13l6.75-.2V148c0,12.7,11.62,24.67,24.67,24.67h74C129.5,179,123.64,185,117.17,185Zm43.16-37c0,6.28-5.86,12.33-12.33,12.33H55.5c-6.48,0-12.33-6.05-12.33-12.33V24.67c0-6.29,5.85-12.34,12.33-12.34h61.67c-.1,14.21,0,24.82,0,24.82,0,12.82,11.53,24.52,24.66,24.52h18.5Zm-18.5-98.67c-6.56,0-12.33-11.93-12.33-18.33V12.52h0l30.83,36.82ZM129.5,86.44H74a6.17,6.17,0,1,0,0,12.33h55.5a6.17,6.17,0,1,0,0-12.33Zm0,30.81H74a6.16,6.16,0,1,0,0,12.32h55.5a6.16,6.16,0,1,0,0-12.32Z" />
+                              </g>
+                            </g>
+                          </g>
+                        </svg>
+                        Paste</a></li>
+                    <li class="d-p"><a class="dropdown-item" href="#" data-toggle="modal"
+                        data-target="#exampleModalCenter6">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+                          <defs>
+                            <style>
+                              .cls-1 {
+                                fill: #010101;
+                              }
+                            </style>
+                          </defs>
+                          <g id="Layer_2" data-name="Layer 2">
+                            <g id="Layer_1-2" data-name="Layer 1">
+                              <path class="cls-1"
+                                d="M35.94,41.41v-27a7.81,7.81,0,0,1,15.62,0V33.87A82,82,0,0,1,200,82a7.82,7.82,0,0,1-15.63,0A66.41,66.41,0,0,0,62.62,45.31h19.8a7.82,7.82,0,0,1,0,15.63H55.47A19.55,19.55,0,0,1,35.94,41.41Zm144.53,61.72H153.52a7.81,7.81,0,1,0,0,15.62h19.79A66.41,66.41,0,0,1,51.56,82a7.81,7.81,0,0,0-15.62,0,81.66,81.66,0,0,0,19,52.39L2.31,186.64a7.81,7.81,0,1,0,11,11.09L66,145.43a82,82,0,0,0,118.4-15.24v19.42a7.82,7.82,0,0,0,15.63,0v-27A19.55,19.55,0,0,0,180.47,103.13Z" />
+                            </g>
+                          </g>
+                        </svg>
+                        Find and Replace</a></li>
+
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </nav>
+          <!-- Dropdown ends -->
+        </li>
+        <li>
+          <!-- dropdown -->
+          <nav class="navbar navbar-expand-md navbar-light bg-light">
+            <div class="collapse navbar-collapse heading-collapse" id="navbarNavDropdown">
+              <ul class="navbar-nav">
+                <li class="nav-item dropdown nav-item-1">
+                  <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Help
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-edit" aria-labelledby="navbarDropdownMenuLink">
+                    <li class="d-p"><a class="dropdown-item" href="#">
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 193.33">
+                          <defs>
+                            <style>
+                              .cls-1 {
+                                fill: #010101;
+                              }
+                            </style>
+                          </defs>
+                          <g id="Layer_2" data-name="Layer 2">
+                            <g id="Layer_1-2" data-name="Layer 1">
+                              <path class="cls-1"
+                                d="M100,86.67a3.35,3.35,0,0,1-1.42-.32L41.91,59.68a3.33,3.33,0,0,1,0-6L98.58,27a3.36,3.36,0,0,1,2.84,0l56.67,26.67a3.33,3.33,0,0,1,0,6L101.42,86.35a3.35,3.35,0,0,1-1.42.32Zm-48.84-30,48.84,23,48.84-23L100,33.68Z" />
+                              <path class="cls-1"
+                                d="M100,113.33a3.26,3.26,0,0,1-1.49-.35l-40-20a3.33,3.33,0,0,1-1.84-3V64.51a3.34,3.34,0,0,1,4.75-3L100,79.65l38.58-18.16a3.34,3.34,0,0,1,4.75,3V90a3.33,3.33,0,0,1-1.84,3l-40,20a3.26,3.26,0,0,1-1.49.35ZM63.33,87.94,100,106.27l36.67-18.33V69.76L101.42,86.35a3.36,3.36,0,0,1-2.84,0L63.33,69.76Z" />
+                              <path class="cls-1"
+                                d="M156.67,60H100a3.34,3.34,0,0,1,0-6.67h56.67a3.34,3.34,0,0,1,0,6.67Z" />
+                              <path class="cls-1"
+                                d="M156.67,90a3.34,3.34,0,0,1-3.34-3.33v-30a3.34,3.34,0,1,1,6.67,0v30A3.33,3.33,0,0,1,156.67,90Z" />
+                              <path class="cls-1"
+                                d="M100,66.67a3.34,3.34,0,0,1-3.33-3.34V50a3.33,3.33,0,0,1,6.66,0V63.33A3.34,3.34,0,0,1,100,66.67Z" />
+                              <path class="cls-1"
+                                d="M150,100a3.33,3.33,0,0,1-2.77-5.18l6.66-10a3.34,3.34,0,1,1,5.55,3.7l-6.67,10A3.33,3.33,0,0,1,150,100Z" />
+                              <path class="cls-1"
+                                d="M163.34,100a3.33,3.33,0,0,1-2.78-1.48l-6.67-10a3.34,3.34,0,1,1,5.55-3.7l6.67,10a3.34,3.34,0,0,1-2.77,5.18Z" />
+                              <path class="cls-1"
+                                d="M100,96.67a3.34,3.34,0,0,1-3.33-3.34v-10a3.33,3.33,0,1,1,6.66,0v10A3.34,3.34,0,0,1,100,96.67Z" />
+                              <path class="cls-1"
+                                d="M196.67,126.67H3.33A3.34,3.34,0,0,1,0,123.33v-110A13.35,13.35,0,0,1,13.34,0H186.66A13.35,13.35,0,0,1,200,13.34v110A3.34,3.34,0,0,1,196.67,126.67ZM6.67,120H193.33V13.34a6.67,6.67,0,0,0-6.67-6.67H13.34a6.67,6.67,0,0,0-6.67,6.67Z" />
+                              <path class="cls-1"
+                                d="M186.66,153.33H13.34A13.35,13.35,0,0,1,0,140V123.33A3.33,3.33,0,0,1,3.33,120H196.67a3.33,3.33,0,0,1,3.33,3.33V140A13.35,13.35,0,0,1,186.66,153.33Zm-180-26.66V140a6.67,6.67,0,0,0,6.67,6.67H186.66a6.67,6.67,0,0,0,6.67-6.67V126.67Z" />
+                              <path class="cls-1" d="M110,140H90a3.34,3.34,0,0,1,0-6.67h20a3.34,3.34,0,0,1,0,6.67Z" />
+                              <path class="cls-1"
+                                d="M183.33,126.67H16.67a3.35,3.35,0,0,1-3.34-3.34V16.67a3.35,3.35,0,0,1,3.34-3.34H183.33a3.35,3.35,0,0,1,3.34,3.34V123.33A3.35,3.35,0,0,1,183.33,126.67ZM20,120H180V20H20Z" />
+                              <path class="cls-1"
+                                d="M143.33,193.33H56.67a10,10,0,1,1,0-20h86.66a10,10,0,0,1,0,20ZM56.67,180a3.34,3.34,0,1,0,0,6.67h86.66a3.34,3.34,0,1,0,0-6.67Z" />
+                              <path class="cls-1"
+                                d="M136.67,180H63.33a3.34,3.34,0,0,1,0-6.67C74.39,173.33,80,165.48,80,150a3.33,3.33,0,0,1,3.33-3.33h33.34A3.33,3.33,0,0,1,120,150c0,15.48,5.61,23.33,16.67,23.33a3.34,3.34,0,0,1,0,6.67Zm-57.1-6.67h40.86c-4.1-4.54-6.52-11.31-7-20H86.58C86.09,162,83.68,168.79,79.57,173.33Z" />
+                            </g>
+                          </g>
+                        </svg>
+                        Training</a></li>
+                    <li class="d-p"><a class="dropdown-item" href="#">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 186.45 200.8">
+                          <defs>
+                            <style>
+                              .cls-1 {
+                                fill: #010101;
+                              }
+                            </style>
+                          </defs>
+                          <g id="Layer_2" data-name="Layer 2">
+                            <g id="Layer_1-2" data-name="Layer 1">
+                              <path class="cls-1"
+                                d="M164.94,0a7.17,7.17,0,0,0-7.17,7.17v26.2A93.05,93.05,0,0,0,0,100.4a7.17,7.17,0,0,0,14.34,0A78.89,78.89,0,0,1,151.42,47.15L119.65,57.74a7.18,7.18,0,1,0,4.53,13.63l43-14.34a7.19,7.19,0,0,0,4.9-6.83v-43A7.17,7.17,0,0,0,164.94,0Z" />
+                              <path class="cls-1"
+                                d="M179.28,93.23a7.17,7.17,0,0,0-7.17,7.17A78.88,78.88,0,0,1,35,153.65l31.77-10.6a7.18,7.18,0,0,0-4.53-13.62l-43,14.34a7.17,7.17,0,0,0-4.91,6.83v43a7.17,7.17,0,0,0,14.34,0v-26.2a93,93,0,0,0,157.77-67A7.17,7.17,0,0,0,179.28,93.23Z" />
+                            </g>
+                          </g>
+                        </svg>
+                        Updates</a></li>
+                    <li class="d-p"><a class="dropdown-item" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 152.34 200">
+                          <defs>
+                            <style>
+                              .cls-1 {
+                                fill: #010101;
+                              }
+                            </style>
+                          </defs>
+                          <g id="Layer_2" data-name="Layer 2">
+                            <g id="Layer_1-2" data-name="Layer 1">
+                              <path class="cls-1"
+                                d="M150.63,40.78,111.56,1.72A5.83,5.83,0,0,0,107.42,0H21.48A21.51,21.51,0,0,0,0,21.48v157A21.51,21.51,0,0,0,21.48,200H130.86a21.5,21.5,0,0,0,21.48-21.48V44.92A5.85,5.85,0,0,0,150.63,40.78ZM113.28,20l19.06,19.05H113.28Zm17.58,168.27H21.48a9.77,9.77,0,0,1-9.76-9.76v-157a9.77,9.77,0,0,1,9.76-9.76h80.08v33.2a5.86,5.86,0,0,0,5.86,5.86h33.2V178.52A9.77,9.77,0,0,1,130.86,188.28Z" />
+                              <path class="cls-1"
+                                d="M115.23,78.91A19.32,19.32,0,0,1,97.86,68.17L97,66.52a5.86,5.86,0,0,0-5.24-3.24H60.55a5.86,5.86,0,0,0-5.24,3.24l-.83,1.65A19.32,19.32,0,0,1,37.11,78.91a5.86,5.86,0,0,0-5.86,5.86V118.2a60.69,60.69,0,0,0,43.24,58.12,6,6,0,0,0,1.68.24,6.05,6.05,0,0,0,1.69-.24,60.67,60.67,0,0,0,43.23-58.12V84.77a5.86,5.86,0,0,0-5.86-5.86Zm-5.86,39.29a48.61,48.61,0,0,1-33.2,46.35A48.62,48.62,0,0,1,43,118.2V90.08A30.88,30.88,0,0,0,64.11,75H88.23a30.92,30.92,0,0,0,21.14,15.08Z" />
+                              <path class="cls-1"
+                                d="M88.6,104.73l-17.95,18-6.91-6.9a5.85,5.85,0,0,0-8.28,8.28l11,11.05a5.85,5.85,0,0,0,8.29,0L96.89,113a5.86,5.86,0,1,0-8.29-8.29Z" />
+                            </g>
+                          </g>
+                        </svg>
+                        Privacy Policy</a></li>
+
+                  </ul>
+                </li>
+                <!--  -->
+
+                <!--  -->
+              </ul>
+            </div>
+          </nav>
+          <!-- Dropdown ends -->
+        </li>
+
+        <li
+          style="float: center; font-size: 14px; color: '#767676'; text-decoration: underline;   font-family: 'ProductSans400';">
+          Last edit was {{timeAgo}}</li>
+
+        <!-- <li>{{createdAt |date}}</li> -->
+
+        <!-- <li><a href="#">Insert</a></li>
+           <li><a href="#">Format</a></li>
+           <li><a href="#">Help</a></li> -->
+      </ul>
+      <div class="toolbar">
+        <button class="tool-items fa fa-undo" onclick="document.execCommand('undo',false,'')"></button>
+        <button class="tool-items fa fa-repeat" onclick="document.execCommand('redo',false,'')"></button>
+        <!-- <button class="tool-items fa fa-print" onclick="document.execCommand('italic', false, '');">
+              </button> -->
+        <button class="tool-items fa fa-underline" (click)="execCommand($event,'underline', false)">
+        </button>
+        <button class="tool-items fa fa-italic" (click)="execCommand($event,'italic', false);">
+        </button>
+        <button class="tool-items fa fa-bold" (click)="execCommand($event,'bold', false)">
+        </button>
+        <button class="tool-items fa fa-strikethrough" (click)="execCommand($event,'strikeThrough', false);">
+        </button>
+        <!-- Jutify -->
+        <button class="tool-items fa fa-align-center" onclick="document.execCommand('justifyCenter',false,'')"></button>
+        <button class="tool-items fa fa-align-left" onclick="document.execCommand('justifyLeft',false,'')"></button>
+        <button class="tool-items fa fa-align-right" onclick="document.execCommand('justifyRight',false,'')"></button>
+        <button class="tool-items fa fa-list-ul"
+          onclick="document.execCommand('insertUnorderedList',false,'')"></button>
+        <button class="tool-items fa fa-list-ol" onclick="document.execCommand('insertOrderedList',false,'')"></button>
+        <select class="slect_option" id="subcontacts" (change)="execCommandWithArg('fontName', $event.target.value); ">
+          <option value="Arial">Arial</option>
+          <option value="Arial Black">Arial Black</option>
+          <option value="Comic Sans MS">Comic Sans MS</option>
+          <option value="Courier">Courier</option>
+          <option value="Helvetica">Helvetica</option>
+          <option value="Impact">Impact</option>
+          <option value="Georgia">Georgia</option>
+          <option value="Tahoma">Tahoma</option>
+          <option value="Times New Roman">Times New Roman</option>
+          <option value="Verdana">Verdana</option>
+        </select>
+        <select class="slect_option" (change)="execCommandWithArg('fontSize', $event.target.value);">
+          <option value="1">1px</option>
+          <option value="2">2px</option>
+          <option value="3">3px</option>
+          <option value="4">4px</option>
+          <option value="5">5px</option>
+          <option value="6">6px</option>
+          <option value="7">7px</option>
+        </select>
+        <label class="color-text">A<input type="color" (change)="execCommandWithArg('foreColor',  $event.target.value);"
+            class="color-picker"></label>
+        <!-- <label class="color-text1"><i class='fas fa-highlighter fa-lg'></i><input type="color"
+                 (change)="execCommandWithArg('hiliteColor',  $event.target.value);" class="color-picker"></label> -->
+        <button class="tool-items fa fa-link" (click)="link()">
+        </button>
+      </div>
+    </header>
+  </nav>
+
+  <div class="">
+    <div class="center">
+      <div class="container">
+        <div class="row">
+          <div class="editor" id="print-section">
+            <div class="d-flex parentEditor">
+              <div class=" editor_45 ">
+                <input type="text" class="note-head1" placeholder="Cue points" (keyup)="getContent()"
+                  [(ngModel)]="cuesTitle">
+                  <div id="cues" class="cues" (keyup)="getContent()" [attr.contenteditable]=internet [innerHTML]="content"
+                  [markjsHighlight]="findText" [markjsConfig]="content" [scrollToFirstMarked]="true"></div>
+              </div>
+              <div class="editor_ab">
+                <input type="text" class="note-head1" placeholder="Note" (keyup)="getContent()"
+                  [(ngModel)]="noteTitle" />
+                <div id="notes" class="notes" (keyup)="getContent()" [attr.contenteditable]=internet
+                  [innerHTML]="content1" [markjsHighlight]="findText" [markjsConfig]="content1"
+                  [scrollToFirstMarked]="true">
+                </div>
+               
+              </div>
+              
+            </div>
+            <div class="editor_3">
+              <input type="text" [(ngModel)]="summaryTitle" (keyup)="getContent()" class="note-head1"
+                placeholder="Summary">
+              <div id="summary" class="summary" contenteditable (keyup)="getContent()" [attr.contenteditable]=internet
+                [innerHTML]="content2" [markjsHighlight]="findText" [markjsConfig]="content2"
+                [scrollToFirstMarked]="true"></div>
+            </div>
+          
+          </div>
+        </div>
+        <!-- <button class="btn btn-info" (click)='updatenote()'> Save</button> -->
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="sharemail" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content modal-content-updated">
+        <div class="modal-body modal-body-updated">
+          <h6>Share with People</h6>
+          <label>To:</label>
+          <input type="email" [(ngModel)]="email" class="" placeholder="Enter Email address" />
+          <div class="alert- mt-2">{{emailError}}</div>
+          <div>
+
+          </div>
+          <button (click)="shareNoteUrl()">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal_mvp_margin" role="document">
+      <div class="modal-content p-2">
+        <div class="">
+          <h5 class="modal-title_dash" id="exampleModalCenterTitle">For which subject do you want to make notes?</h5>
+          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button> -->
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="lab_note">Search Subjects</label>
+            <input type="text" (keyup)="searchSubject($event)" [(ngModel)]='selectedSub' class="modal_form p-l-dash"
+              placeholder="Search" style="padding-left: 53px;" />
+            <img src="../../../assets/images/search.svg" class="img_search" />
+            <div class="under_box">
+              <ul id="myUL" *ngFor="let sub of searchSubjects;">
+                <li><a (click)="selectSubject(sub.subjectName,sub._id)">{{sub.subjectName}}</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="lab_note">Note Title</label>
+            <input type="text" class="modal_form" [(ngModel)]="newNotes" placeholder="Note Title" />
+          </div>
+        </div>
+        <div class="">
+          <button type="button" class="btn_crete" (click)='createNotes()'>Yes! Create</button>
+          <button type="button" class="btn_leave_it" data-dismiss="modal">Leave it!</button>
+          <!-- <button type="button" class="btn_add_new">Add New Subject</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="copyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal_mvp_margin" role="document">
+      <div class="modal-content p-2">
+        <div class="">
+          <h5 class="modal-title_dash" id="exampleModalCenterTitle">Copy Notes</h5>
+          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button> -->
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="lab_note">Name</label>
+            <input type="text" (keyup)="searchSubject($event)" [(ngModel)]='copyNotes' class="modal_form p-l-dash"
+              placeholder="Search" style="margin-left: 15px;" />
+
+
+            <label class="lab_note">Search Subject</label>
+
+            <input type="text" (keyup)="searchSubject($event)" [(ngModel)]='selectedSub' class="modal_form p-l-dash"
+              placeholder="Search" style="padding-left: 45px;" />
+            <img src="../../../assets/images/search.svg" class="img_search" />
+            <div class="under_box">
+              <ul id="myUL" *ngFor="let sub of searchSubjects;">
+                <li><a (click)="selectSubject(sub.subjectName,sub._id)">{{sub.subjectName}}</a></li>
+              </ul>
+            </div>
+
+
+          </div>
+
+        </div>
+        <div class="">
+          <button type="button" class="btn_crete" (click)='createCopy()'>Yes! Create</button>
+          <button type="button" class="btn_leave_it" data-dismiss="modal">Leave it!</button>
+          <button type="button" class="btn_add_new">Add New Subject</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="exampleModalCenter3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal_mvp_margin" role="document">
+      <div class="modal-content">
+        <div class="">
+          <h5 class="modal-title_dash" id="exampleModalCenterTitle">Change Notes Name</h5>
+          <p class="para_modal_notes">Please enter name of the Note you like.</p>
+          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button> -->
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <input type="text" class="modal_form" [(ngModel)]="notesName" placeholder="Notes Name" />
+          </div>
+        </div>
+        <div class="">
+          <button type="button" class="btn_crete" (click)="updateNoteName()">Yes! Create</button>
+          <button type="button" class="btn_leave_it" data-dismiss="modal">Leave it!</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="exampleModalCenter4" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal_mvp_margin modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="">
+          <h5 class="modal-title_dash text-center" id="exampleModalCenterTitle"></h5>
+          <p class="para_modal_notes text-center">Are you sure to move this Note to Trash?</p>
+          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button> -->
+        </div>
+
+        <div class="">
+          <button type="button" class="btn_crete m-auto d-block" (click)="deleteNotes">DELETE</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="exampleModalCenter5" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal_mvp_margin" role="document">
+      <div class="modal-content">
+        <div class="">
+          <h5 class="modal-title_dash" id="exampleModalCenterTitle">Document Details</h5>
+          <button type="button" class="close colse_btn_12" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="under_both_document">
+            <ul>
+              <li><a href="#"> Location</a></li>
+              <li><a href="#"> Owner</a></li>
+              <li><a href="#"> Modified</a></li>
+              <li><a href="#"> Created </a></li>
+            </ul>
+
+            <ul>
+              <li><a href="#">{{location}}</a></li>
+              <li><a href="#"> me</a></li>
+              <li><a href="#"> {{updatedAt |date }}</a></li>
+              <li><a href="#"> {{createdAt |date }}
+                </a></li>
+            </ul>
+          </div>
+        </div>
+        <!-- <div class="">
+          <button type="button" class="btn_crete" (click)="updateNote()">Yes! Create</button>
+          <button type="button" class="btn_leave_it" data-dismiss="modal">Leave it!</button>
+        </div> -->
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="exampleModalCenter6" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal_mvp_margin modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="">
+          <h5 class="modal-title_dash" id="exampleModalCenterTitle">Find & Replace</h5>
+
+        </div>
+
+        <div class="modal-body">
+          <div class="form-group d-flex">
+            <label class="lab_name_find">Find</label>
+            <input type="text" placeholder="" (input)="onFindText($event.target.value)" class="input_mvp_c" />
+            <!-- {{findsCount}} -->
+          </div>
+
+          <div class="form-group d-flex">
+            <label class="lab_name_find">Replace with </label>
+            <input type="text" class="input_mvp_c" [(ngModel)]="replaceText" placeholder="" />
+
+          </div>
+        </div>
+
+        <div class="flex_find_all">
+          <button type="button" class="btn_all_find">Replace</button>
+          <button type="button" (click)="findAndReplace()" class="btn_all_find">Replace all</button>
+          <button type="button" class="btn_all_find">Previous</button>
+          <button type="button" class="btn_all_find">Next</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
