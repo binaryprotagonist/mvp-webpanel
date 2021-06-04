@@ -105,7 +105,7 @@ export class NotesWritingComponent implements OnInit {
     this.getNote()
     this.getUser()
     this.getSubjects()
-    this.markInstance = new mark(document.querySelector('.parentEditor'));
+    this.markInstance = new mark(document.querySelector('.editor'));
     $('#exampleModalCenter6').on('hidden.bs.modal', (e) => {
       this.markInstance.unmark();
     });
