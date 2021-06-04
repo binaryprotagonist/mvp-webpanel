@@ -229,9 +229,9 @@ checkStyle(){
     }
     const inputFile = document.getElementById('getImage') as HTMLInputElement;
     inputFile.value = '';
+    this.getContent()
   }
   execCommandWithArg(command, arg) {
-    console.log(arg)
    
     // Set design mode to on
     document.designMode = "on";
@@ -239,6 +239,7 @@ checkStyle(){
     document.execCommand(command, false, arg);
     
     document.designMode = "off";
+    this.getContent()
 
   }
   execCommand(event, command, arg) {
@@ -252,17 +253,20 @@ checkStyle(){
     }
 
     document.execCommand(command, false, '');
+    this.getContent()
   }
 
   /* execute functiom for color and backg*/
   changeTextColor(color): void {
     document.execCommand('foreColor', false, color.toString());
     document.getElementById('selectTextColorBox').style.backgroundColor = color;
+    this.getContent()
   }
 
   changeBackgroundColor(color): void {
     document.execCommand('hiliteColor', false, color.toString());
     document.getElementById('selectBackgroundColorBox').style.backgroundColor = color;
+    this.getContent()
   }
   
   
