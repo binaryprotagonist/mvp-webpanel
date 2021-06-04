@@ -150,7 +150,6 @@ for (var i = 0, len =sel.rangeCount; i < len; ++i) {
 
 sel.removeAllRanges();
 sel.addRange(range);
-console.lo(html)
 return html;
 }
   getUser() {
