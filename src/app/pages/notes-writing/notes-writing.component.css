@@ -320,10 +320,7 @@ label {
 .editor img {
   max-width: 100% !important;
 }
-.image{
-  max-width: 100% !important;
 
-}
 
 .div1 {
   position: relative;
@@ -682,7 +679,7 @@ div#notes
 
 
 
-.dropdown-menu.show {
+.dropdown-menu-custom.show {
   border-radius: 5px;
   padding: 0.5rem;
   margin: 0;
@@ -716,6 +713,11 @@ div#notes
  .no-underline {
    text-decoration: none;
  }
+
+ img {
+  max-width: 200px !important; 
+  max-height: 200px !important;
+}
 
 
 

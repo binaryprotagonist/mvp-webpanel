@@ -460,8 +460,7 @@
                           </g>
                         </svg>
                         Paste</a></li>
-                    <li class="d-p"><a class="dropdown-item" href="#" data-toggle="modal"
-                        data-target="#exampleModalCenter6">
+                    <li class="d-p"><a class="dropdown-item" (click)='showFindAndReplaceModal()'>
 
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
                           <defs>
@@ -652,7 +651,7 @@
             <div id="selectTextColorBox" class="selectColorBox"></div>
           </a>
         
-          <div class="dropdown-menu " aria-labelledby="dropdownMenuLink">
+          <div class="dropdown-menu dropdown-menu-custom" aria-labelledby="dropdownMenuLink">
             <div class="rowCustom m-0 py-2">
               <button class="color-box" style="background-color: #ff0000;" (click) = 'changeTextColor("#ff0000")'></button>
               <button class="color-box" style="background-color: #3A5BBC;" (click) = 'changeTextColor("#3A5BBC")'></button>
@@ -679,7 +678,7 @@
             <div id="selectBackgroundColorBox" class="selectColorBox"></div>
           </a>
         
-          <div class="dropdown-menu " aria-labelledby="dropdownMenuLink">
+          <div class="dropdown-menu dropdown-menu-custom" aria-labelledby="dropdownMenuLink">
             <div class="rowCustom m-0 py-2">
               <button class="color-box" style="background-color: #ff0000;" (click) = 'changeBackgroundColor("#ff0000")'></button>
               <button class="color-box" style="background-color: #FFBD33;" (click) = 'changeBackgroundColor("#FFBD33")'></button>
@@ -703,6 +702,12 @@
         
         <button class="tool-items fa fa-link" (click)="link()">
         </button>
+        <input type="file" hidden id='getImage' (change)='getImage($event)'>
+        <label for="getImage" class="tool-items p-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
+          </svg>
+        </label>
       </div>
     </header>
   </nav>
@@ -711,14 +716,14 @@
     <div class="center">
       <div class="container">
         <div class="row">
-          <div (click)="getSelectionHtml()" id="content" class="editor" id="print-section">
+          <div  id="content" class="editor" id="print-section">
             <div class="d-flex parentEditor">
               
               <div class=" editor_45 ">
                 <input type="text" class="note-head1" placeholder="Cue points" (keyup)="getContent()"
                   [(ngModel)]="cuesTitle">
-                  <div id="cues" class="cues" (keyup)="getContent()" [attr.contenteditable]=internet 
-                  [markjsHighlight]="findText" [markjsConfig]="content" [scrollToFirstMarked]="true"><p [innerHTML]="content"></p></div>
+                  <div id="cues" class="cues" (keyup)="getContent()" [attr.contenteditable]=internet [innerHTML]="content"
+                  [markjsHighlight]="findText" [markjsConfig]="content" [scrollToFirstMarked]="true"></div>
               </div>
               <div class="editor_ab">
                 <input type="text" class="note-head1" placeholder="Note" (keyup)="getContent()"
@@ -921,9 +926,13 @@
     aria-hidden="true">
     <div class="modal_mvp_margin modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
-        <div class="">
-          <h5 class="modal-title_dash" id="exampleModalCenterTitle">Find & Replace</h5>
-
+        <div class="rowCustom p-3 findAndReplaceModalHandle">
+          <span class="modal-title_dash h5" id="exampleModalCenterTitle">Find & Replace</span>
+          <span class="ml-auto cursor-pointer" (click)='hideFindAndReplaceModal()' >
+            <svg xmlns="http://www.w3.org/2000/svg" height='20' fill="#000" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </span>
         </div>
 
         <div class="modal-body">
@@ -941,10 +950,10 @@
         </div>
 
         <div class="flex_find_all">
-          <button type="button" class="btn_all_find">Replace</button>
+          <button type="button" (click)="findAndReplaceOne()" class="btn_all_find">Replace</button>
           <button type="button" (click)="findAndReplace()" class="btn_all_find">Replace all</button>
-          <button type="button" class="btn_all_find">Previous</button>
-          <button type="button" class="btn_all_find">Next</button>
+          <button type="button" (click)='findNext()' class="btn_all_find">Next</button>
+          <button type="button" (click)='findPrevious()' class="btn_all_find">Previous</button>
         </div>
       </div>
     </div>

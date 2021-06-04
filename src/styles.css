@@ -9,3 +9,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 /* #fc_frame {
   display: none;
 } */
+
+mark {
+  background: yellow;
+}
+
+mark.current {
+  background: orange;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+

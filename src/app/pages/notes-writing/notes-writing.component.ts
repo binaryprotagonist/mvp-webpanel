@@ -16,6 +16,7 @@ import { map } from 'rxjs/internal/operators/map';
 import { of } from 'rxjs/internal/observable/of';
 import { merge } from 'rxjs'
 import Swal from 'sweetalert2';
+import * as mark from 'mark.js';
 
 declare var $: any;
 
@@ -67,6 +68,9 @@ export class NotesWritingComponent implements OnInit {
   onlineOffline: any
   subjects: any
   subjectsId: string
+  findResults;
+  findResultsCurrentIndex = 0;
+  markInstance;
   onResize(evt: AngularResizeElementEvent): void {
     if (evt.currentWidthValue > 180 && evt.currentWidthValue < 1100) {
       this.data.width = evt.currentWidthValue;
@@ -101,6 +105,15 @@ export class NotesWritingComponent implements OnInit {
     this.getNote()
     this.getUser()
     this.getSubjects()
+    this.markInstance = new mark(document.querySelector('.parentEditor'));
+    $('#exampleModalCenter6').on('hidden.bs.modal', (e) => {
+      this.markInstance.unmark();
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.ctrlKey && event.key === 'f') {
+        this.showFindAndReplaceModal();
+      }
+    });
     
   }
 
@@ -111,47 +124,9 @@ checkStyle(){
     // console.log("style",e.target.parentNode.firstElementChild);
         console.log("style",e);
 
-    });
-}
-getSelectionHtml() {
-  var sel = window.getSelection();
-if (sel.rangeCount && sel.getRangeAt) {
- var range = sel.getRangeAt(0);
-}
-// Set design mode to on
-document.designMode = "on";
-if (range) {
-sel.addRange(range);
-}
-// var selection = window.getSelection(),
-//   range, oldBrowser = true;
-
-// if (!selection) {
-//   selection = window.getSelection();
-//   range = selection.getRangeAt(0);
-//   oldBrowser = false;
-// } else
-//   range = document.getSelection().createRange();
-
-// selection.modify("move", "backward", "lineboundary");
-// selection.modify("extend", "forward", "lineboundary");
-
-// if (oldBrowser) {
-//   var html = document.selection.createRange().htmlText;
-//   range.select();
-//   return html;
-// }
-
-var html = document.createElement("div");
-
-for (var i = 0, len =sel.rangeCount; i < len; ++i) {
-  html.appendChild(sel.getRangeAt(i).cloneContents());
+  });
 }
 
-sel.removeAllRanges();
-sel.addRange(range);
-return html;
-}
   getUser() {
     this.commonService.get(`getUser`).subscribe((data: any) => {
       if (data.status == 200) {
@@ -238,26 +213,22 @@ return html;
     this.autoUpdate()
   }
 
-  getImage(event) {
+  getImage(event): void {
     const file = event.target.files[0];
-    var reader = new FileReader();
+    const reader = new FileReader();
     let dataURI;
-
-    reader.addEventListener(
-      "load",
-      function () {
+    reader.addEventListener('load', () => {
         dataURI = reader.result;
-        const img = document.createElement("img");
+        const img = document.createElement('img');
         img.src = dataURI;
-        var editorContent = document.querySelector(".editor");
+        const editorContent = document.querySelector('.editor_ab div');
         editorContent.appendChild(img);
-      },
-      false
-    );
+      }, false);
     if (file) {
       reader.readAsDataURL(file);
     }
-
+    const inputFile = document.getElementById('getImage') as HTMLInputElement;
+    inputFile.value = '';
   }
   execCommandWithArg(command, arg) {
     console.log(arg)
@@ -557,38 +528,93 @@ return html;
     }
   }
 
-  onFindText(searchValue: string) {
-    console.log(searchValue);
-    // const p = this.content1
-    this.findText = searchValue
-    console.log("findtext", this.findText)
-    this.findCount = 0
-    if (searchValue) {
-      const Count = [...this.content.matchAll(searchValue)];
-      const Count1 = [...this.content1.matchAll(searchValue)];
-      const Count2 = [...this.content2.matchAll(searchValue)];
+  showFindAndReplaceModal(): void {
+    $('#exampleModalCenter6').modal({
+      backdrop: false,
+      show: true
+    }).on('shown.bs.modal', () => {
+      console.log('shown');
+      document.getElementById('findTextInput').focus();
+      $('body').css('overflow', 'auto');
+    });
+    $('.findAndReplaceModal').draggable({
+      handle: '.findAndReplaceModalHandle'
+    });
+    $('#exampleModalCenter6').modal().on('shown', () => {
+      console.log('shown');
+      $('#findTextInput').focus();
 
-      console.log("aaaa", Count.length, Count1.length, Count2.length)
-      this.findCount = Count.length + Count1.length + Count2.length
+    });
+  }
+
+  hideFindAndReplaceModal(): void {
+    $('#exampleModalCenter6').modal('hide');
+  }
+
+  onFindText(searchValue: string): void {
+    this.findText = searchValue;
+    $(() => {
+      this.findResults = $('mark');
+      this.jumpTo();
+     });
+  }
+
+  jumpTo(): void {
+    if (this.findResults.length) {
+      let position;
+      const current = this.findResults.eq(this.findResultsCurrentIndex);
+      this.findResults.removeClass('current');
+      if (current.length) {
+        current.addClass('current');
+        position = current.offset().top - 50;
+        window.scrollTo(0, position);
+      }
     }
   }
 
 
-  findAndReplace() {
-    // this.content1
-    const p = this.content1
-    // console.log(this.findText,this.replaceText);
-    //
-    const array = [...p.matchAll(this.findText)];
-    console.log("aaaa", array.length)
-    //
-    const newStr = this.content.replaceAll(this.findText, this.replaceText)
-    const newStr1 = this.content1.replaceAll(this.findText, this.replaceText)
-    const newStr2 = this.content2.replaceAll(this.findText, this.replaceText)
+  findAndReplace(): void {
+    const newStr = this.content.replaceAll(this.findText, this.replaceText);
+    const newStr1 = this.content1.replaceAll(this.findText, this.replaceText);
+    const newStr2 = this.content2.replaceAll(this.findText, this.replaceText);
+    this.content = newStr;
+    this.content1 = newStr1;
+    this.content2 = newStr2;
+  }
 
-    this.content = newStr
-    this.content1 = newStr1
-    this.content2 = newStr2
+  findAndReplaceOne(): void {
+    const current = this.findResults.eq(this.findResultsCurrentIndex);
+    current.text(this.replaceText);
+    current.removeClass('current');
+    this.markInstance.unmark(this.replaceText);
+    this.markInstance.mark(this.findText);
+    this.findResultsCurrentIndex = 0;
+    $(() => {
+      this.findResults = $('mark');
+      this.jumpTo();
+     });
+  }
 
+  findNext(): void {
+    if (this.findResults.length) {
+      if (this.findResultsCurrentIndex <= this.findResults.length - 1) {
+        this.findResultsCurrentIndex += 1;
+      }
+      if (this.findResultsCurrentIndex > this.findResults.length - 1) {
+        this.findResultsCurrentIndex = 0;
+      }
+      this.jumpTo();
+    }
+  }
+
+  findPrevious(): void {
+    if (this.findResults.length) {
+      if (this.findResultsCurrentIndex > 0) {
+        --this.findResultsCurrentIndex;
+      } else if (this.findResultsCurrentIndex === 0) {
+        this.findResultsCurrentIndex = this.findResults.length - 1;
+      }
+      this.jumpTo();
+    }
   }
 }
