@@ -646,10 +646,61 @@
           <option value="6">6px</option>
           <option value="7">7px</option>
         </select>
-        <label class="color-text">A<input type="color" (change)="execCommandWithArg('foreColor',  $event.target.value);"
-            class="color-picker"></label>
-        <!-- <label class="color-text1"><i class='fas fa-highlighter fa-lg'></i><input type="color"
-                 (change)="execCommandWithArg('hiliteColor',  $event.target.value);" class="color-picker"></label> -->
+        <div class="dropdown">
+          <a class="colCustom dropdown-toggle text-center px-1 text-muted no-underline" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span><b>A</b></span>
+            <div id="selectTextColorBox" class="selectColorBox"></div>
+          </a>
+        
+          <div class="dropdown-menu " aria-labelledby="dropdownMenuLink">
+            <div class="rowCustom m-0 py-2">
+              <button class="color-box" style="background-color: #ff0000;" (click) = 'changeTextColor("#ff0000")'></button>
+              <button class="color-box" style="background-color: #3A5BBC;" (click) = 'changeTextColor("#3A5BBC")'></button>
+              <button class="color-box" style="background-color: #7fff00" (click) = 'changeTextColor("#7fff00")'></button>
+              <button class="color-box" style="background-color: #9400d3" (click) = 'changeTextColor("#9400d3")'></button>
+            </div>
+            <div class="rowCustom m-0 py-2">
+              <button class="color-box" style="background-color: #696969" (click) = 'changeTextColor("#696969")'></button>
+              <button class="color-box" style="background-color: #ff00ff" (click) = 'changeTextColor("#ff00ff")'></button>
+              <button class="color-box" style="background-color: #d2691e" (click) = 'changeTextColor("#d2691e")'></button>
+              <button class="color-box" style="background-color: #a52a2a" (click) = 'changeTextColor("#a52a2a")'></button>
+            </div>
+            <div class="rowCustom m-0 py-2">
+              <button class="color-box" style="background-color: #010101;" (click) = 'changeTextColor("#010101")'></button>
+              <button class="color-box" style="background-color: #3A5BBC;" (click) = 'changeTextColor("#3A5BBC")'></button>
+              <button class="color-box" style="background-color: #7fffd4" (click) = 'changeTextColor("#7fffd4")'></button>
+              <button class="color-box" style="background-color: #a52a2a" (click) = 'changeTextColor("#a52a2a")'></button>
+            </div>
+          </div>
+        </div>
+        <div class="dropdown">
+          <a class="colCustom dropdown-toggle text-center px-1 text-muted no-underline" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span><b>B</b></span>
+            <div id="selectBackgroundColorBox" class="selectColorBox"></div>
+          </a>
+        
+          <div class="dropdown-menu " aria-labelledby="dropdownMenuLink">
+            <div class="rowCustom m-0 py-2">
+              <button class="color-box" style="background-color: #ff0000;" (click) = 'changeBackgroundColor("#ff0000")'></button>
+              <button class="color-box" style="background-color: #FFBD33;" (click) = 'changeBackgroundColor("#FFBD33")'></button>
+              <button class="color-box" style="background-color: #DBFF33" (click) = 'changeBackgroundColor("#DBFF33")'></button>
+              <button class="color-box" style="background-color: #75FF33" (click) = 'changeBackgroundColor("#75FF33")'></button>
+            </div>
+            <div class="rowCustom m-0 py-2">
+              <button class="color-box" style="background-color: #33FFBD" (click) = 'changeBackgroundColor("#33FFBD")'></button>
+              <button class="color-box" style="background-color: #FF5733" (click) = 'changeBackgroundColor("#FF5733")'></button>
+              <button class="color-box" style="background-color: #6bd59a" (click) = 'changeBackgroundColor("#6bd59a")'></button>
+              <button class="color-box" style="background-color: #b079ab" (click) = 'changeBackgroundColor("#b079ab")'></button>
+            </div>
+            <div class="rowCustom m-0 py-2">
+              <button class="color-box" style="background-color: #010101;" (click) = 'changeBackgroundColor("#010101")'></button>
+              <button class="color-box" style="background-color: #3A5BBC;" (click) = 'changeBackgroundColor("#3A5BBC")'></button>
+              <button class="color-box" style="background-color: #7fffd4" (click) = 'changeBackgroundColor("#7fffd4")'></button>
+              <button class="color-box" style="background-color: #6ad0CA" (click) = 'changeBackgroundColor("#6ad0CA")'></button>
+            </div>
+          </div>
+        </div>
+        
         <button class="tool-items fa fa-link" (click)="link()">
         </button>
       </div>
@@ -660,13 +711,14 @@
     <div class="center">
       <div class="container">
         <div class="row">
-          <div class="editor" id="print-section">
+          <div (click)="getSelectionHtml()" id="content" class="editor" id="print-section">
             <div class="d-flex parentEditor">
+              
               <div class=" editor_45 ">
                 <input type="text" class="note-head1" placeholder="Cue points" (keyup)="getContent()"
                   [(ngModel)]="cuesTitle">
-                  <div id="cues" class="cues" (keyup)="getContent()" [attr.contenteditable]=internet [innerHTML]="content"
-                  [markjsHighlight]="findText" [markjsConfig]="content" [scrollToFirstMarked]="true"></div>
+                  <div id="cues" class="cues" (keyup)="getContent()" [attr.contenteditable]=internet 
+                  [markjsHighlight]="findText" [markjsConfig]="content" [scrollToFirstMarked]="true"><p [innerHTML]="content"></p></div>
               </div>
               <div class="editor_ab">
                 <input type="text" class="note-head1" placeholder="Note" (keyup)="getContent()"

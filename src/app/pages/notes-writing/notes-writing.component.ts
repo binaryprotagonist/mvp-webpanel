@@ -101,6 +101,7 @@ export class NotesWritingComponent implements OnInit {
     this.getNote()
     this.getUser()
     this.getSubjects()
+    
   }
 
   ngAfterViewInit() { }
@@ -111,6 +112,46 @@ checkStyle(){
         console.log("style",e);
 
     });
+}
+getSelectionHtml() {
+  var sel = window.getSelection();
+if (sel.rangeCount && sel.getRangeAt) {
+ var range = sel.getRangeAt(0);
+}
+// Set design mode to on
+document.designMode = "on";
+if (range) {
+sel.addRange(range);
+}
+// var selection = window.getSelection(),
+//   range, oldBrowser = true;
+
+// if (!selection) {
+//   selection = window.getSelection();
+//   range = selection.getRangeAt(0);
+//   oldBrowser = false;
+// } else
+//   range = document.getSelection().createRange();
+
+// selection.modify("move", "backward", "lineboundary");
+// selection.modify("extend", "forward", "lineboundary");
+
+// if (oldBrowser) {
+//   var html = document.selection.createRange().htmlText;
+//   range.select();
+//   return html;
+// }
+
+var html = document.createElement("div");
+
+for (var i = 0, len =sel.rangeCount; i < len; ++i) {
+  html.appendChild(sel.getRangeAt(i).cloneContents());
+}
+
+sel.removeAllRanges();
+sel.addRange(range);
+console.lo(html)
+return html;
 }
   getUser() {
     this.commonService.get(`getUser`).subscribe((data: any) => {
@@ -220,7 +261,15 @@ checkStyle(){
 
   }
   execCommandWithArg(command, arg) {
+    console.log(arg)
+   
+    // Set design mode to on
+    document.designMode = "on";
+   
     document.execCommand(command, false, arg);
+    
+    document.designMode = "off";
+
   }
   execCommand(event, command, arg) {
 
@@ -234,6 +283,19 @@ checkStyle(){
 
     document.execCommand(command, false, '');
   }
+
+  /* execute functiom for color and backg*/
+  changeTextColor(color): void {
+    document.execCommand('foreColor', false, color.toString());
+    document.getElementById('selectTextColorBox').style.backgroundColor = color;
+  }
+
+  changeBackgroundColor(color): void {
+    document.execCommand('hiliteColor', false, color.toString());
+    document.getElementById('selectBackgroundColorBox').style.backgroundColor = color;
+  }
+  
+  
   link() {
     var url = prompt("Enter the URL");
     document.execCommand("createLink", false, url);
