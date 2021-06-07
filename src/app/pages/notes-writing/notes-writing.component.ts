@@ -7,6 +7,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { ToastrService } from 'ngx-toastr';
 import jspdf from 'jspdf';
 import { AngularResizeElementDirection, AngularResizeElementEvent } from 'angular-resize-element';
+import * as html from 'html2pdf.js';
 
 import html2canvas from 'html2canvas';
 import * as moment from 'moment';
@@ -363,20 +364,33 @@ checkStyle(){
       }
     })
   }
-  savePdf(id) {
-    var data = document.getElementById('print-section');
-    html2canvas(data).then(canvas => {
-      // Few necessary setting options
-      var imgWidth = 208;
-      var pageHeight = 203;
-      var imgHeight = canvas.height * imgWidth / canvas.width;
-      var heightLeft = imgHeight;
-      const contentDataURL = canvas.toDataURL('image/png')
-      let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF
-      var position = 0;
-      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, pageHeight)
-      pdf.save('new-file.pdf'); // Generated PDF
+  savePdf() {
+    const opt = {
+      margin:       0.1,
+      image:        { type: 'jpeg', quality: 0.9 },
+      html2canvas:  { scale: 3 },
+      jsPDF:        { unit: 'in', format: 'A4', orientation: 'portrait' }
+    };
+    this.spinner.show();
+    const element =`<div  id="content" class="editor" id="print-section">
+    <div class="d-flex parentEditor">
+      <div class=" editor_45 ">
+      1
+      </div>
+      <div class="editor_ab">
+       2
+      </div>
+    </div>
+    <div class="editor_3">
+      3
+  </div>
+    </div>
+    `;
+    // html().from(element).set(opt).save();
+    html().set(opt).from(element).save().then(() => {
+      this.spinner.hide();
     });
+    // html(element, opt);
   }
 
   shareWithMail() {
@@ -570,7 +584,8 @@ checkStyle(){
       this.findResults.removeClass('current');
       if (current.length) {
         current.addClass('current');
-        position = current.offset().top - 50;
+        
+        position = current.offset().top - 150;
         window.scrollTo(0, position);
       }
     }

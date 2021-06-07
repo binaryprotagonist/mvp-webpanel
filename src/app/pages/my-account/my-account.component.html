@@ -5,11 +5,11 @@
     <div class="row">
       <div class="col-xl-12 col-lg-12 col-md-12 box_account px-4">
         <div id="Myaccount">
-          <div class="cusom_flex_profile">
+          <div class="cusom_flex_profile align-items-center">
             <h3 class="head_avtar">Profile Management</h3>
-           <a routerLink='/subscription'> <button class="btn_pro">{{PlanName}}</button></a>
+           <a routerLink='/subscription'> <button class="btn_pro">{{PlanName | titlecase}}</button></a>
           </div>
-          <div class="row">
+          <div class="row align-items-center">
             <div *ngIf="profileImage==null" class="col-lg-2 col-md-3 col-5">
               <img src="../../../assets/images/avtar.png" class="img_large" />
             </div>
@@ -76,9 +76,9 @@
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label class="lab_first">Gender</label>
-                    <input type="radio" [disabled]=!edit value="male" [(ngModel)]="gender" name="gender" class=""
+                    <input type="radio" [disabled]="!edit" value="male" [(ngModel)]="gender" name="gender" class=""
                       class="radio_mvp" /><label class="lab_gender">Male</label>
-                    <input type="radio" [disabled]=!edit value="female" [(ngModel)]="gender" name="gender" class=""
+                    <input type="radio" [disabled]="!edit" value="female" [(ngModel)]="gender" name="gender" class=""
                       class="radio_mvp" /> <label class="lab_gender">Female</label>
                   </div>
                 </div>
@@ -107,7 +107,7 @@
               <!-- 000 -->
               <div class="row">
                 <div class="col-xl-6">
-                  <h3 class="head_personal"></h3>
+                  <h3 class="head_personal">Email Settings</h3>
                 </div>
                 <div *ngIf="!editEmail" class="col-xl-6">
                   <a (click)="editMail(true)">

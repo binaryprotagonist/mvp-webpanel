@@ -460,6 +460,9 @@ label.lab_gender {
     padding-left: 0px;
     margin-bottom: 5px;
     font-size: 12px;
+    padding: 0.5rem;
+    align-items: center;
+    border-radius: 0.5rem;
 }
 
 .dropdown-menu.custom_drop.show img {
@@ -473,7 +476,7 @@ img.avtar_img {
 }
 
 p.para_premium {
-    line-height: 2;
+    line-height: 15px;
     color: #979797;
     font-size: 11px;
 }

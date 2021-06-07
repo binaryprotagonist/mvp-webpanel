@@ -200,9 +200,10 @@ updateProfile(){
   }
 
 editMail(value){
-  this.editEmail=value
-  console.log("value",value)
-  this.emailUpdateForm.enable();
+  this.editEmail = value;
+  console.log('value', value);
+  if (value) { this.emailUpdateForm.enable(); }
+  else { this.emailUpdateForm.disable(); }
 }
 updateEmail(){
   // alert(this.submitted2)

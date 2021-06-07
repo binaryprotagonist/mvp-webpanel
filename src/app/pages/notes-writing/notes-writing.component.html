@@ -1,168 +1,136 @@
   <ngx-spinner></ngx-spinner>
+
+  <!-- Header -->
   <nav class="navbar navbar-expand-md navbar-light bg-white height_custom sticky-top">
-
-    <a class="navbar-brand" [routerLink]="['/quickAccess']">
-      <img src="/assets/images/header_logo.png" />
-      <span class="svg_box_circle">
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20"
-          viewBox="0 0 20 20">
-          <defs>
-            <style>
-              .a,
-              .c {
-                fill: #979797;
-              }
-
-              .a {
-                stroke: #707070;
-              }
-
-              .b {
-                clip-path: url(#a);
-              }
-            </style>
-            <clipPath id="a">
-              <rect class="a" width="20" height="20" transform="translate(1 1)" />
-            </clipPath>
-          </defs>
-          <g class="b" transform="translate(-1 -1)">
-            <g transform="translate(1.633 4.761)">
-              <path class="c"
-                d="M.3,11.2h0L5.554,5.965a1.006,1.006,0,0,1,1.42,1.426L3.444,10.9H17.728a1.006,1.006,0,0,1,0,2.013H3.444l3.53,3.513a1.006,1.006,0,0,1-1.42,1.426L.3,12.624h0A1.007,1.007,0,0,1,.3,11.2Z"
-                transform="translate(0 -5.672)" />
-            </g>
-          </g>
-        </svg>
-      </span>
+    <a class="logo" [routerLink]="['/quickAccess']">
+      <img width="92" src="../../../assets/images/header_logo.png" class="img_header" />
+    </a>  
+    <a class="svg_box_circle ml-3" [routerLink]="['/quickAccess']">
+      <svg xmlns="http://www.w3.org/2000/svg" class="m-0" width='20'  fill="none" viewBox="0 0 24 24" stroke="#979797">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+      </svg>
     </a>
-    <div class="d-flex" style="margin-left: -35px;">
-      <!-- <p (keyup)="get Name($event.target.innerHTML)" contenteditable class="note-name" [innerHTML]="notesName"></p> -->
-      <input type="text" (keyup)="getContent()" type="text" (keyup)="getContent()" autoSizeInput
-        [includePadding]="false" [includeBorders]="false" [(ngModel)]="notesName" class="note-name">
+    <input type="text" (keyup)="getContent()" type="text" (keyup)="getContent()" autoSizeInput
+      [includePadding]="false" [includeBorders]="false" [(ngModel)]="notesName" class="note-name ml-3">
 
-      <div class="dropdown">
-        <button class="pop-button dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          <i class="fa fa-folder-open-o ml-3 mt-1 icon-color-change"></i>
-        </button>
-        <div class="dropdown-menu pop-div" aria-labelledby="dropdownMenuButton">
-          <ul class="under_cost_list_button">
-            <li *ngFor="let subject of subjects;">
-              <a (click)="getSubjectsId(subject._id)"><svg _ngcontent-cqy-c87="" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" xml:space="preserve"
-                  style="enable-background: new 0 0 512 512;">
-                  <path _ngcontent-cqy-c87="" d="M441.412,140.235v338.781c0,18.219-14.778,32.983-32.983,32.983H103.572
-              c-18.219,0-32.983-14.764-32.983-32.983V32.983C70.588,14.764,85.352,0,103.572,0h197.605L441.412,140.235z"
-                    style="fill: #518EF8;"></path>
-                  <g _ngcontent-cqy-c87="">
-                    <rect _ngcontent-cqy-c87="" x="161.18" y="257.054" width="189.626" height="21.071"
-                      style="fill: #FFFFFF;"></rect>
-                    <rect _ngcontent-cqy-c87="" x="161.18" y="304.112" width="189.626" height="21.071"
-                      style="fill: #FFFFFF;"></rect>
-                    <rect _ngcontent-cqy-c87="" x="161.18" y="351.171" width="189.626" height="21.071"
-                      style="fill: #FFFFFF;"></rect>
-                    <rect _ngcontent-cqy-c87="" x="161.18" y="398.23" width="134.855" height="21.071"
-                      style="fill: #FFFFFF;"></rect>
-                  </g>
-                  <polygon _ngcontent-cqy-c87=""
-                    points="320.31,137.188 441.412,187.079 441.412,140.235 372.751,119.962 " style="fill: #3A5BBC;">
-                  </polygon>
-                  <path _ngcontent-cqy-c87=""
-                    d="M441.412,140.235H334.16c-18.22,0-32.983-14.764-32.983-32.983V0L441.412,140.235z"
-                    style="fill: #ACD1FC;"></path>
-                  <g _ngcontent-cqy-c87=""></g>
-                  <g _ngcontent-cqy-c87=""></g>
-                  <g _ngcontent-cqy-c87=""></g>
-                  <g _ngcontent-cqy-c87=""></g>
-                  <g _ngcontent-cqy-c87=""></g>
-                  <g _ngcontent-cqy-c87=""></g>
-                  <g _ngcontent-cqy-c87=""></g>
-                  <g _ngcontent-cqy-c87=""></g>
-                  <g _ngcontent-cqy-c87=""></g>
-                  <g _ngcontent-cqy-c87=""></g>
-                  <g _ngcontent-cqy-c87=""></g>
-                  <g _ngcontent-cqy-c87=""></g>
-                  <g _ngcontent-cqy-c87=""></g>
-                  <g _ngcontent-cqy-c87=""></g>
-                  <g _ngcontent-cqy-c87=""></g>
-                </svg> {{subject.subjectName |titlecase}}
-              </a>
-            </li>
-          </ul>
-        </div>
+    <!-- Folder -->
+    <div class="dropdown">
+      <button class="pop-button dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-folder-open-o ml-3 mt-1 icon-color-change"></i>
+      </button>
+      <div class="dropdown-menu pop-div" aria-labelledby="dropdownMenuButton">
+        <ul class="under_cost_list_button">
+          <li *ngFor="let subject of subjects;">
+            <a class="d-inline-flex align-items-center" (click)="getSubjectsId(subject._id)">
+              <svg _ngcontent-cqy-c87="" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" xml:space="preserve"
+                style="enable-background: new 0 0 512 512;">
+                <path _ngcontent-cqy-c87="" d="M441.412,140.235v338.781c0,18.219-14.778,32.983-32.983,32.983H103.572
+            c-18.219,0-32.983-14.764-32.983-32.983V32.983C70.588,14.764,85.352,0,103.572,0h197.605L441.412,140.235z"
+                  style="fill: #518EF8;"></path>
+                <g _ngcontent-cqy-c87="">
+                  <rect _ngcontent-cqy-c87="" x="161.18" y="257.054" width="189.626" height="21.071"
+                    style="fill: #FFFFFF;"></rect>
+                  <rect _ngcontent-cqy-c87="" x="161.18" y="304.112" width="189.626" height="21.071"
+                    style="fill: #FFFFFF;"></rect>
+                  <rect _ngcontent-cqy-c87="" x="161.18" y="351.171" width="189.626" height="21.071"
+                    style="fill: #FFFFFF;"></rect>
+                  <rect _ngcontent-cqy-c87="" x="161.18" y="398.23" width="134.855" height="21.071"
+                    style="fill: #FFFFFF;"></rect>
+                </g>
+                <polygon _ngcontent-cqy-c87=""
+                  points="320.31,137.188 441.412,187.079 441.412,140.235 372.751,119.962 " style="fill: #3A5BBC;">
+                </polygon>
+                <path _ngcontent-cqy-c87=""
+                  d="M441.412,140.235H334.16c-18.22,0-32.983-14.764-32.983-32.983V0L441.412,140.235z"
+                  style="fill: #ACD1FC;"></path>
+                <g _ngcontent-cqy-c87=""></g>
+                <g _ngcontent-cqy-c87=""></g>
+                <g _ngcontent-cqy-c87=""></g>
+                <g _ngcontent-cqy-c87=""></g>
+                <g _ngcontent-cqy-c87=""></g>
+                <g _ngcontent-cqy-c87=""></g>
+                <g _ngcontent-cqy-c87=""></g>
+                <g _ngcontent-cqy-c87=""></g>
+                <g _ngcontent-cqy-c87=""></g>
+                <g _ngcontent-cqy-c87=""></g>
+                <g _ngcontent-cqy-c87=""></g>
+                <g _ngcontent-cqy-c87=""></g>
+                <g _ngcontent-cqy-c87=""></g>
+                <g _ngcontent-cqy-c87=""></g>
+                <g _ngcontent-cqy-c87=""></g>
+              </svg>
+              <span class="ml-2">{{subject.subjectName |titlecase}}</span>
+            </a>
+          </li>
+        </ul>
       </div>
-
-      <div class="dropdown">
-        <button class="pop-button dropdown-toggle" type="button" id="dropdownMenuButton1" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          <i class="fa fa-cloud ml-2 mt-1 icon-color-change"></i>
-        </button>
-        <div class="dropdown-menu pop-div" aria-labelledby="dropdownMenuButton">
-          <div class="pop-top-div">
-            <p> <span><i class="fa fa-cloud mr-3"></i></span> All changes saved to drive</p>
-          </div>
-          <div class="pop-bottom-div">
-            <p class="font-weight-bold"> <span><i class="fa fa-exclamation-triangle mr-3"></i></span>This Document
-              is not ready for offline use </p>
-            <p class="">If you lose an internet connection, you can't edit this document. To access your documents
-              without an internet connection, turn on offline</p>
-            <button class="pop-button-on mt-5">Turn on</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- <button type="button" class="pop-button" data-toggle="popover" title="Popover title"
-            data-content="And here's some amazing content. It's very engaging. Right?">
-            <i class="fa fa-folder-open-o ml-3 mt-1" ></i>
-            </button> -->
-
-
     </div>
+
+    <!-- Cloud -->
+    <div class="dropdown">
+      <button class="pop-button dropdown-toggle" type="button" id="dropdownMenuButton1" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-cloud ml-2 mt-1 icon-color-change"></i>
+      </button>
+      <div class="dropdown-menu pop-div" aria-labelledby="dropdownMenuButton">
+        <div class="pop-top-div">
+          <p> <span><i class="fa fa-cloud mr-3"></i></span> All changes saved to drive</p>
+        </div>
+        <div class="pop-bottom-div">
+          <p class="font-weight-bold"> <span><i class="fa fa-exclamation-triangle mr-3"></i></span>This Document
+            is not ready for offline use </p>
+          <p class="">If you lose an internet connection, you can't edit this document. To access your documents
+            without an internet connection, turn on offline</p>
+          <button class="pop-button-on mt-5">Turn on</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nav Toggle Mobile View Only -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ml-auto">
 
-        <li class="nav-item active">
-          <button class="btn_headershare btn-share" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+    <!-- Profile -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto align-items-center">
+
+        <li class="nav-item active pr-3 border-right">
+          <button class="btn_headershare btn-share p-0 m-0 mt-2 px-4 d-inline-flex align-items-center" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
-            <img src="../../../assets/images/btn_headershare.png" />
-            Share
+            <img class="mr-2" src="../../../assets/images/btn_headershare.png" />
+            <span>Share</span>
           </button>
           <!--  -->
-          <div class="dropdown show">
+          <div class="dropdown show mt-2">
             <div class="dropdown-menu user-delete-dropdown-box drop-menu-share" aria-labelledby="dropdownMenuLink">
-              <a class="dropdown-item" (click)='savePdf(0)'><span><img src="assets/images/download.png"
+              <a class="dropdown-item p-2 rounded-lg" (click)='savePdf(0)'><span><img src="assets/images/download.png"
                     class="block-img" /></span>Download Pdf</a>
               <!-- <a class="dropdown-item" data-toggle="modal" data-target="#sharemail"
                         aria-expanded="false"><span><img src="assets/images/share.png" class="block-img" /></span>share
                         with mail</a> -->
-              <a class="dropdown-item" data-toggle="modal" data-target="#sharemail" aria-expanded="false"><span><img
+              <a class="dropdown-item p-2 rounded-lg" data-toggle="modal" data-target="#sharemail" aria-expanded="false"><span><img
                     src="assets/images/share.png" class="block-img" /></span>Share
                 with EMail </a>
             </div>
           </div>
           <!--  -->
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">
-            <div class="line_header">
-            </div>
-          </a>
-        </li>
         <div class="dropdown dropdown_second">
           <li class="nav-item" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
-            <a class="nav-link" href="#">
-              <img *ngIf="profileImage==null" src="../../../assets/images/avtar.png" class="img_header_p" />
-              <img *ngIf="profileImage!=null" src="{{ profileImage}}" class="img_header_p" /> </a>
+            <a class="nav-link px-3" href="#">
+              <img *ngIf="profileImage==null" src="assets/images/avtar.png" class="img_header_p" />
+              <img *ngIf="profileImage!=null" src="{{ profileImage}}" class="img_header_p" />
+            </a>
             <div class="dropdown-menu custom_drop" aria-labelledby="dropdownMenuButton" style="z-index: 9999;">
-              <a class="dropdown-item" href="#">
-                <div class="row">
+              <a class="dropdown-item p-1 rounded-lg" href="#">
+                <div class="row align-items-center">
                   <div class="col-3">
-                    <img src="../../../assets/images/avtar.png" class="avtar_img" />
+                    <img src="assets/images/avtar.png" class="avtar_img" />
                   </div>
                   <div class="col-9">
                     <h4 class="head_member">{{firstName}} {{lastName}}</h4>
@@ -192,16 +160,14 @@
             <div class="collapse navbar-collapse heading-collapse" id="navbarNavDropdown">
               <ul class="navbar-nav">
                 <li class="nav-item dropdown nav-item-1">
-                  <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink"
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     File
                   </a>
                   <ul class="dropdown-menu dropdown-menu-edit" aria-labelledby="navbarDropdownMenuLink">
-
-
-                    <li class="dropdown-submenu"><a data-toggle="modal" (click)=addNotesModal()
-                        class="dropdown-item dropdown-toggle">
-
+                    <li class="dropdown-submenu">
+                      <a data-toggle="modal" (click)=addNotesModal()
+                        class="dropdown-item dropdown-toggle cursor-pointer p-1">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 134.51 134.51">
                           <defs>
                             <style>
@@ -227,10 +193,10 @@
                           </g>
                         </svg>
                         New</a>
-
                     </li>
 
-                    <li class="d-p"><a class="dropdown-item" (click)=openModel()>
+                    <li class="d-p">
+                      <a class="dropdown-item cursor-pointer p-1" (click)=openModel()>
 
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 172.67 197.33">
                           <defs>
@@ -251,8 +217,9 @@
                         </svg>
                         Make a copy</a></li>
 
-                    <li class="dropdown-submenu"><a data-toggle="modal" data-target="#sharemail" aria-expanded="false"
-                        class="dropdown-item dropdown-toggle">
+                    <li class="dropdown-submenu ">
+                      <a data-toggle="modal" data-target="#sharemail" aria-expanded="false"
+                        class="dropdown-item dropdown-toggle cursor-pointer p-1">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 194.69 148.3">
                           <defs>
                             <style>
@@ -274,7 +241,7 @@
                         <li><a class="dropdown-item" href="#">Email as Url</a></li>
                       </ul> -->
                     </li>
-                    <li class="d-p"><a class="dropdown-item" (click)='savePdf(0)'>
+                    <li class="d-p"><a class="dropdown-item cursor-pointer p-1" (click)='savePdf(0)'>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
                           <defs>
                             <style>
@@ -295,7 +262,7 @@
                           </g>
                         </svg>
                         Download</a></li>
-                    <li class="d-p"><a class="dropdown-item" data-toggle="modal" data-target="#exampleModalCenter3">
+                    <li class="d-p"><a class="dropdown-item cursor-pointer p-1" data-toggle="modal" data-target="#exampleModalCenter3">
 
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 199.99">
                           <defs>
@@ -317,7 +284,7 @@
                           </g>
                         </svg>
                         Rename</a></li>
-                    <li class="d-p"><a class="dropdown-item" data-toggle="modal" data-target="#exampleModalCenter4">
+                    <li class="d-p"><a class="dropdown-item cursor-pointer p-1" data-toggle="modal" data-target="#exampleModalCenter4">
 
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 159.33 196.1">
                           <defs>
@@ -342,7 +309,7 @@
                         </svg>
                         Move
                         to Trash</a></li>
-                    <li (click)="getDetails()" class="d-p"><a class="dropdown-item" data-toggle="modal">
+                    <li (click)="getDetails()" class="d-p"><a class="dropdown-item cursor-pointer p-1" data-toggle="modal">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
                           <defs>
                             <style>
@@ -385,8 +352,8 @@
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Edit
                   </a>
-                  <ul class="dropdown-menu dropdown-menu-edit" aria-labelledby="navbarDropdownMenuLink">
-                    <li class="d-p"><a onclick="document.execCommand('undo',false,'')" class="dropdown-item">
+                  <ul class="dropdown-menu dropdown-menu-edit " aria-labelledby="navbarDropdownMenuLink">
+                    <li class="d-p"><a onclick="document.execCommand('undo',false,'')" class="dropdown-item cursor-pointer p-1">
 
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 156.09 200">
                           <defs>
@@ -404,7 +371,7 @@
                           </g>
                         </svg>
                         Undo</a></li>
-                    <li class="d-p"><a onclick="document.execCommand('redo',false,'')" class="dropdown-item">
+                    <li class="d-p"><a onclick="document.execCommand('redo',false,'')" class="dropdown-item cursor-pointer p-1">
 
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 156.09 200">
                           <defs>
@@ -422,7 +389,7 @@
                           </g>
                         </svg>
                         Redo</a></li>
-                    <li class="d-p"><a class="dropdown-item" (click)="execCommand($event,'paste', false)">
+                    <li class="d-p"><a class="dropdown-item cursor-pointer p-1" (click)="execCommand($event,'paste', false)">
 
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 172.67 197.33">
                           <defs>
@@ -442,7 +409,7 @@
                           </g>
                         </svg>
                         Paste</a></li>
-                    <li class="d-p"><a class="dropdown-item" (click)='showFindAndReplaceModal()'>
+                    <li class="d-p"><a class="dropdown-item cursor-pointer p-1" (click)='showFindAndReplaceModal()'>
 
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
                           <defs>
@@ -468,6 +435,7 @@
           </nav>
           <!-- Dropdown ends -->
         </li>
+
         <li>
           <!-- dropdown -->
           <nav class="navbar navbar-expand-md navbar-light bg-light">
@@ -479,7 +447,7 @@
                     Help
                   </a>
                   <ul class="dropdown-menu dropdown-menu-edit" aria-labelledby="navbarDropdownMenuLink">
-                    <li class="d-p"><a class="dropdown-item" href="#">
+                    <li class="d-p"><a class="dropdown-item cursor-pointer p-1" href="#">
 
 
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 193.33">
@@ -523,7 +491,7 @@
                           </g>
                         </svg>
                         Training</a></li>
-                    <li class="d-p"><a class="dropdown-item" href="#">
+                    <li class="d-p"><a class="dropdown-item cursor-pointer p-1" href="#">
 
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 186.45 200.8">
                           <defs>
@@ -543,7 +511,7 @@
                           </g>
                         </svg>
                         Updates</a></li>
-                    <li class="d-p"><a class="dropdown-item" href="#">
+                    <li class="d-p"><a class="dropdown-item cursor-pointer p-1" href="#">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 152.34 200">
                           <defs>
                             <style>
@@ -578,35 +546,30 @@
 
         <li
           style="float: center; font-size: 14px; color: '#767676'; text-decoration: underline;   font-family: 'ProductSans400';">
-          Last edit was {{timeAgo}}</li>
-
-        <!-- <li>{{createdAt |date}}</li> -->
-
-        <!-- <li><a href="#">Insert</a></li>
-           <li><a href="#">Format</a></li>
-           <li><a href="#">Help</a></li> -->
+          Last edit was {{timeAgo}}
+        </li>
       </ul>
       <div class="toolbar">
         <button class="tool-items fa fa-undo" onclick="document.execCommand('undo',false,'')"></button>
         <button class="tool-items fa fa-repeat" onclick="document.execCommand('redo',false,'')"></button>
-        <!-- <button class="tool-items fa fa-print" onclick="document.execCommand('italic', false, '');">
-              </button> -->
-        <button class="tool-items fa fa-underline" (click)="execCommand($event,'underline', false)">
-        </button>
-        <button class="tool-items fa fa-italic" (click)="execCommand($event,'italic', false);">
-        </button>
-        <button class="tool-items fa fa-bold" (click)="execCommand($event,'bold', false)">
-        </button>
-        <button class="tool-items fa fa-strikethrough" (click)="execCommand($event,'strikeThrough', false);">
-        </button>
+        <button class="tool-items fa fa-bold" (click)="execCommand($event,'bold', false)"></button>
+        <button class="tool-items fa fa-italic" (click)="execCommand($event,'italic', false);"></button>
+        <button class="tool-items fa fa-underline" (click)="execCommand($event,'underline', false)"></button>
+        <button class="tool-items fa fa-strikethrough" (click)="execCommand($event,'strikeThrough', false);"></button>
         <!-- Jutify -->
-        <button class="tool-items fa fa-align-center" onclick="document.execCommand('justifyCenter',false,'')"></button>
         <button class="tool-items fa fa-align-left" onclick="document.execCommand('justifyLeft',false,'')"></button>
+        <button class="tool-items fa fa-align-center" onclick="document.execCommand('justifyCenter',false,'')"></button>
         <button class="tool-items fa fa-align-right" onclick="document.execCommand('justifyRight',false,'')"></button>
-        <button class="tool-items fa fa-list-ul"
-          onclick="document.execCommand('insertUnorderedList',false,'')"></button>
+        <button class="tool-items fa fa-list-ul" onclick="document.execCommand('insertUnorderedList',false,'')"></button>
         <button class="tool-items fa fa-list-ol" onclick="document.execCommand('insertOrderedList',false,'')"></button>
-        <select class="slect_option" id="subcontacts" (change)="execCommandWithArg('fontName', $event.target.value); ">
+        <button class="tool-items fa fa-link" (click)="link()"></button>
+        <input type="file" hidden id='getImage' (change)='getImage($event)'>
+        <label for="getImage" class="tool-items p-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
+          </svg>
+        </label>
+        <select class="slect_option p-1" id="subcontacts" (change)="execCommandWithArg('fontName', $event.target.value); ">
           <option value="Arial">Arial</option>
           <option value="Arial Black">Arial Black</option>
           <option value="Comic Sans MS">Comic Sans MS</option>
@@ -618,7 +581,7 @@
           <option value="Times New Roman">Times New Roman</option>
           <option value="Verdana">Verdana</option>
         </select>
-        <select class="slect_option" (change)="execCommandWithArg('fontSize', $event.target.value);">
+        <select class="slect_option p-1" (change)="execCommandWithArg('fontSize', $event.target.value);">
           <option value="1">1px</option>
           <option value="2">2px</option>
           <option value="3">3px</option>
@@ -633,24 +596,27 @@
             <div id="selectTextColorBox" class="selectColorBox"></div>
           </a>
         
-          <div class="dropdown-menu dropdown-menu-custom" aria-labelledby="dropdownMenuLink">
-            <div class="rowCustom m-0 py-2">
-              <button class="color-box" style="background-color: #ff0000;" (click) = 'changeTextColor("#ff0000")'></button>
-              <button class="color-box" style="background-color: #3A5BBC;" (click) = 'changeTextColor("#3A5BBC")'></button>
-              <button class="color-box" style="background-color: #7fff00" (click) = 'changeTextColor("#7fff00")'></button>
-              <button class="color-box" style="background-color: #9400d3" (click) = 'changeTextColor("#9400d3")'></button>
-            </div>
-            <div class="rowCustom m-0 py-2">
-              <button class="color-box" style="background-color: #696969" (click) = 'changeTextColor("#696969")'></button>
-              <button class="color-box" style="background-color: #ff00ff" (click) = 'changeTextColor("#ff00ff")'></button>
-              <button class="color-box" style="background-color: #d2691e" (click) = 'changeTextColor("#d2691e")'></button>
-              <button class="color-box" style="background-color: #a52a2a" (click) = 'changeTextColor("#a52a2a")'></button>
-            </div>
-            <div class="rowCustom m-0 py-2">
-              <button class="color-box" style="background-color: #010101;" (click) = 'changeTextColor("#010101")'></button>
-              <button class="color-box" style="background-color: #3A5BBC;" (click) = 'changeTextColor("#3A5BBC")'></button>
-              <button class="color-box" style="background-color: #7fffd4" (click) = 'changeTextColor("#7fffd4")'></button>
-              <button class="color-box" style=" background-color: #a52a2a" (click) = 'changeTextColor("#a52a2a")'></button>
+          <div class="dropdown-menu dropdown-menu-custom shadow" aria-labelledby="dropdownMenuLink">
+            <div class="">Text Color</div>
+            <div class="">
+              <div class="rowCustom m-0 py-2">
+                <button class="color-box" style="background-color: #ff0000;" (click) = 'changeTextColor("#ff0000")'></button>
+                <button class="color-box" style="background-color: #3A5BBC;" (click) = 'changeTextColor("#3A5BBC")'></button>
+                <button class="color-box" style="background-color: #7fff00" (click) = 'changeTextColor("#7fff00")'></button>
+                <button class="color-box" style="background-color: #9400d3" (click) = 'changeTextColor("#9400d3")'></button>
+              </div>
+              <div class="rowCustom m-0 py-2">
+                <button class="color-box" style="background-color: #696969" (click) = 'changeTextColor("#696969")'></button>
+                <button class="color-box" style="background-color: #ff00ff" (click) = 'changeTextColor("#ff00ff")'></button>
+                <button class="color-box" style="background-color: #d2691e" (click) = 'changeTextColor("#d2691e")'></button>
+                <button class="color-box" style="background-color: #a52a2a" (click) = 'changeTextColor("#a52a2a")'></button>
+              </div>
+              <div class="rowCustom m-0 py-2">
+                <button class="color-box" style="background-color: #010101;" (click) = 'changeTextColor("#010101")'></button>
+                <button class="color-box" style="background-color: #3A5BBC;" (click) = 'changeTextColor("#3A5BBC")'></button>
+                <button class="color-box" style="background-color: #7fffd4" (click) = 'changeTextColor("#7fffd4")'></button>
+                <button class="color-box" style=" background-color: #a52a2a" (click) = 'changeTextColor("#a52a2a")'></button>
+              </div>
             </div>
           </div>
         </div>
@@ -660,7 +626,8 @@
             <div id="selectBackgroundColorBox" class="selectColorBox"></div>
           </a>
         
-          <div class="dropdown-menu dropdown-menu-custom" aria-labelledby="dropdownMenuLink">
+          <div class="dropdown-menu dropdown-menu-custom shadow" aria-labelledby="dropdownMenuLink">
+            <div>Background Color</div>
             <div class="rowCustom m-0 py-2">
               <button class="color-box" style="background-color: #ff0000;" (click) = 'changeBackgroundColor("#ff0000")'></button>
               <button class="color-box" style="background-color: #FFBD33;" (click) = 'changeBackgroundColor("#FFBD33")'></button>
@@ -682,17 +649,12 @@
           </div>
         </div>
         
-        <button class="tool-items fa fa-link" (click)="link()">
-        </button>
-        <input type="file" hidden id='getImage' (change)='getImage($event)'>
-        <label for="getImage" class="tool-items p-1">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
-          </svg>
-        </label>
+        
       </div>
     </header>
   </nav>
+
+  <!-- Notes section -->
 
   <div class="">
     <div class="center">
@@ -732,6 +694,8 @@
       </div>
     </div>
   </div>
+
+  <!-- Modals -->
 
   <div class="modal fade" id="sharemail" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
@@ -906,7 +870,7 @@
   </div>
   <div class="modal fade" id="exampleModalCenter6" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
-    <div class="modal_mvp_margin modal-dialog modal-dialog-centered" role="document">
+    <div class="modal_mvp_margin modal-dialog modal-dialog-centered findAndReplaceModal" role="document">
       <div class="modal-content">
         <div class="rowCustom p-3 findAndReplaceModalHandle">
           <span class="modal-title_dash h5" id="exampleModalCenterTitle">Find & Replace</span>

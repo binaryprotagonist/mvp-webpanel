@@ -6,22 +6,26 @@
     <div class="quick_box">
       <h3 class="head_quick">My Subjects</h3>
     </div>
-    <div class="box_row_date">
-      <div class="form-group mb-0 " style="width: 63%;">
-        <input type="text"  placeholder="Sort by date" class="form-control form_date_picker" bsDatepicker (bsValueChange)="onValueChange($event)">
-        <img src="../../../../assets/images/arrow_header.png" class="img_arrow_date">
+    <div class="box_row_date align-items-center">  
+      <span>Sort By Date: </span>
+      <input type="date" class="px-2 py-1 mx-2 border rounded-lg" (change)='onValueChange($event.target.value)'>
+
+      <div [routerLink]="['/trash']" class="trashScreenButton border px-2 py-1">
+        <div class="box_drop m-0 mr-2">
+          Go to trash screen
+        </div>
+        <svg class='text-danger' xmlns="http://www.w3.org/2000/svg" width='16' height='16' class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="#dc3545">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+        </svg>
+      </div>
+      <!-- <div class="form-group mb-0 " style="width: 63%;">
       </div>
       <div class="dropdown label_dropdown">
         <img src="../../../assets/images/dots_3.png" type="button" id="dropdownMenuButton1" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false" class="img_subject_e" />
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <a class="dropdown-item"[routerLink]="['/trash']">
-            <div class="box_drop">
-              Go to trash screen
-            </div>
-          </a>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
   <div class="row">
@@ -83,8 +87,8 @@
   </div>
   <div class="row">
     <div class="col notes_flex_grow custom_height">
-      <div class="box_list_subject padding_custom_notes" style="padding-top: 40px !important;">
-        <img data-toggle="modal" (click)=addNotesModal() src="../../../assets/images/plus.png" class="plus-icon" />
+      <div class="box_list_subject padding_custom_notes" (click)=addNotesModal() style="padding-top: 40px !important;">
+        <img data-toggle="modal"  src="../../../assets/images/plus.png" class="plus-icon" />
         <h1>Add New Note</h1>
         <p>Click to make new notes</p>
       </div>
@@ -95,14 +99,11 @@
         <div class="box-bottom">
           <div class="all_box_p">
             <div class="w-100" (click)="routeOnNotes(note.notesName,note._id)">
-              <div *ngIf="note.subjectId==null ;else other_content">
-                   </div>
+              <div *ngIf="note.subjectId==null ;else other_content"></div>
               <ng-template #other_content>
-                              <h3 class="mb-0">{{note.subjectId.subjectName}}</h3>
-
+                <h3 class="mb-0">{{note.subjectId.subjectName}}</h3>
               </ng-template>
               <h3>{{note.notesName}}</h3>
-
               <p>{{ note.createdAt | date }} </p>
             </div>
             <div class="dropdown label_dropdown">

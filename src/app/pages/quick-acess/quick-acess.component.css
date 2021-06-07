@@ -34,6 +34,34 @@
     display: flex;
     margin-right: -30px;
   }
+
+  .box_row_date > span {
+    font-size: 12px;
+  }
+
+  .box_row_date > input {
+    font-size: 12px;
+  }
+
+  .trashScreenButton {
+    cursor: pointer;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: .3rem; 
+  }
+
+  .trashScreenButton:hover {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: white
+  }
+
+  .trashScreenButton:hover > svg {
+    stroke: white
+  }
+
   .form_date_picker {
     background: transparent;
     border: none;

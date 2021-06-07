@@ -218,14 +218,12 @@ html{
 
 .parentEditor{
   border-bottom: 1px dotted black ;
-  min-height: 700px;
-  max-height: max-content;
+  height: 700px;
   width:1140px; 
 }
 .editor{
   width:1140px;
-  min-height:1000px;
-  max-height: max-content;
+  height:1000px;
   margin: 2rem;
   /* padding: 20px; */
   background: #FFFFFF 0% 0% no-repeat padding-box;
@@ -250,32 +248,30 @@ margin-top: 125px;
 }
 
 .editor_45 {
-  position: relative;
-  top:0px;
-  width: 372px;
+  width: 420px;
   border-right:1px dotted black;
-   overflow: hidden; 
+   display: flex;
+   flex-direction: column;
   /* padding: 20px; */
 }
 .cues{
   width: 100%;
   height:100%;
-  overflow: hidden;
+  overflow-y: auto;
 }
 .notes{
   width: 100%;
   height:100%;
-  overflow: hidden;
+  overflow-y: auto;
   padding-right: 20px !important;
 
 }
 
 .editor_ab {
-  position: relative;
   top:0px;
-  width: 1140px;
-  overflow: hidden; 
-  padding: 0px;
+  width: 720px;
+  display: flex;
+  flex-direction: column;
 }
 div#notes p {
   padding: 15px !important;
@@ -284,10 +280,18 @@ div#notes p {
 {
   width: 1140px;
   top:0px;
-  min-height:300px ;
-  max-height: max-content;
+  height:300px ;
+  /* padding: 20px; */
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20px;
+
+}
+.summary{
+  width:100%;
+  height:100%;
+  overflow-y: auto;
   padding: 20px;
-  overflow: hidden;
 
 }
 
@@ -572,7 +576,7 @@ select.slect_option{
   border: .5px solid lightgrey;
   left: 130px;
   border-radius: 5px;
-  overflow: scroll;
+  overflow-y: auto;
 }
 .dropdown-toggle::after{
   border-top: none;
@@ -720,6 +724,12 @@ div#notes
   max-height: 200px !important;
 }
 
+.logo {
+  margin-left: 2.25rem;
+  padding-right: .75rem;
+  border-right: 1px solid gray;
+}
+
 
 
 
@@ -749,6 +759,7 @@ div#notes
     left:100%;
     margin-top:-6px;
     width: 100%;
+    cursor: pointer;
 }
 
 /* rotate caret on hover */
@@ -804,7 +815,7 @@ ul.under_list_notes li a{
 }
 
 .drop-menu-share a{
-  padding: 5px 0 !important;
+  padding: 5px !important;
   font-size: 14px !important;
   cursor: pointer;
 }
@@ -1083,13 +1094,14 @@ ul.under_cost_list_button {
   padding-top: 22px;
 }
 
-span.svg_box_circle {
+.svg_box_circle {
   background: #e7e7e7;
   border-radius: 50%;
   width: 36px;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   height: 36px;
-  margin-right: 19px;
 }
 
 span.svg_box_circle svg {
