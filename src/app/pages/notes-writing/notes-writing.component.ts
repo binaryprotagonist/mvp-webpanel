@@ -364,7 +364,7 @@ checkStyle(){
       }
     })
   }
-  savePdf() {
+  savePdf(value) {
     const opt = {
       margin:       0.1,
       image:        { type: 'jpeg', quality: 0.9 },
