@@ -23,6 +23,7 @@ import {AutoSizeInputModule} from 'ngx-autosize-input';
 // import { TrashComponent } from './trash/trash.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxCleaveDirectiveModule } from "ngx-cleave-directive";
+import {SafeHtmlPipe} from "./notes-writing/notes-writing.component"
 
 // import { MatMomentDateModule } from "@angular/material-moment-adapter";
 @NgModule({
@@ -40,6 +41,7 @@ import { NgxCleaveDirectiveModule } from "ngx-cleave-directive";
     Subscription,
     SearchPipe,
     HelpComponent,
+    SafeHtmlPipe
 
   ],
 

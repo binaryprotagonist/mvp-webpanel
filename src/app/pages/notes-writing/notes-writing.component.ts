@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
+import { PipeTransform, Pipe } from "@angular/core";
+
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { CommonService } from '../../core/services/common.service';
 import { Router, NavigationEnd } from '@angular/router';
@@ -20,12 +23,21 @@ import Swal from 'sweetalert2';
 import * as mark from 'mark.js';
 
 declare var $: any;
-
+@Pipe({ name: 'safeHtml'})
+export class SafeHtmlPipe implements PipeTransform  {
+  constructor(private sanitized: DomSanitizer) {}
+  transform(value) {
+    return this.sanitized.bypassSecurityTrustHtml(value);
+  }
+}
 @Component({
   selector: 'app-notes-writing',
   templateUrl: './notes-writing.component.html',
   styleUrls: ['./notes-writing.component.css']
 })
+
+
+
 export class NotesWritingComponent implements OnInit {
   @ViewChild('container', { read: ElementRef })
   public readonly containerElement;
@@ -72,6 +84,7 @@ export class NotesWritingComponent implements OnInit {
   findResults;
   findResultsCurrentIndex = 0;
   markInstance;
+  clickedOnNotesSection = true;
   onResize(evt: AngularResizeElementEvent): void {
     if (evt.currentWidthValue > 180 && evt.currentWidthValue < 1100) {
       this.data.width = evt.currentWidthValue;
@@ -97,6 +110,7 @@ export class NotesWritingComponent implements OnInit {
       ))
     );
   }
+  
 
   ngOnInit(): void {
 //  this.checkStyle()
@@ -365,31 +379,85 @@ checkStyle(){
     })
   }
   savePdf(value) {
+    window.scrollTo(0, 0);
     const opt = {
       margin:       0.1,
       image:        { type: 'jpeg', quality: 0.9 },
       html2canvas:  { scale: 3 },
       jsPDF:        { unit: 'in', format: 'A4', orientation: 'portrait' }
     };
-    this.spinner.show();
-    const element =`<div  id="content" class="editor" id="print-section">
-    <div class="d-flex parentEditor">
-      <div class=" editor_45 ">
-      1
+    // this.spinner.show();
+    const element = `
+    <div class="" >
+      <div class="pdf-d-flex">
+        <div class="pdf-cues">
+          <div class="pdf-inputType">
+            ${this.cuesTitle}
+          </div>
+          ${this.content}
+        </div>
+        <div class="pdf-notes">
+          <div class="pdf-inputType">
+            ${this.noteTitle}
+          </div>
+          ${this.content1}
+        </div>
       </div>
-      <div class="editor_ab">
-       2
+
+      <div class="pdf-summarry" >
+        <div>
+          <div class="pdf-inputType">
+            ${this.cuesTitle}
+          </div>
+            ${this.content2}
+        </div>
       </div>
     </div>
-    <div class="editor_3">
-      3
-  </div>
-    </div>
+    <style>
+      .pdf-d-flex{
+        display:flex;
+        border-bottom:1px dotted black
+      }
+      .pdf-cues{
+        border-right:1px dotted black;
+        padding:20px;
+        word-wrap:break-word;
+        width:2.8in;
+        min-height:7in;
+        font-size:14px;
+        line-height: 0.2in;
+      }
+      .pdf-notes{
+        padding:20px;
+        word-wrap:break-word;
+        width:5.2in;
+        font-size:14px;
+        line-height: 0.2in;
+        min-height:7in;
+      }
+      .pdf-summarry{
+        padding:20px;
+        word-wrap:break-word;
+        width:8in;
+        font-size:14px;
+        min-height:4in;
+        line-height: 0.2in;
+      }
+      .pdf-inputType{
+        padding:5px 10px;
+        1px solid #e7e7e7;
+        border-radius:30px;
+        background-color: #e7e7e7;
+        margin-bottom: 10px;
+        width:2in;
+      }
+    </style>
     `;
-    // html().from(element).set(opt).save();
-    html().set(opt).from(element).save().then(() => {
-      this.spinner.hide();
-    });
+  // const element = document.getElementById('print-section')
+    html().from(element).set(opt).save();
+    // html().from(element).toCanvas().save().then(() => {
+      // this.spinner.hide();
+    // });
     // html(element, opt);
   }
 
