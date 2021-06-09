@@ -894,17 +894,16 @@ ul.under_list_notes li a{
   outline: none;
 }
 .modal-body-updated input::placeholder{
-  font-size: 12px;
+  font-size: 13px;
   color: lightgray;
-  text-align: center;
 }
 
 .modal-body-updated button{
-  width: 150px;
+  width: 125px;
     margin: auto;
     text-align: center;
     border-radius: 10px;
-    height: 40px;
+    height: 36px;
     background:#3051e9;
     color: white;
     border: none;

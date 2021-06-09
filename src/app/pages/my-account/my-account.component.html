@@ -76,10 +76,14 @@
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label class="lab_first">Gender</label>
-                    <input type="radio" [disabled]="!edit" value="male" [(ngModel)]="gender" name="gender" class=""
-                      class="radio_mvp" /><label class="lab_gender">Male</label>
-                    <input type="radio" [disabled]="!edit" value="female" [(ngModel)]="gender" name="gender" class=""
-                      class="radio_mvp" /> <label class="lab_gender">Female</label>
+                    <fieldset class="d-inline-block" [disabled]="!edit">
+                      <input type="radio"  value="male" [(ngModel)]="gender" name="gender" class="radio_mvp" />
+                      <label class="lab_gender">Male</label>
+                    </fieldset>
+                    <fieldset class="d-inline-block" [disabled]='!edit'>
+                      <input type="radio" value="female" [(ngModel)]="gender" name="gender" class="radio_mvp" />
+                      <label class="lab_gender">Female</label>
+                    </fieldset>
                   </div>
                 </div>
                 <div class="col-lg-6">

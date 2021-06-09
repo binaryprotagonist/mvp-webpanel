@@ -704,15 +704,12 @@
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content modal-content-updated">
-      <div class="modal-body modal-body-updated">
-        <h6>Share with People</h6>
-        <label>To:</label>
-        <input type="email" [(ngModel)]="email" class="" placeholder="Enter Email address" />
-        <div class="alert- mt-2">{{emailError}}</div>
-        <div>
-
-        </div>
-        <button (click)="shareNoteUrl()">Send</button>
+      <div class="modal-body modal-body-updated text-left p-4">
+        <h5 class="mb-2">Share with People</h5>
+        <label class="m-0 mb-2 p-0">To:</label>
+        <input type="email" [(ngModel)]="email" class="w-100 m-0 text-left" placeholder="Enter Email Address" />
+        <div class="text-danger mt-2" *ngIf='emailError'>{{emailError}}</div>
+        <button class="m-0 mt-3" (click)="shareNoteUrl()">Send</button>
       </div>
     </div>
   </div>
