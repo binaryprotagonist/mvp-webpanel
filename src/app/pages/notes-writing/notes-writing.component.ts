@@ -488,10 +488,11 @@ checkStyle(){
       let body = {
         sendTo: this.email,
         noteId: this.noteId,
-        userName: this.firstName + " " + this.lastName,
-        url: `https://mvp-user-panel.herokuapp.com/note-share/${this.noteId}`
+        userName: this.firstName,
+        url: `https://frontendformvp.herokuapp.com//note-share/${this.noteId}`
       }
       this.commonService.post(`shareNotesUrl`, body).subscribe((data: any) => {
+        console.log(data)
         if (data.status == 200) {
           this.spinner.hide();
           this.toastr.success('successfully send', 'success');

@@ -36,9 +36,8 @@
       <div class="center">
          <div class="container-fluid">
             <div class="row">
-               <div class="editor" >
+               <!-- <div class="editor" >
                   <div class="d-flex" >
-                     <!-- <input type="text"> -->
                       <div  class=" editor_45 " #container [style.width.px]="data.width" [style.height.px]="data.height"  >
                           <input type="text" class="note-head1" placeholder="Cue points" value={{cuesTitle}} readonly />
                           <div id="cues"
@@ -62,7 +61,36 @@
                      <input type="text" class="note-head1" placeholder="Summary" value={{summaryTitle}} readonly>
                   <div id="summary"    (keyup)="getContent()"  [innerHTML]="content2"></div>
                </div>
-               </div>
+               </div> -->
+
+
+
+               <div id="content" class="editor" id="print-section">
+                  <div class="d-flex parentEditor">
+                    
+                    <div class=" editor_45 ">
+                      <input type="text" class="note-head1" placeholder="Cue points"
+                         value={{cuesTitle}} readonly>
+                        <div id="cues" class="cues"  [innerHTML]="content"
+                        ></div>
+                    </div>
+                    <div  class="editor_ab">
+                      <input type="text" class="note-head1" placeholder="Note" value={{noteTitle}} readonly >
+                      <div id="notes" class="notes"  
+                        [innerHTML]="content1" >
+                      </div>
+                     
+                    </div>
+                    
+                  </div>
+                  <div class="editor_3">
+                    <input type="text" value="summaryTitle"  class="note-head1"
+                      placeholder="Summary">
+                    <div id="summary" class="summary"   
+                      [innerHTML]="content2"  readonly  ></div>
+                  </div>
+                
+                </div>
             </div>
          </div>
       </div>
