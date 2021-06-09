@@ -382,6 +382,7 @@ checkStyle(){
     window.scrollTo(0, 0);
     const opt = {
       margin:       0.1,
+      filename:     ` ${this.notesName}.pdf`,
       image:        { type: 'jpeg', quality: 0.9 },
       html2canvas:  { scale: 3 },
       jsPDF:        { unit: 'in', format: 'A4', orientation: 'portrait' }
