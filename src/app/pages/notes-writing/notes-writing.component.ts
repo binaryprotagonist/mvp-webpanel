@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { PipeTransform, Pipe } from "@angular/core";
 
 import { AngularEditorConfig } from '@kolkov/angular-editor';
@@ -26,7 +26,10 @@ declare var $: any;
 @Pipe({ name: 'safeHtml'})
 export class SafeHtmlPipe implements PipeTransform  {
   constructor(private sanitized: DomSanitizer) {}
-  transform(value) {
+  transform(value): SafeHtml {
+    if (value === undefined){
+      value = null;
+    }
     return this.sanitized.bypassSecurityTrustHtml(value);
   }
 }

@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule,ExtraOptions } from '@angular/router';
+import { Routes, RouterModule, ExtraOptions } from '@angular/router';
 import { AuthGuardService } from './core/services';
+import { PrivacyComponent } from './privacy/privacy.component';
+import { TermsComponent } from './terms/terms.component';
 
 const routes: Routes = [
   {
@@ -20,13 +22,21 @@ const routes: Routes = [
     path: '',
     redirectTo: 'login',
     pathMatch: 'full',
+  },
+  {
+    path: 'privacy-policy',
+    component: PrivacyComponent
+  },
+  {
+    path: 'terms-and-conditions',
+    component: TermsComponent
   }
 ];
 const config: ExtraOptions = {
   useHash: false,
 };
 @NgModule({
-  imports: [RouterModule.forRoot(routes,config)],
+  imports: [RouterModule.forRoot(routes, config)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

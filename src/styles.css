@@ -22,3 +22,11 @@ mark.current {
   cursor: pointer;
 }
 
+.bg-auth-group
+{
+    background-image: url('assets/images/login_bg.png') ;
+    height: 100vh;
+    background-size: cover;
+
+}
+
