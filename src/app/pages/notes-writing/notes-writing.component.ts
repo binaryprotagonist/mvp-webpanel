@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { PipeTransform, Pipe } from "@angular/core";
+import { PipeTransform, Pipe } from '@angular/core';
 
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { CommonService } from '../../core/services/common.service';
 import { Router, NavigationEnd } from '@angular/router';
-import { NgxSpinnerService } from "ngx-spinner";
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import jspdf from 'jspdf';
 import { AngularResizeElementDirection, AngularResizeElementEvent } from 'angular-resize-element';
@@ -138,9 +138,9 @@ export class NotesWritingComponent implements OnInit {
   ngAfterViewInit() { }
 
 checkStyle(){
-  $("#notes").delegate('*', 'click',function (e) {
+  $('#notes').delegate('*', 'click',function (e) {
     // console.log("style",e.target.parentNode.firstElementChild);
-        console.log("style",e);
+        console.log('style',e);
 
   });
 }
@@ -157,7 +157,7 @@ checkStyle(){
   }
   signOut() {
     localStorage.clear()
-    this.router.navigate(["login"]);
+    this.router.navigate(['login']);
     location.reload();
 
   }
@@ -218,15 +218,15 @@ checkStyle(){
       selection.removeAllRanges();
       selection.addRange(range);
     }
-    console.log("this.content", this.content)
+    console.log('this.content', this.content)
 
   }
 
 
   getContent() {
-    this.notesContent = document.getElementById("notes").innerHTML;
-    this.cuesContent = document.getElementById("cues").innerHTML;
-    this.summaryContent = document.getElementById("summary").innerHTML;
+    this.notesContent = document.getElementById('notes').innerHTML;
+    this.cuesContent = document.getElementById('cues').innerHTML;
+    this.summaryContent = document.getElementById('summary').innerHTML;
     //alert(this.cuesContent)
     this.autoUpdate()
   }
@@ -239,6 +239,8 @@ checkStyle(){
         dataURI = reader.result;
         const img = document.createElement('img');
         img.src = dataURI;
+        img.classList.add('pdf-image');
+        img.style.height = '200px';
         const editorContent = document.querySelector('.editor_ab div');
         editorContent.appendChild(img);
       }, false);
@@ -252,11 +254,11 @@ checkStyle(){
   execCommandWithArg(command, arg) {
    
     // Set design mode to on
-    document.designMode = "on";
+    document.designMode = 'on';
    
     document.execCommand(command, false, arg);
     
-    document.designMode = "off";
+    document.designMode = 'off';
     this.getContent()
 
   }
@@ -284,13 +286,12 @@ checkStyle(){
   changeBackgroundColor(color): void {
     document.execCommand('hiliteColor', false, color.toString());
     document.getElementById('selectBackgroundColorBox').style.backgroundColor = color;
-    this.getContent()
+    this.getContent();
   }
-  
-  
+
   link() {
-    var url = prompt("Enter the URL");
-    document.execCommand("createLink", false, url);
+    var url = prompt('Enter the URL');
+    document.execCommand('createLink', false, url);
   }
   getNote() {
     this.spinner.show();
@@ -300,16 +301,16 @@ checkStyle(){
     this.noteId = splitUrl[2]
     this.commonService.get(`getNote/${this.noteId}`).subscribe((data: any) => {
       if (data.status == 200) {
-        console.log("...........", data.data)
+        console.log('...........', data.data)
         if (data.data[0].subjectId == null) {
-          localStorage.removeItem("location");
+          localStorage.removeItem('location');
 
         }
-        if (data.data[0].hasOwnProperty("height") && data.data[0].height != null && data.data[0].height != "") {
+        if (data.data[0].hasOwnProperty('height') && data.data[0].height != null && data.data[0].height != '') {
 
           this.data.height = data.data[0].height
         }
-        if (data.data[0].hasOwnProperty("width") && data.data[0].width != null && data.data[0].width != "") {
+        if (data.data[0].hasOwnProperty('width') && data.data[0].width != null && data.data[0].width != '') {
           this.data.width = data.data[0].width
 
         }
@@ -322,7 +323,7 @@ checkStyle(){
         this.content1 = data.data[0].notesData.notesText
         this.noteTitle = data.data[0].notesData.notesTitle
         this.shareWith = data.data[0].shareWith
-        console.log("this.shareWith", this.shareWith)
+        console.log('this.shareWith', this.shareWith)
 
         this.content2 = data.data[0].summaries.summaryText
         this.summaryTitle = data.data[0].summaries.summaryTitle
@@ -338,28 +339,28 @@ checkStyle(){
   autoUpdate() {
     clearTimeout(this.debounce);
     this.debounce = setTimeout(() => {
-      this.updatenote()
+      this.updatenote();
     }, 1000);
   }
   updatenote() {
     let body = {
-      "noteId": this.noteId,
-      "notesName": this.notesName,
-      "subjectId": this.subjectId,
-      "cues": {
-        "cuesTitle": this.cuesTitle,
-        "cuesText": this.cuesContent
+      'noteId': this.noteId,
+      'notesName': this.notesName,
+      'subjectId': this.subjectId,
+      'cues': {
+        'cuesTitle': this.cuesTitle,
+        'cuesText': this.cuesContent
       },
-      "notesData": {
-        "notesTitle": this.noteTitle,
-        "notesText": this.notesContent
+      'notesData': {
+        'notesTitle': this.noteTitle,
+        'notesText': this.notesContent
       },
-      "summaries": {
-        "summaryTitle": this.summaryTitle,
-        "summaryText": this.summaryContent
+      'summaries': {
+        'summaryTitle': this.summaryTitle,
+        'summaryText': this.summaryContent
       },
-      "height": this.data.height,
-      "width": this.data.width
+      'height': this.data.height,
+      'width': this.data.width
 
 
     }
@@ -376,12 +377,16 @@ checkStyle(){
           'error');
       }
       else {
-        console.log("datata", data)
+        console.log('datata', data)
         this.toastr.error('Not Save', 'error');
       }
     })
   }
-  savePdf(value) {
+  savePdf(value): void {
+    this.notesContent = document.getElementById('notes').innerHTML;
+    this.cuesContent = document.getElementById('cues').innerHTML;
+    this.summaryContent = document.getElementById('summary').innerHTML;
+    console.log(this.content1)
     window.scrollTo(0, 0);
     const opt = {
       margin:       0.1,
@@ -390,7 +395,6 @@ checkStyle(){
       html2canvas:  { scale: 3 },
       jsPDF:        { unit: 'in', format: 'A4', orientation: 'portrait' }
     };
-    // this.spinner.show();
     const element = `
     <div class="" >
       <div class="pdf-d-flex">
@@ -398,13 +402,13 @@ checkStyle(){
           <div class="pdf-inputType">
             ${this.cuesTitle}
           </div>
-          ${this.content}
+          ${this.cuesContent}
         </div>
         <div class="pdf-notes">
           <div class="pdf-inputType">
             ${this.noteTitle}
           </div>
-          ${this.content1}
+          ${this.notesContent}
         </div>
       </div>
 
@@ -413,7 +417,7 @@ checkStyle(){
           <div class="pdf-inputType">
             ${this.cuesTitle}
           </div>
-            ${this.content2}
+            ${this.summaryContent}
         </div>
       </div>
     </div>
@@ -455,59 +459,74 @@ checkStyle(){
         margin-bottom: 10px;
         width:2in;
       }
+
+      .pdf-image {
+        height: 1.6in !important;
+      }
     </style>
     `;
-  // const element = document.getElementById('print-section')
-    html().from(element).set(opt).save();
-    // html().from(element).toCanvas().save().then(() => {
-      // this.spinner.hide();
-    // });
-    // html(element, opt);
+    this.spinner.show();
+    html().from(element).set(opt).save().then(() => {
+      this.spinner.hide();
+    });
   }
 
   shareWithMail() {
     let body = {
-      sendTo: "",
+      sendTo: '',
       message: ''
     }
     this.commonService.postFile(`notesShare`, body).subscribe((data: any) => {
       // console.log("data",data)
       if (data.status == 200) {
-        alert("success")
-        console.log("datata", data)
+        alert('success')
+        console.log('datata', data)
 
       } else {
-        console.log("datata", data)
+        console.log('datata', data)
         this.toastr.error('Not Save', 'error');
       }
     })
   }
-  shareNoteUrl() {
-    var reEmail = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+  shareNoteUrl(): void {
+    const reEmail = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
     if (!this.email.match(reEmail)) {
-      this.emailError = 'Invalid email address'
+      this.emailError = 'Invalid email address';
     }
     else {
       this.spinner.show();
-      let body = {
+      const body = {
         sendTo: this.email,
         noteId: this.noteId,
         userName: this.firstName,
-        url: `https://frontendformvp.herokuapp.com//note-share/${this.noteId}`
-      }
+        url: `https://frontendformvp.herokuapp.com/note-share/${this.noteId}`
+      };
       this.commonService.post(`shareNotesUrl`, body).subscribe((data: any) => {
-        console.log(data)
+        console.log(data);
+        this.spinner.hide();
+        $('#sharemail').modal('hide');
         if (data.status == 200) {
-          this.spinner.hide();
-          this.toastr.success('successfully send', 'success');
-          console.log("datata", data)
-          this.email = ''
+          Swal.fire(
+            'Shared Note',
+            'Email has been send successfully',
+            'success'
+          );
+          this.email = '';
         } else {
-          console.log("datata", data)
-          this.spinner.hide();
-          this.toastr.error('Not Save', 'error');
+          console.log('datata', data);
+          Swal.fire(
+            'Email Share Failed',
+            'There is an error sending email',
+            'error'
+          );
         }
-      })
+      }, (error) => {
+        Swal.fire(
+          'Error',
+          'Internal Server Error',
+          'error'
+        );
+      });
     }
   }
   searchSubject(event) {
@@ -562,18 +581,18 @@ checkStyle(){
   createCopy() {
     this.spinner.show();
     let body = {
-      "notesName": this.copyNotes,
-      "cues": {
-        "cuesTitle": this.cuesTitle,
-        "cuesText": document.getElementById("cues").innerHTML
+      'notesName': this.copyNotes,
+      'cues': {
+        'cuesTitle': this.cuesTitle,
+        'cuesText': document.getElementById('cues').innerHTML
       },
-      "notesData": {
-        "notesTitle": this.noteTitle,
-        "notesText": document.getElementById("notes").innerHTML
+      'notesData': {
+        'notesTitle': this.noteTitle,
+        'notesText': document.getElementById('notes').innerHTML
       },
-      "summaries": {
-        "summaryTitle": this.summaryTitle,
-        "summaryText": document.getElementById("summary").innerHTML
+      'summaries': {
+        'summaryTitle': this.summaryTitle,
+        'summaryText': document.getElementById('summary').innerHTML
       }
     }
     this.commonService.post('createNoteCopy', body).subscribe((data: any) => {
@@ -605,15 +624,14 @@ checkStyle(){
     this.commonService.delete('deleteNotes', this.noteId).subscribe((data: any) => {
       if (data.status == 200) {
         this.spinner.hide();
-        this._router.navigate(["quickAccess"]);
+        this._router.navigate(['quickAccess']);
       }
     })
   }
   getDetails() {
     $('#exampleModalCenter5').modal('show');
-    alert(localStorage.getItem("location"))
-    if (localStorage.getItem("location") != null) {
-      this.location = localStorage.getItem("location")
+    if (localStorage.getItem('location') != null) {
+      this.location = localStorage.getItem('location')
     } else {
       this.location = 'root folder'
     }

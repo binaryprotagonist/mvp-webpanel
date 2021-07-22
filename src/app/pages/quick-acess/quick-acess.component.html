@@ -36,7 +36,7 @@
         <p>Click to make new subject</p>
       </div>
     </div>
-    <div class="col notes_flex_grow" *ngFor="let subject of subjects;">
+    <div class="col notes_flex_grow" *ngFor="let subject of filteredSubjects;">
       <div class="box_list_subject">
         <div>
           <img src="../../../assets/images/file_entry.svg" (click)="routeOnSubject(subject.subjectName,subject._id)">
@@ -93,7 +93,7 @@
         <p>Click to make new notes</p>
       </div>
     </div>
-    <div class="col notes_flex_grow col" *ngFor="let note of notes;">
+    <div class="col notes_flex_grow col" *ngFor="let note of filteredNotes;">
       <div class="box_list_subject">
         <img (click)="routeOnNotes(note.notesName,note._id)" src="../../../assets/images/doc3.png"  class=""/>
         <div class="box-bottom">

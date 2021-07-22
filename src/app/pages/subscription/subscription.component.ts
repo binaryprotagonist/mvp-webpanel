@@ -9,8 +9,8 @@ import {
   StripeElementsOptions
 } from '@stripe/stripe-js';
 import Swal from 'sweetalert2';
-import 'sweetalert2/src/sweetalert2.scss'
-import { NgxSpinnerService } from "ngx-spinner";
+import 'sweetalert2/src/sweetalert2.scss';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
 
 @Component({
@@ -21,26 +21,26 @@ import { Router } from '@angular/router';
 export class Subscription implements OnInit {
   stripeTest: FormGroup;
   stripeTestError = {
-    'name': '',
-    'email': '',
-    'card': '',
-  }
-  plans = []
-  currentPlan = ''
-  FullName = ''
-  userId
-  planId
-  stripeToken
-  planPrice
-  mainPrice
-  planDuration
-  plandata: any
-  stripeId: any
-  userData: any
-  coupon
-  couponData: any
-  couponMessage = null
-  discount = null
+    name: '',
+    email: '',
+    card: '',
+  };
+  plans = [];
+  currentPlan = '';
+  FullName = '';
+  userId;
+  planId;
+  stripeToken;
+  planPrice;
+  mainPrice;
+  planDuration;
+  plandata: any;
+  stripeId: any;
+  userData: any;
+  coupon;
+  couponData: any;
+  couponMessage = null;
+  discount = null;
   // stripe
   @ViewChild(StripeCardComponent) card: StripeCardComponent;
   cardOptions: StripeCardElementOptions = {
@@ -63,35 +63,42 @@ export class Subscription implements OnInit {
   };
 
 
+  paymentFormvalidationMessages = {
+    name: {
+      required: 'Name is required',
+      minlength: 'minimum 3 characters required'
+    },
+    email: {
+      required: 'email is required',
+      pattern: 'email not in valid format'
+    },
+    card: {
+      required: 'card number is required',
+      minlength: 'minimum 16 digit required',
+      maxlength: 'minimum 16 digit required'
+    }
+  };
+
+
   //
-  constructor(private commonService: CommonService, private router: Router, private paymentService: PaymentService, private fb: FormBuilder, private stripeService: StripeService, private spinner: NgxSpinnerService) { }
+  constructor(private commonService: CommonService,
+              private router: Router,
+              private paymentService: PaymentService,
+              private fb: FormBuilder,
+              private stripeService: StripeService,
+              private spinner: NgxSpinnerService) { }
   ngOnInit(): void {
     //
-    this.getPlans()
+    this.getPlans();
     // this.paymentForm()
-    this.getUser()
-    this.getTransparentPricing()
-    console.log("stripe", this.coupon.length)
+    this.getUser();
+    this.getTransparentPricing();
+    console.log('stripe', this.coupon.length);
     if (this.coupon.length >= 0) {
-      this.discount = null
+      this.discount = null;
     }
   }
-  paymentFormvalidationMessages = {
-    'name': {
-      'required': 'Name is required',
-      'minlength': 'minimum 3 characters required'
-    },
-    'email': {
-      'required': 'email is required',
-      'pattern': 'email not in valid format'
-    },
-    'card': {
-      'required': 'card number is required',
-      'minlength': 'minimum 16 digit required',
-      'maxlength': 'minimum 16 digit required'
 
-    }
-  }
 
   paymentForm() {
     this.stripeTest = this.fb.group({
@@ -99,46 +106,46 @@ export class Subscription implements OnInit {
       email: [this.userData ? this.userData.email : '', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
       card: ['', [Validators.required, Validators.minLength(16), Validators.maxLength(16),]],
       coupon: ['']
-    })
-    this.stripeTest.valueChanges.subscribe(data => this.onValueChanges(data))
+    });
+    this.stripeTest.valueChanges.subscribe(data => this.onValueChanges(data));
 
   }
   applyCoupon() {
     // alert(this.stripeTest.value('coupon'))
     let data = {
       couponId: this.stripeTest.value.coupon
-    }
-    console.log("data ", this.stripeTest.value.coupon)
+    };
+    console.log('data ', this.stripeTest.value.coupon);
     this.commonService.post(`getCoupons`, data).subscribe((data: any) => {
-      console.log("plandata.currentPlan.noteUsage", data)
+      console.log('plandata.currentPlan.noteUsage', data)
 
       if (data.status == 200) {
         this.couponData = data.data
         this.discount = (this.couponData.percent_off / 100) * this.planPrice
-        console.log("plandata.currentPlan", this.discount, this.couponData.percent_off)
+        console.log('plandata.currentPlan', this.discount, this.couponData.percent_off)
         this.planPrice = this.planPrice - this.discount
         this.couponMessage = null
-        document.getElementById("coupon").setAttribute("readonly", 'true');
+        document.getElementById('coupon').setAttribute('readonly', 'true');
 
       }
       if (data.status == 404) {
         this.discount = null
         this.couponMessage = 'Invalid Coupon code'
       }
-    })
+    });
   }
   cancleCoupon() {
-    this.discount = null
-    this.stripeTest.value.coupon = null
-    $('input[name=coupon]').val("")
-    this.planPrice = this.mainPrice
-    document.getElementById("coupon").removeAttribute("readonly");
+    this.discount = null;
+    this.stripeTest.value.coupon = null;
+    $('input[name=coupon]').val('');
+    this.planPrice = this.mainPrice;
+    document.getElementById('coupon').removeAttribute('readonly');
 
     // document.getElementById("coupon").reset();
   }
   onValueChanges(data?: any) {
     if (!this.stripeTest)
-      return
+      return;
     const form = this.stripeTest;
     for (const field in this.stripeTestError) {
       if (this.stripeTestError.hasOwnProperty(field)) {
@@ -163,12 +170,12 @@ export class Subscription implements OnInit {
         this.FullName = data.result.fullName
         this.userData = data.result
         this.paymentForm()
-        console.log("userdata", this.userData)
+        console.log('userdata', this.userData)
         setTimeout(() => {
-          document.getElementById(this.currentPlan).classList.add("PayButton")
+          document.getElementById(this.currentPlan).classList.add('PayButton')
         }, 1000);
       }
-    })
+    });
   }
   getTransparentPricing() {
     this.commonService.get(`getTransparentPricing`).subscribe((data: any) => {
@@ -176,30 +183,30 @@ export class Subscription implements OnInit {
         this.plandata = data.result
         // console.log("plandata.currentPlan.noteUsage", this.plandata.currentPlan.noteUsage)
       }
-    })
+    });
   }
   getPlans() {
     this.commonService.get(`getSubscriptionPlan`).subscribe((data: any) => {
       // console.log(data)
       if (data.result.length > 0) {
-        console.log("data", data)
+        console.log('data', data)
         this.plans = data.result
         setTimeout(() => {
-          document.getElementById(this.currentPlan).classList.add("PayButton")
+          document.getElementById(this.currentPlan).classList.add('PayButton')
         }, 500);
       } else {
         this.plans = []
       }
-    })
+    });
   }
   onChoosePlan(id, price, duration, stripeId, planName) {
-    console.log(this.userData,)
+    console.log(this.userData,);
 
-    this.planId = id
-    this.planPrice = price
-    this.mainPrice = price
-    this.planDuration = duration
-    this.stripeId = stripeId
+    this.planId = id;
+    this.planPrice = price;
+    this.mainPrice = price;
+    this.planDuration = duration;
+    this.stripeId = stripeId;
     let data = {
       userId: this.userId,
       userName: this.FullName,
@@ -213,29 +220,29 @@ export class Subscription implements OnInit {
       firstName: this.userData.firstName,
       lastName: this.userData.lastName,
       email: this.userData.email
-    }
-    this.paymentService.paymentService(data)
-    this.router.navigate(["payment"]);
+    };
+    this.paymentService.paymentService(data);
+    this.router.navigate(['payment']);
 
   }
   onPayment() {
     let body = {
       userId: this.userId,
       amount: this.planPrice,
-    }
-    console.log("payment data", body)
+    };
+    console.log('payment data', body);
     this.commonService.post(`payment`, body).subscribe((data: any) => {
       // console.log(data)
       if (data.data.length > 0) {
-        console.log("paymen responce", data)
+        console.log('paymen responce', data)
         // this.onSubscription()
       } else {
         this.spinner.hide();
       }
-    })
+    });
   }
   createToken(): void {
-    console.log(this.stripeTest.value, this.card.element)
+    console.log(this.stripeTest.value, this.card.element);
     this.spinner.show();
     const name = this.stripeTest.get('name').value;
     const email = this.stripeTest.get('name').value;
@@ -244,9 +251,9 @@ export class Subscription implements OnInit {
       .createToken(this.card.element, { name, })
       .subscribe((result) => {
         if (result.token) {
-          this.onpaymentDone(result)
+          this.onpaymentDone(result);
         } else if (result.error) {
-          console.log("error", result.error.message);
+          console.log('error', result.error.message);
           Swal.fire('ohh snap!',
             'card not valid!',
             'error');
@@ -263,18 +270,18 @@ export class Subscription implements OnInit {
       planDuration: this.planDuration,
       stripePlanId: this.stripeId,
       couponId: this.stripeTest.value.coupon
-    }
-    console.log("payment data", body)
+    };
+    console.log('payment data', body);
     this.commonService.post(`create-payment`, body).subscribe((data: any) => {
       // console.log(data)
       this.spinner.hide();
-      document.getElementById("onPay").click();
+      document.getElementById('onPay').click();
       if (data.status == 200) {
-        console.log("paymen responce", data)
+        console.log('paymen responce', data)
         Swal.fire('Hurray!!',
           'Your subscription begins now!!',
           'success');
-        document.getElementById(this.currentPlan).classList.remove("PayButton")
+        document.getElementById(this.currentPlan).classList.remove('PayButton')
 
         this.getUser()
       }
@@ -286,7 +293,7 @@ export class Subscription implements OnInit {
       else {
         this.spinner.hide();
       }
-    })
+    });
   }
   // onSubscription() {
 
@@ -330,26 +337,26 @@ export class Subscription implements OnInit {
   // }
   onCancel(planId) {
     Swal.fire({
-      title: "Are you sure?",
-      text: "Once Cancel, you need to subscribe again!",
+      title: 'Are you sure?',
+      text: 'Once Cancel, you need to subscribe again!',
       showConfirmButton: true,
       showCancelButton: true,
       confirmButtonText: 'Yes!'
     })
       .then((willDelete) => {
         if (willDelete.value) {
-          this.planCancel(planId)
+          this.planCancel(planId);
         } else {
           // Swal.fire("Fail");
         }
-        console.log(willDelete)
+        console.log(willDelete);
       });
   }
   planCancel(planId) {
     let body = {
       planStatus: 1,
       subscriptionId: planId
-    }
+    };
     this.commonService.post(`planCancel`, body).subscribe((data: any) => {
       // console.log(data)
       if (data.status == 200) {
@@ -357,7 +364,7 @@ export class Subscription implements OnInit {
         Swal.fire('subscription Cancel!',
           'You need to subscription again.',
           'success');
-        document.getElementById(this.currentPlan).classList.remove("PayButton")
+        document.getElementById(this.currentPlan).classList.remove('PayButton')
 
       }
       else if (data.status == 400) {
@@ -368,7 +375,7 @@ export class Subscription implements OnInit {
       else {
         this.spinner.hide();
       }
-    })
+    });
   }
 
 }

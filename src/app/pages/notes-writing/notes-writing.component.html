@@ -69,24 +69,6 @@
   </div>
 
   <!-- Cloud -->
-  <div class="dropdown">
-    <button class="pop-button dropdown-toggle" type="button" id="dropdownMenuButton1" data-toggle="dropdown"
-      aria-haspopup="true" aria-expanded="false">
-      <i class="fa fa-cloud ml-2 mt-1 icon-color-change"></i>
-    </button>
-    <div class="dropdown-menu pop-div" aria-labelledby="dropdownMenuButton">
-      <div class="pop-top-div">
-        <p> <span><i class="fa fa-cloud mr-3"></i></span> All changes saved to drive</p>
-      </div>
-      <div class="pop-bottom-div">
-        <p class="font-weight-bold"> <span><i class="fa fa-exclamation-triangle mr-3"></i></span>This Document
-          is not ready for offline use </p>
-        <p class="">If you lose an internet connection, you can't edit this document. To access your documents
-          without an internet connection, turn on offline</p>
-        <button class="pop-button-on mt-5">Turn on</button>
-      </div>
-    </div>
-  </div>
 
   <!-- Nav Toggle Mobile View Only -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -114,7 +96,7 @@
                       with mail</a> -->
             <a class="dropdown-item p-2 rounded-lg" data-toggle="modal" data-target="#sharemail" aria-expanded="false"><span><img
                   src="assets/images/share.png" class="block-img" /></span>Share
-              with EMail </a>
+              with Email </a>
           </div>
         </div>
         <!--  -->
@@ -142,7 +124,7 @@
               Account</a>
             <a class="dropdown-item" routerLink='/subscription'><img src="../../../assets/images/profile2.svg" />
               Subscription</a>
-            <a class="dropdown-item" href="#"><img src="../../../assets/images/profile3.svg" /> Privacy & Terms
+            <a class="dropdown-item" routerLink="/privacy-policy"><img src="../../../assets/images/profile3.svg" /> Privacy & Terms
               of use</a>
             <a (click)="signOut()" class="dropdown-item"><img src="../../../assets/images/profile1.svg" /> Sign
               out</a>
@@ -447,9 +429,8 @@
                   Help
                 </a>
                 <ul class="dropdown-menu dropdown-menu-edit" aria-labelledby="navbarDropdownMenuLink">
-                  <li class="d-p"><a class="dropdown-item cursor-pointer p-1" href="#">
-
-
+                  <li class="d-p">
+                    <a class="dropdown-item cursor-pointer p-1" href="#">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 193.33">
                         <defs>
                           <style>
@@ -490,9 +471,11 @@
                           </g>
                         </g>
                       </svg>
-                      Training</a></li>
-                  <li class="d-p"><a class="dropdown-item cursor-pointer p-1" href="#">
-
+                      Training
+                    </a>
+                  </li>
+                  <li class="d-p">
+                    <a class="dropdown-item cursor-pointer p-1" href="#">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 186.45 200.8">
                         <defs>
                           <style>
@@ -510,8 +493,11 @@
                           </g>
                         </g>
                       </svg>
-                      Updates</a></li>
-                  <li class="d-p"><a class="dropdown-item cursor-pointer p-1" href="#">
+                      Updates
+                    </a>
+                  </li>
+                  <li class="d-p">
+                    <a class="dropdown-item cursor-pointer p-1" href="#">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 152.34 200">
                         <defs>
                           <style>
@@ -531,13 +517,11 @@
                           </g>
                         </g>
                       </svg>
-                      Privacy Policy</a></li>
-
+                      Privacy Policy
+                    </a>
+                  </li>
                 </ul>
               </li>
-              <!--  -->
-
-              <!--  -->
             </ul>
           </div>
         </nav>

@@ -137,7 +137,7 @@ export class PaymentComponent implements OnInit {
       streetAddress: ['', [Validators.required]],
       postal: ['', [Validators.required]],
       city: ['', [Validators.required]],
-      apartment: ['', [Validators.required]],
+      apartment: [''],
       country: ['', [Validators.required]],
       coupon: ['']
 

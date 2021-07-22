@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { CommonService } from '../../../core/services/common.service';
-import { Router, NavigationEnd } from '@angular/router';
-import { NgxSpinnerService } from "ngx-spinner";
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import jspdf from 'jspdf';
 import { AngularResizeElementDirection, AngularResizeElementEvent } from 'angular-resize-element';
@@ -21,40 +21,49 @@ export class NotesShareComponent implements OnInit {
   @ViewChild('container', { read: ElementRef })
   public readonly containerElement;
   form: FormGroup;
-  content: any
-  htmlContent = ''
+  content: any;
+  htmlContent = '';
   notes: any;
-  cuesTitle: any
+  cuesTitle: any;
   content1: any;
-  content2: any
-  noteId: any
-  notesContent: any
-  cuesContent: any
-  summaryContent: any
-  summaryTitle: any
-  noteTitle: any
-  debounce: any
-  timeAgo: any
-  notesName: any
-  createdDate: any
-  userName: any
+  content2: any;
+  noteId: any;
+  notesContent: any;
+  cuesContent: any;
+  summaryContent: any;
+  summaryTitle: any;
+  noteTitle: any;
+  debounce: any;
+  timeAgo: any;
+  notesName: any;
+  createdDate: any;
+  userName: any;
   readonly AngularResizeElementDirection = AngularResizeElementDirection;
   data: any = {};
 
 
-  constructor(private toastr: ToastrService, private commonService: CommonService, private formBuilder: FormBuilder, private router: Router, private spinner: NgxSpinnerService) { }
+  constructor(private toastr: ToastrService,
+              private commonService: CommonService,
+              private formBuilder: FormBuilder,
+              private router: Router,
+              private spinner: NgxSpinnerService,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       signature: ['', Validators.required]
     });
-    this.getNote()
+    this.getNote();
+    this.route.queryParams.subscribe((params) => {
+      if (params.user) {
+        this.userName = params.user;
+      }
+    });
   }
-  ngAfterViewInit() { }
 
   onKeyUp(e) {
     // console.log(this.media1.nativeElement.innerHTML)
-    this.content = e.target.innerHTML
+    this.content = e.target.innerHTML;
     let placeholderText = e.target.innerText;
     e.target.innerText = '';
     e.target.innerText = placeholderText;
@@ -68,13 +77,13 @@ export class NotesShareComponent implements OnInit {
       selection.removeAllRanges();
       selection.addRange(range);
     }
-    console.log("this.content", this.content)
+    console.log('this.content', this.content);
 
   }
   getContent() {
-    this.notesContent = document.getElementById("notes").innerHTML;
-    this.cuesContent = document.getElementById("cues").innerHTML;
-    this.summaryContent = document.getElementById("summary").innerHTML;
+    this.notesContent = document.getElementById('notes').innerHTML;
+    this.cuesContent = document.getElementById('cues').innerHTML;
+    this.summaryContent = document.getElementById('summary').innerHTML;
 
     // alert(this.cuesContent)
     // this.autoUpdate()
@@ -86,13 +95,13 @@ export class NotesShareComponent implements OnInit {
     let dataURI;
 
     reader.addEventListener(
-      "load",
+      'load',
       function () {
         dataURI = reader.result;
 
-        const img = document.createElement("img");
+        const img = document.createElement('img');
         img.src = dataURI;
-        var editorContent = document.querySelector(".editor");
+        var editorContent = document.querySelector('.editor');
         editorContent.appendChild(img);
       },
       false
@@ -110,63 +119,39 @@ export class NotesShareComponent implements OnInit {
     //console.log(event.target.classList)
 
     if (event.target.classList.contains('mystyle')) {
-      event.target.classList.remove('mystyle')
+      event.target.classList.remove('mystyle');
     } else {
-      event.target.classList.add('mystyle')
+      event.target.classList.add('mystyle');
     }
 
     document.execCommand(command, false, '');
   }
   link() {
-    var url = prompt("Enter the URL");
-    document.execCommand("createLink", false, url);
+    var url = prompt('Enter the URL');
+    document.execCommand('createLink', false, url);
   }
   getNote() {
     this.spinner.show();
-    let myMainSite = this.router.url
-    var splitUrl = myMainSite.split('/');
-    this.noteId = splitUrl[2]
-    //
-    var username = myMainSite.split('?')
-    console.log("url", username)
-  this.userName = username[1].substring(5)
-  this.userName = this.userName.replaceAll("%20",' ')
-
-
+    const myMainSite = this.router.url;
+    const splitUrl = myMainSite.split('/');
+    this.noteId = splitUrl[2];
     this.commonService.get(`shareNotesUrl/${this.noteId}`).subscribe((data: any) => {
+      this.spinner.hide();
       if (data.status == 200) {
-        console.log("dayda", data.data)
-        this.createdDate = data.data[0].createdAt
-        this.notesName = data.data[0].notesName
-        this.timeAgo = moment(data.data[0].updatedAt).fromNow()
-        this.content = data.data[0].cues.cuesText
-        this.cuesTitle = data.data[0].cues.cuesTitle
-        this.content1 = data.data[0].notesData.notesText
-        this.noteTitle = data.data[0].notesData.notesTitle
-
-        this.content2 = data.data[0].summaries.summaryText
-        this.summaryTitle = data.data[0].summaries.summaryTitle
-        this.spinner.hide();
-      } else {
-        this.spinner.hide();
+        console.log('dayda', data.data);
+        this.createdDate = data.data[0].createdAt;
+        this.notesName = data.data[0].notesName;
+        this.timeAgo = moment(data.data[0].updatedAt).fromNow();
+        this.content = data.data[0].cues.cuesText;
+        this.cuesTitle = data.data[0].cues.cuesTitle;
+        this.content1 = data.data[0].notesData.notesText;
+        this.noteTitle = data.data[0].notesData.notesTitle;
+        this.content2 = data.data[0].summaries.summaryText;
+        this.summaryTitle = data.data[0].summaries.summaryTitle;
       }
-    })
-  }
-
-  savePdf(id) {
-    var data = document.getElementById('contentToConvert');
-    html2canvas(data).then(canvas => {
-      // Few necessary setting options
-      var imgWidth = 208;
-      var pageHeight = 295;
-      var imgHeight = canvas.height * imgWidth / canvas.width;
-      var heightLeft = imgHeight;
-
-      const contentDataURL = canvas.toDataURL('image/png')
-      let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF
-      var position = 0;
-      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
-      pdf.save('MYPdf.pdf'); // Generated PDF
+    }, (error) => {
+      console.error(error);
+      this.spinner.hide();
     });
   }
 
