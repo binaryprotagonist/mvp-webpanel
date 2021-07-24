@@ -240,7 +240,7 @@ checkStyle(){
         const img = document.createElement('img');
         img.src = dataURI;
         img.classList.add('pdf-image');
-        img.style.height = '200px';
+        img.style.height = '300px';
         const editorContent = document.querySelector('.editor_ab div');
         editorContent.appendChild(img);
       }, false);
@@ -461,7 +461,7 @@ checkStyle(){
       }
 
       .pdf-image {
-        height: 1.6in !important;
+        height: 2.2in !important;
       }
     </style>
     `;

@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PagesComponent } from './pages.component';
 import { NotesComponent, MyAccountComponent, DashboardComponent, QuickAcessComponent, NotesWritingComponent, TrashComponent, Subscription, HelpComponent, PaymentComponent } from './';
+import { TrainingComponent } from './training/training.component';
+import { UpdatesComponent } from './updates/updates.component';
 
 const routes: Routes = [
   {
@@ -15,7 +17,9 @@ const routes: Routes = [
       { path: 'trash', component: TrashComponent },
       { path: 'subscription', component: Subscription },
       { path: 'helpSuport', component: HelpComponent },
-      { path: 'payment', component: PaymentComponent }
+      { path: 'payment', component: PaymentComponent },
+      { path: 'training', component: TrainingComponent },
+      { path: 'updates', component: UpdatesComponent }
     ]
   },
 

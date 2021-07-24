@@ -24,6 +24,8 @@ import {AutoSizeInputModule} from 'ngx-autosize-input';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxCleaveDirectiveModule } from "ngx-cleave-directive";
 import {SafeHtmlPipe} from "./notes-writing/notes-writing.component"
+import { TrainingComponent } from './training/training.component';
+import { UpdatesComponent } from './updates/updates.component';
 
 // import { MatMomentDateModule } from "@angular/material-moment-adapter";
 @NgModule({
@@ -41,8 +43,9 @@ import {SafeHtmlPipe} from "./notes-writing/notes-writing.component"
     Subscription,
     SearchPipe,
     HelpComponent,
-    SafeHtmlPipe
-
+    SafeHtmlPipe,
+    TrainingComponent,
+    UpdatesComponent
   ],
 
   imports: [

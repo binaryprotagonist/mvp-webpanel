@@ -1,7 +1,7 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { CommonService } from '../../core/services/common.service';
-import { NgxSpinnerService } from "ngx-spinner";
+import { NgxSpinnerService } from 'ngx-spinner';
 import { PaymentService } from '../../core/services/paymentService';
 import { CountryName } from '../../core/services/country'
 import { StripeService, StripeCardComponent } from 'ngx-stripe';
@@ -95,18 +95,18 @@ export class PaymentComponent implements OnInit {
     let data = {
       couponId: this.stripeTest.value.coupon
     }
-    console.log("data ", this.stripeTest.value.coupon)
+    console.log('data ', this.stripeTest.value.coupon)
     this.commonService.post(`getCoupons`, data).subscribe((data: any) => {
-      console.log("plandata.currentPlan.noteUsage", data)
+      console.log('plandata.currentPlan.noteUsage', data)
 
       if (data.status == 200) {
         this.couponData = data.data
         this.discount = (this.couponData.percent_off / 100) * this.planPrice
-        console.log("plandata.currentPlan", this.discount, this.couponData.percent_off)
+        console.log('plandata.currentPlan', this.discount, this.couponData.percent_off)
         this.planPrice = this.planPrice - this.discount
         this.couponMessage = null
         this.couponId = this.stripeTest.value.coupon
-        document.getElementById("coupon").setAttribute("readonly", 'true');
+        document.getElementById('coupon').setAttribute('readonly', 'true');
       }
       if (data.status == 404) {
         this.discount = null
@@ -118,9 +118,9 @@ export class PaymentComponent implements OnInit {
   cancleCoupon() {
     this.discount = null
     this.stripeTest.value.coupon = null
-    $('input[name=coupon]').val("")
+    $('input[name=coupon]').val('')
     this.planPrice = this.mainPrice
-    document.getElementById("coupon").removeAttribute("readonly");
+    document.getElementById('coupon').removeAttribute('readonly');
     this.couponId = ''
     // document.getElementById("coupon").reset();
   }
@@ -237,16 +237,20 @@ export class PaymentComponent implements OnInit {
 
       this.spinner.show();
 
-      console.log("payment data", this.stripeTest.value)
+      console.log('payment data', this.stripeTest.value)
       this.commonService.post(`create-payment`, body).subscribe((data: any) => {
         this.spinner.hide();
         if (data.status == 200) {
-          console.log("paymen responce", data)
-          Swal.fire('Hurray!!',
-            'Your subscription begins now!!',
-            'success');
-          this.router.navigate(["subscription"]);
-
+          console.log('paymen responce', data)
+          Swal.fire(
+            {
+              title: 'Success',
+              text: 'Plan subscription successfull',
+              didClose: () => {
+                this.router.navigate(['subscription']);
+              }
+            }
+          );
         }
         else if (data.status == 400) {
           Swal.fire(
@@ -261,7 +265,10 @@ export class PaymentComponent implements OnInit {
         else {
           this.spinner.hide();
         }
-      })
+      }, (error) => {
+        console.error(error);
+        this.spinner.hide();
+      });
     }
   }
 
@@ -279,7 +286,7 @@ export class PaymentComponent implements OnInit {
         if (result.token) {
           this.onpaymentDone(result.token)
         } else if (result.error) {
-          console.log("error", result.error.message);
+          console.log('error', result.error.message);
           Swal.fire('ohh snap!',
             'card not valid!',
             'error');

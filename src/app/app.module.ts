@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import * as bootstrap from "bootstrap";
-import * as $ from "jquery";
+import * as bootstrap from 'bootstrap';
+import * as $ from 'jquery';
 import { AuthGuardService, CommonService,PaymentService,CountryName } from './core/services';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,7 +21,6 @@ import {
 } from 'angularx-social-login';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { TermsComponent } from './terms/terms.component';
-
 
 @NgModule({
   declarations: [

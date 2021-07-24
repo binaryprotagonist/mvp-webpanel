@@ -424,13 +424,13 @@
           <div class="collapse navbar-collapse heading-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
               <li class="nav-item dropdown nav-item-1">
-                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink"
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Help
                 </a>
                 <ul class="dropdown-menu dropdown-menu-edit" aria-labelledby="navbarDropdownMenuLink">
                   <li class="d-p">
-                    <a class="dropdown-item cursor-pointer p-1" href="#">
+                    <a class="dropdown-item cursor-pointer p-1" routerLink='/training' target="_blank">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 193.33">
                         <defs>
                           <style>
@@ -475,7 +475,7 @@
                     </a>
                   </li>
                   <li class="d-p">
-                    <a class="dropdown-item cursor-pointer p-1" href="#">
+                    <a class="dropdown-item cursor-pointer p-1" routerLink='/updates' target="_blank">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 186.45 200.8">
                         <defs>
                           <style>
@@ -497,7 +497,7 @@
                     </a>
                   </li>
                   <li class="d-p">
-                    <a class="dropdown-item cursor-pointer p-1" href="#">
+                    <a class="dropdown-item cursor-pointer p-1" routerLink='/privacy-policy' target="_blank">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 152.34 200">
                         <defs>
                           <style>
@@ -546,6 +546,8 @@
       <button class="tool-items fa fa-align-right" onclick="document.execCommand('justifyRight',false,'')"></button>
       <button class="tool-items fa fa-list-ul" onclick="document.execCommand('insertUnorderedList',false,'')"></button>
       <button class="tool-items fa fa-list-ol" onclick="document.execCommand('insertOrderedList',false,'')"></button>
+      <button class="tool-items fa fa-indent" onclick="document.execCommand('indent',false,null)"></button>
+      <button class="tool-items fa fa-outdent" onclick="document.execCommand('outdent',false,null)"></button>
       <button class="tool-items fa fa-link" (click)="link()"></button>
       <div class="imageInputBox">
         <input type="file" [disabled]='!clickedOnNotesSection' hidden id='getImage' (change)='getImage($event)'>
