@@ -31,6 +31,7 @@ export class HeaderComponent implements OnInit {
 
   searchText = '';
   cuesData: any;
+  notesData:any;
   summariesData: any;
   characters = [
     'Ant-Man',
@@ -64,6 +65,7 @@ export class HeaderComponent implements OnInit {
       if (data.status == 200) {
         console.log("notesSearch", data.data)
         this.summariesData = data.data.summariesData
+        this.notesData = data.data.notesData
         this.cuesData = data.data.cuesData
         this.spinner.hide();
       }

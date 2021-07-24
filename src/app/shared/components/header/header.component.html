@@ -89,6 +89,8 @@
               role="tab" aria-controls="nav-home" aria-selected="true">Cue Points</a>
             <a class="nav-item nav-link search-head" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
               role="tab" aria-controls="nav-profile" aria-selected="false">Summary</a>
+              <a class="nav-item nav-link search-head" id="nav-note-tab" data-toggle="tab" href="#nav-notes"
+              role="tab" aria-controls="nav-notes" aria-selected="false">Notes</a>
           </div>
         </nav>
         <div class="tab-content tab-customise-content" id="nav-tabContent">
@@ -129,6 +131,29 @@
                   <div class="list-box">
                     <ol class="subject-content-list">
                       <li>{{element.summaryText}}</li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Summary end -->
+          </div>
+          <div class="tab-pane fade" id="nav-notes" role="tabpanel" aria-labelledby="nav-note-tab">
+            <!-- summary section -->
+            <div class="row">
+              <div class="col-md-12" *ngFor="let element of notesData">
+                <div class="content-box">
+                  <div class="d-flex justify-content-between border-bottom">
+                    <div>
+                      <p class="content-head">{{element.notesName}}<span class="content-date"> {{element.createdAt |
+                          date}}</span></p>
+                      <p class="content-subject">{{element.subjectName}}</p>
+                    </div>
+                    <a (click)="routeOnNotes(element.notesName,element.noteId)" class="content-click">View in Document</a>
+                  </div>
+                  <div class="list-box">
+                    <ol class="subject-content-list">
+                      <li>{{element.notesText}}</li>
                     </ol>
                   </div>
                 </div>
