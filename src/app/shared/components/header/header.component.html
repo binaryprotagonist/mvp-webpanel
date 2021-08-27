@@ -78,7 +78,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content modal-customise-content">
       <div class="">
-        <input type="search" [(ngModel)]="searchText" (keyup)="onSearch()" class="search-bar-pop" placeholder="what are you searching for" />
+        <input id='search-bar' type="search" [(ngModel)]="searchText" (input)="onSearch()" class="search-bar-pop" placeholder="what are you searching for" />
         <!-- <button class="btn btn-info" (click)='onSearch()'>search</button> -->
         <hr class="m-0" />
       </div>
@@ -107,9 +107,8 @@
                     <a (click)="routeOnNotes(element.notesName,element.noteId)" class="content-click">View in Document</a>
                   </div>
                   <div class="list-box">
-                    <ol class="subject-content-list">
-                      <li [innerHTML]="element.cuesText"></li>
-                    </ol>
+                    <div class="subject-content-list" [innerHTML]="element.cuesText">
+                    </div>
                   </div>
                 </div>
               </div>
@@ -129,9 +128,8 @@
                     <a (click)="routeOnNotes(element.notesName,element.noteId)" class="content-click">View in Document</a>
                   </div>
                   <div class="list-box">
-                    <ol class="subject-content-list">
-                      <li [innerHTML]="element.summaryText"></li>
-                    </ol>
+                    <div class="subject-content-list" [innerHTML]="element.summaryText">
+                    </div>
                   </div>
                 </div>
               </div>
@@ -152,9 +150,8 @@
                     <a (click)="routeOnNotes(element.notesName,element.noteId)" class="content-click">View in Document</a>
                   </div>
                   <div class="list-box">
-                    <ol class="subject-content-list">
-                      <li [innerHTML]="element.notesText"></li>
-                    </ol>
+                    <div class="subject-content-list" [innerHTML]="element.notesText">
+                    </div>
                   </div>
                 </div>
               </div>

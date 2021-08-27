@@ -103,3 +103,8 @@
   font-family: 'Product Sans';
   margin-bottom: 10px;
 }
+
+.subject-content-list img {
+    max-width: 200px !important; 
+    max-height: 200px !important;
+  }

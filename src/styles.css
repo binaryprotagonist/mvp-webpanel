@@ -22,6 +22,12 @@ mark.current {
   cursor: pointer;
 }
 
+#searchmodal img {
+  max-width: 200px !important; 
+  max-height: 200px !important;
+}
+
+
 .bg-auth-group
 {
     background-image: url('assets/images/login_bg.png') ;

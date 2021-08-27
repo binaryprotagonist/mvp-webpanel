@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from '../../core/services/common.service';
-import { NgxSpinnerService } from "ngx-spinner";
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-trash',
@@ -8,68 +8,50 @@ import { NgxSpinnerService } from "ngx-spinner";
   styleUrls: ['./trash.component.css']
 })
 export class TrashComponent implements OnInit {
-  deletedData:any;
-  constructor(private commonService: CommonService,private spinner: NgxSpinnerService) { }
+  deletedData: any = [];
+  constructor(private commonService: CommonService, private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
     this.getDeletedData();
   }
 
-  getDeletedData(){
+  getDeletedData(): void {
     this.spinner.show();
-    this.commonService.get(`getDeletedData`).subscribe((data: any)=>{
-      if(data.status==200){
-        console.log("........",data.data)
-      this.deletedData=data.data.sort((a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt))
+    this.commonService.get(`getDeletedData`).subscribe((data: any) => {
       this.spinner.hide();
-      console.log(this.deletedData)
-
-      }else{
-        this.deletedData=[]
-        this.spinner.hide();
+      if (data?.success) {
+        this.deletedData = data.data.sort((a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt));
       }
-
-  })
-
-
-
-}
-
-restoresubject(id){
-  let body={
-    subjectId:id
+    }, (error) => {
+      console.log(error);
+      this.spinner.hide();
+    });
   }
-  this.spinner.show();
-  this.commonService.post('restoreSubject',body).subscribe((data: any)=>{
-    if(data && data.status==200){
 
-      this.getDeletedData();
+  restoresubject(id): void {
+    this.spinner.show();
+    this.commonService.post('restoreSubject', { subjectId: id }).subscribe((data: any) => {
       this.spinner.hide();
-    }else{
+      if (data?.success){
+        this.getDeletedData();
+      }
+    }, (error) => {
+      console.log(error);
       this.spinner.hide();
-    }
-  })
-}
-restorNote(id){
-  this.spinner.show();
-  let body={
-    notesId:id
+    });
   }
-  this.commonService.post('restoreNote',body).subscribe((data: any)=>{
-    if(data && data.status==200){
-      this.getDeletedData();
-      this.spinner.hide();
-    }else{
-      this.spinner.hide();
 
-    }
-  })
-
-}
-private checkKey(data,key: string) {
-  // console.log(data,key)
-  return(data.hasOwnProperty(key))
- // this.mapToSearch[newKey] = newValue;
-}
+  restorNote(id): void {
+    this.spinner.show();
+    this.commonService.post('restoreNote', { notesId: id }).subscribe((data: any) => {
+      this.spinner.hide();
+      if (data?.success) {
+        this.deletedData = this.deletedData.filter(({_id}) => _id !== id);
+      }
+    }, (error) => {
+      console.log(error);
+      this.spinner.hide();
+    });
+  }
 
 }

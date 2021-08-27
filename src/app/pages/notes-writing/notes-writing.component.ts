@@ -113,10 +113,8 @@ export class NotesWritingComponent implements OnInit {
       ))
     );
   }
-  
 
   ngOnInit(): void {
-//  this.checkStyle()
     this.form = this.formBuilder.group({
       signature: ['', Validators.required]
     });
@@ -126,13 +124,43 @@ export class NotesWritingComponent implements OnInit {
     this.markInstance = new mark(document.querySelector('.editor'));
     $('#exampleModalCenter6').on('hidden.bs.modal', (e) => {
       this.markInstance.unmark();
+      const findInput = document.querySelector('#findTextInput') as HTMLInputElement;
+      findInput.value = '';
     });
+
+    const aLink = document.querySelector('a');
+    aLink.contentEditable = 'false';
+    aLink.addEventListener('mouseover', () => {
+      console.log('alink');
+      window.open(aLink.href, '_blank');
+    });
+
     document.addEventListener('keydown', (event) => {
+      if (event.ctrlKey && event.shiftKey) {
+        this.internet = false;
+        document.getElementById('notes').contentEditable = 'false';
+      }
       if (event.ctrlKey && event.key === 'f') {
         this.showFindAndReplaceModal();
       }
+      if (event.key === 'Tab') {
+        event.preventDefault();
+        document.execCommand('indent',false,null)
+      }
+      if (event.shiftKey && event.key === 'Tab') {
+        event.preventDefault();
+        document.execCommand('outdent', false, null);
+        document.execCommand('outdent',false,null)
+      }
     });
-    
+
+
+    document.addEventListener('keyup', (event) => {
+      if (event.key === 'Control') {
+        this.internet = true;
+        document.getElementById('notes').contentEditable = 'true';
+      }
+    });
   }
 
   ngAfterViewInit() { }
@@ -290,8 +318,13 @@ checkStyle(){
   }
 
   link() {
-    var url = prompt('Enter the URL');
+    const url = prompt('Enter the URL');
     document.execCommand('createLink', false, url);
+    const aLink = document.querySelector('a');
+    aLink.contentEditable = 'false';
+    aLink.addEventListener('click', () => {
+      window.open(aLink.href, '_blank');
+    });
   }
   getNote() {
     this.spinner.show();
@@ -675,7 +708,6 @@ checkStyle(){
       this.findResults.removeClass('current');
       if (current.length) {
         current.addClass('current');
-        
         position = current.offset().top - 150;
         window.scrollTo(0, position);
       }

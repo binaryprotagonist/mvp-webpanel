@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from '../../../core/services/common.service';
 import { Router } from '@angular/router';
-import { SearchPipe } from "../../../pages/search.pipe";
-import { NgxSpinnerService } from "ngx-spinner";
+import { SearchPipe } from '../../../pages/search.pipe';
+import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2';
 
 declare var $: any;
@@ -19,16 +19,10 @@ export class HeaderComponent implements OnInit {
   email: any;
   profileImage:any;
   PlanName:any
+  debounce = null;
   constructor(private commonService: CommonService, private _router: Router,private spinner: NgxSpinnerService) { }
 
-  ngOnInit(): void {
-    this.getUser();
-    // this.onSearch()
-  }
-
-
   query;
-
   searchText = '';
   cuesData: any;
   notesData:any;
@@ -42,11 +36,17 @@ export class HeaderComponent implements OnInit {
     'Batgirl',
     'Batman',
     'Batwoman',
-  ]
+  ];
 
+  ngOnInit(): void {
+    this.getUser();
+  }
 
   searchmodal() {
-    $('#searchmodal').modal('show');
+    $('#searchmodal').modal('show').on('shown.bs.modal', () => {
+      console.log('shown');
+      document.getElementById('search-bar').focus();
+    });
   }
 
   getUser() {
@@ -54,51 +54,46 @@ export class HeaderComponent implements OnInit {
       if (data.status == 200) {
         this.firstName = data.result.FullName;
         this.lastName = data.result.lastName;
-        this.profileImage=data.result.profileImage
-        this.PlanName =data.result.PlanName
+        this.profileImage = data.result.profileImage;
+        this.PlanName = data.result.PlanName;
       }
-    })
+    });
   }
   onSearch() {
-    this.spinner.show();
-    this.commonService.get(`notesSearch?search=${this.searchText}`).subscribe((data: any) => {
-      if (data.status == 200) {
-        console.log("notesSearch", data.data)
-        this.summariesData = data.data.summariesData
-        this.notesData = data.data.notesData
-        this.cuesData = data.data.cuesData
+    clearTimeout(this.debounce);
+    this.debounce = setTimeout(() => {
+      this.spinner.show();
+      this.commonService.get(`notesSearch?search=${this.searchText}`).subscribe((data: any) => {
         this.spinner.hide();
-      }
-      else{
-        this.spinner.hide();
-
-      }
-    })
+        if (data.status == 200) {
+          console.log('notesSearch', data.data);
+          this.summariesData = data.data.summariesData;
+          this.notesData = data.data.notesData;
+          this.cuesData = data.data.cuesData;
+        }
+      });
+    }, 1000);
   }
-  logout() {
-    localStorage.clear()
-    this._router.navigate(["login"]);
+  logout(): void {
+    localStorage.clear();
+    this._router.navigate(['login']);
     location.reload();
-
   }
-   signOut() {
+   signOut(): void {
     Swal.fire({
-      title: "Are you sure to Logout?",
-      // text: "Once deleted, you will not be able to recover this imaginary file!",
+      title: 'Are you sure to Logout?',
       showConfirmButton: true,
       showCancelButton: true,
-      confirmButtonText: 'Yes !'
+      confirmButtonText: 'Yes'
     })
-      .then((willDelete) => {
-        if (willDelete.value) {
-          this.logout()
-        } else {
-          // Swal.fire("Fail");
-        }
-        console.log(willDelete)
-      })
+    .then((logout) => {
+      if (logout.value) {
+        this.logout();
+      }
+    });
   }
-  routeOnNotes(notesName,id){
+
+  routeOnNotes(notesName, id): void {
     this._router.navigate([`notesWriting/${id}`]);
   }
 }
