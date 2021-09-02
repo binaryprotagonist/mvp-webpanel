@@ -54,4 +54,11 @@ export class TrashComponent implements OnInit {
     });
   }
 
+  private checkKey(data,key: string) {
+    // console.log(data,key)
+    console.log(data.hasOwnProperty(key))
+    return(data.hasOwnProperty(key))
+   // this.mapToSearch[newKey] = newValue;
+  }
+
 }
