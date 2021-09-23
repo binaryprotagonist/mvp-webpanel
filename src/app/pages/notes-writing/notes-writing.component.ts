@@ -103,8 +103,7 @@ export class NotesWritingComponent implements OnInit {
   constructor(private _router: Router, private toastr: ToastrService, private commonService: CommonService, private formBuilder: FormBuilder, private router: Router, private spinner: NgxSpinnerService) {
     this.onlineOffline = merge(of(navigator.onLine),
       fromEvent(window, 'online').pipe(map(() => {
-        true
-        this.internet = true
+        this.internet = true;
       })),
       fromEvent(window, 'offline').pipe(map(() => {
         false
@@ -128,18 +127,7 @@ export class NotesWritingComponent implements OnInit {
       findInput.value = '';
     });
 
-    const aLink = document.querySelector('a');
-    aLink.contentEditable = 'false';
-    aLink.addEventListener('mouseover', () => {
-      console.log('alink');
-      window.open(aLink.href, '_blank');
-    });
-
     document.addEventListener('keydown', (event) => {
-      if (event.ctrlKey && event.shiftKey) {
-        this.internet = false;
-        document.getElementById('notes').contentEditable = 'false';
-      }
       if (event.ctrlKey && event.key === 'f') {
         this.showFindAndReplaceModal();
       }
@@ -320,11 +308,12 @@ checkStyle(){
   link() {
     const url = prompt('Enter the URL');
     document.execCommand('createLink', false, url);
-    const aLink = document.querySelector('a');
-    aLink.contentEditable = 'false';
-    aLink.addEventListener('click', () => {
-      window.open(aLink.href, '_blank');
-    });
+    const aTag = window.getSelection().focusNode.parentNode as HTMLAnchorElement;
+    console.log(aTag);
+    aTag.setAttribute('contentEditable', 'false');
+    aTag.setAttribute('target', '_blank');
+    this.getContent();
+    this.autoUpdate();
   }
   getNote() {
     this.spinner.show();
@@ -362,6 +351,7 @@ checkStyle(){
         this.summaryTitle = data.data[0].summaries.summaryTitle
         // this.cuesTitle = data.data[0].summaries.summaryText
         this.spinner.hide();
+        $('#content').find('a').css({"color": "red", "border": "2px solid red"});
         // this.autoUpdate()
 
       } else {
@@ -416,92 +406,22 @@ checkStyle(){
     })
   }
   savePdf(value): void {
-    this.notesContent = document.getElementById('notes').innerHTML;
-    this.cuesContent = document.getElementById('cues').innerHTML;
-    this.summaryContent = document.getElementById('summary').innerHTML;
-    console.log(this.content1)
-    window.scrollTo(0, 0);
-    const opt = {
-      margin:       0.1,
-      filename:     ` ${this.notesName}.pdf`,
-      image:        { type: 'jpeg', quality: 0.9 },
-      html2canvas:  { scale: 3 },
-      jsPDF:        { unit: 'in', format: 'A4', orientation: 'portrait' }
-    };
-    const element = `
-    <div class="" >
-      <div class="pdf-d-flex">
-        <div class="pdf-cues">
-          <div class="pdf-inputType">
-            ${this.cuesTitle}
-          </div>
-          ${this.cuesContent}
-        </div>
-        <div class="pdf-notes">
-          <div class="pdf-inputType">
-            ${this.noteTitle}
-          </div>
-          ${this.notesContent}
-        </div>
-      </div>
-
-      <div class="pdf-summarry" >
-        <div>
-          <div class="pdf-inputType">
-            ${this.cuesTitle}
-          </div>
-            ${this.summaryContent}
-        </div>
-      </div>
-    </div>
-    <style>
-      .pdf-d-flex{
-        display:flex;
-        border-bottom:1px dotted black
-      }
-      .pdf-cues{
-        border-right:1px dotted black;
-        padding:20px;
-        word-wrap:break-word;
-        width:2.8in;
-        min-height:7in;
-        font-size:14px;
-        line-height: 0.2in;
-      }
-      .pdf-notes{
-        padding:20px;
-        word-wrap:break-word;
-        width:5.2in;
-        font-size:14px;
-        line-height: 0.2in;
-        min-height:7in;
-      }
-      .pdf-summarry{
-        padding:20px;
-        word-wrap:break-word;
-        width:8in;
-        font-size:14px;
-        min-height:4in;
-        line-height: 0.2in;
-      }
-      .pdf-inputType{
-        padding:5px 10px;
-        1px solid #e7e7e7;
-        border-radius:30px;
-        background-color: #e7e7e7;
-        margin-bottom: 10px;
-        width:2in;
-      }
-
-      .pdf-image {
-        height: 2.2in !important;
-      }
-    </style>
-    `;
     this.spinner.show();
-    html().from(element).set(opt).save().then(() => {
+    this.commonService.postPdf('generatePDF', { id: this.noteId }).subscribe((resp: any) => {
       this.spinner.hide();
-    });
+      const a = document.createElement('a');
+      const result = resp.result;
+      const blob = new Blob([resp], {type: 'application/pdf'});
+      const url = window.URL.createObjectURL(blob);
+      a.href = url;
+      a.download = `Notes.pdf`;
+      a.click();
+      window.URL.revokeObjectURL(url);
+      console.log(resp);
+    }, (error) => {
+      this.spinner.hide();
+      console.log(error);
+    })
   }
 
   shareWithMail() {

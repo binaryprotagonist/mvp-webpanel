@@ -93,8 +93,7 @@ export class Subscription implements OnInit {
     // this.paymentForm()
     this.getUser();
     this.getTransparentPricing();
-    console.log('stripe', this.coupon.length);
-    if (this.coupon.length >= 0) {
+    if (this.coupon?.length >= 0) {
       this.discount = null;
     }
   }
@@ -200,8 +199,6 @@ export class Subscription implements OnInit {
     });
   }
   onChoosePlan(id, price, duration, stripeId, planName) {
-    console.log(this.userData,);
-
     this.planId = id;
     this.planPrice = price;
     this.mainPrice = price;
@@ -210,7 +207,6 @@ export class Subscription implements OnInit {
     let data = {
       userId: this.userId,
       userName: this.FullName,
-      // email:this.
       planId: id,
       planPrice: price,
       mainPrice: price,
@@ -232,10 +228,8 @@ export class Subscription implements OnInit {
     };
     console.log('payment data', body);
     this.commonService.post(`payment`, body).subscribe((data: any) => {
-      // console.log(data)
       if (data.data.length > 0) {
         console.log('paymen responce', data)
-        // this.onSubscription()
       } else {
         this.spinner.hide();
       }
@@ -246,7 +240,6 @@ export class Subscription implements OnInit {
     this.spinner.show();
     const name = this.stripeTest.get('name').value;
     const email = this.stripeTest.get('name').value;
-
     this.stripeService
       .createToken(this.card.element, { name, })
       .subscribe((result) => {
@@ -258,7 +251,6 @@ export class Subscription implements OnInit {
             'card not valid!',
             'error');
           this.spinner.hide();
-
         }
       });
   }
@@ -271,9 +263,7 @@ export class Subscription implements OnInit {
       stripePlanId: this.stripeId,
       couponId: this.stripeTest.value.coupon
     };
-    console.log('payment data', body);
     this.commonService.post(`create-payment`, body).subscribe((data: any) => {
-      // console.log(data)
       this.spinner.hide();
       document.getElementById('onPay').click();
       if (data.status == 200) {
@@ -282,7 +272,6 @@ export class Subscription implements OnInit {
           'Your subscription begins now!!',
           'success');
         document.getElementById(this.currentPlan).classList.remove('PayButton')
-
         this.getUser()
       }
       else if (data.status == 400) {
@@ -295,46 +284,6 @@ export class Subscription implements OnInit {
       }
     });
   }
-  // onSubscription() {
-
-  //   let body = {
-  //     "userId": this.userId,
-  //     "subscriptionId": this.planId,
-  //     "planDuration": this.planDuration
-  //   }
-  //   console.log("data,body", body)
-
-  //   this.commonService.post(`subscribePlan`, body).subscribe((data: any) => {
-  //     console.log("data,data0", data)
-  //     if (data.status == 200) {
-  //       console.log("data", data)
-
-  //     } else {
-  //       this.spinner.hide();
-  //       document.getElementById("onPay").click();
-  //     }
-  //   })
-  // }
-
-  // onpaymentStore(result) {
-  //   let body = {
-  //     userId: this.userId,
-  //     token: result.token.id,
-  //     subscriptionId: this.planId,
-  //     status: "success",
-  //     amount: this.planPrice,
-  //   }
-  //   console.log("payment data", body)
-  //   this.commonService.post(`payment`, body).subscribe((data: any) => {
-  //     // console.log(data)
-  //     if (data.status == 200) {
-  //       console.log("paymen responce", data)
-  //       this.onSubscription()
-  //     } else {
-  //       this.spinner.hide();
-  //     }
-  //   })
-  // }
   onCancel(planId) {
     Swal.fire({
       title: 'Are you sure?',

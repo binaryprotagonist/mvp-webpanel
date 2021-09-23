@@ -57,7 +57,7 @@ export class PaymentComponent implements OnInit {
   months=[1,2,3,4,5,6,7,8,9,10,11,12]
   years=[2021,2022,2023,2024,2025,2026,2027,2028,2029]
   userData
-  planData
+  planData;
   countrys
   planPrice
   selectedCountry
@@ -69,21 +69,35 @@ export class PaymentComponent implements OnInit {
   couponId: any
   countryList: any
   cardMessage:any
+
+  paymentFormvalidationMessages = {
+    'firstName': {
+      'required': 'first name is required',
+      'minlength': 'minimum 3 characters required'
+    },
+    'lastName': {
+      'required': 'first name is required',
+      'minlength': 'minimum 3 characters required'
+    },
+    'email': {
+      'required': 'email is required',
+      'pattern': 'email not in valid format'
+    },
+  }
+
   constructor(private commonService: CommonService, private router: Router, private stripeService: StripeService, private fb: FormBuilder, private spinner: NgxSpinnerService, private PaymentService: PaymentService, private CountryList: CountryName) { }
 
   ngOnInit(): void {
     this.getPaymentData()
-
+    this.paymentForm();
   }
 
   async getPaymentData() {
-
-    const data = await this.PaymentService.getPaymentData()
+    const data = this.PaymentService.getPaymentData();
     if (!data) {
-      this.router.navigate(['/subscription'])
+      this.router.navigate(['/subscription']);
     }
     else {
-
       this.planData = data
       this.planPrice = data.planPrice
       this.countryList = this.CountryList.getCountry()
@@ -91,11 +105,9 @@ export class PaymentComponent implements OnInit {
     }
   }
   applyCoupon() {
-    // alert(this.stripeTest.value('coupon'))
     let data = {
       couponId: this.stripeTest.value.coupon
     }
-    console.log('data ', this.stripeTest.value.coupon)
     this.commonService.post(`getCoupons`, data).subscribe((data: any) => {
       console.log('plandata.currentPlan.noteUsage', data)
 
@@ -111,7 +123,8 @@ export class PaymentComponent implements OnInit {
       if (data.status == 404) {
         this.discount = null
         this.couponId = ''
-        this.couponMessage = 'Invalid Coupon code'
+        this.couponMessage = 'Invalid Coupon code';
+        setTimeout(() => this.couponMessage = null, 2500);
       }
     })
   }
@@ -127,23 +140,13 @@ export class PaymentComponent implements OnInit {
 
   paymentForm() {
     this.stripeTest = this.fb.group({
-      firstName: [this.planData ? this.planData.firstName : '', [Validators.required, Validators.minLength(3)]],
-      lastName: [this.planData ? this.planData.lastName : '', [Validators.required, Validators.minLength(3)]],
-      email: [this.planData ? this.planData.email : '', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]],
-      // card: ['', [ Validators.minLength(19), Validators.maxLength(19)]],
-      // expMonth: ['', [Validators.required,]],
-      // expYear: ['', [Validators.required,]],
-      // cvc: ['', [Validators.required]],
-      streetAddress: ['', [Validators.required]],
-      postal: ['', [Validators.required]],
-      city: ['', [Validators.required]],
-      apartment: [''],
-      country: ['', [Validators.required]],
+      firstName: [this.planData?.firstName || null, [Validators.required]],
+      lastName: [this.planData?.lastName  || null, [Validators.required]],
+      email: [this.planData?.email  || null, [Validators.required]],
       coupon: ['']
-
     })
     this.stripeTest.valueChanges.subscribe(data => this.onValueChanges(data))
-
+    console.log(this.stripeTest.value)
   }
   onValueChanges(data?: any) {
     if (!this.stripeTest)
@@ -164,52 +167,6 @@ export class PaymentComponent implements OnInit {
       }
     }
   }
-  paymentFormvalidationMessages = {
-    'firstName': {
-      'required': 'first name is required',
-      'minlength': 'minimum 3 characters required'
-    },
-    'lastName': {
-      'required': 'first name is required',
-      'minlength': 'minimum 3 characters required'
-    },
-    'email': {
-      'required': 'email is required',
-      'pattern': 'email not in valid format'
-    },
-    'city': {
-      'required': 'City is required',
-    },
-
-    'streetAddress': {
-      'required': 'Street Address is required',
-    },
-    'apartment': {
-      'required': 'Apartment is required',
-    },
-    'postal': {
-      'required': 'Postal is required',
-    },
-    'card': {
-      'required': 'card number is required',
-      'minlength': 'minimum 16 digit required',
-      'maxlength': 'minimum 16 digit required'
-    },
-    'expMonth': {
-      'required': 'Expairy month is required',
-    },
-    'expYear': {
-      'required': 'Expairy Year is required',
-    },
-    'cvc': {
-      'required': 'cvc is required',
-    },
-    'country': {
-      'required': 'country is required',
-    }
-
-  }
-
 
   onpaymentDone(token) {
     let body = {
@@ -219,85 +176,62 @@ export class PaymentComponent implements OnInit {
       stripePlanId: this.planData.stripePlanId,
       planName: this.planData.planName,
       couponId: this.couponId,
-      country: this.stripeTest.value.country,
-      apartment: this.stripeTest.value.apartment,
-      city: this.stripeTest.value.city,
-      postal: this.stripeTest.value.postal,
-      streetAddress: this.stripeTest.value.streetAddress,
-      token:token
-      // number: this.stripeTest.value.card,
-      // exp_month: this.stripeTest.value.expMonth,
-      // exp_year: this.stripeTest.value.expYear,
-      // cvc: this.stripeTest.value.cvc,
+      token:token.id,
+      email: this.planData.email,
+      fullName: this.planData.firstName + ' ' + this.planData.lastName
     }
-    if(this.stripeTest.value.card==''){
-        this.stripeTestError.card = 'card number is required'
-    }
-    if (this.stripeTest.valid) {
-
-      this.spinner.show();
-
-      console.log('payment data', this.stripeTest.value)
-      this.commonService.post(`create-payment`, body).subscribe((data: any) => {
-        this.spinner.hide();
-        if (data.status == 200) {
-          console.log('paymen responce', data)
-          Swal.fire(
-            {
-              title: 'Success',
-              text: 'Plan subscription successfull',
-              didClose: () => {
-                this.router.navigate(['subscription']);
-              }
+    this.commonService.post(`create-payment`, body).subscribe((data: any) => {
+      this.spinner.hide();
+      if (data.status == 200) {
+        console.log('paymen responce', data)
+        Swal.fire(
+          {
+            title: 'Success',
+            text: 'Plan subscription successfull',
+            didClose: () => {
+              this.router.navigate(['subscription']);
             }
-          );
-        }
-        else if (data.status == 400) {
-          Swal.fire(
-            'something went wrong!!',
-            'error');
-        }
-        else if (data.status == 402) {
-          Swal.fire(
-            'something went wrong!!',
-            'error');
-        }
-        else {
-          this.spinner.hide();
-        }
-      }, (error) => {
-        console.error(error);
+          }
+        );
+      }
+      else if (data.status == 400) {
+        Swal.fire(
+          'something went wrong!!',
+          'error');
+      }
+      else if (data.status == 402) {
+        Swal.fire(
+          'something went wrong!!',
+          'error');
+      }
+      else {
         this.spinner.hide();
-      });
-    }
+      }
+    }, (error) => {
+      console.error(error);
+      this.spinner.hide();
+    });
   }
 
   createToken(){
-    this.stripeTest.markAllAsTouched()
-    this.onValueChanges()
-  
-    console.log(this.stripeTest.value.firstName)
-    const name = this.stripeTest.value.firstName + this.stripeTest.value.lastName;
-    if(this.stripeTest.valid){
-      this.stripeService
-      .createToken(this.card.element, { name})
-      .subscribe((result) => {
-        console.log(result.token)
-        if (result.token) {
-          this.onpaymentDone(result.token)
-        } else if (result.error) {
-          console.log('error', result.error.message);
-          Swal.fire('ohh snap!',
-            'card not valid!',
-            'error');
-          this.spinner.hide();
-
-        }
-      });
-    }else{
-      return
+    if (this.stripeTest.invalid) {
+      this.stripeTest.markAllAsTouched()
+      this.onValueChanges()
+      return;
     }
-    
+    const name = this.stripeTest.value.firstName + " " +  this.stripeTest.value.lastName;
+    this.spinner.show();
+    this.stripeService
+    .createToken(this.card.element, {name})
+    .subscribe((result) => {
+      if (result.token) {
+        this.onpaymentDone(result.token)
+      } else if (result.error) {
+        console.log('error', result.error.message);
+        Swal.fire('ohh snap!', 'card not valid!', 'error');
+        this.spinner.hide();
+      }
+    }, (error) => this.spinner.hide());
   }
 
 }

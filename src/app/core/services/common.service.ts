@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import { constants } from './../utils/constants';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -58,6 +59,17 @@ export class CommonService {
           throw err;
         })
       )
+  }
+
+  postPdf(url, body): Observable<any>{
+    let token=localStorage.getItem('token') ? localStorage.getItem('token') : '';
+    return this.http
+      .post(constants.apiBaseURL + url, body,
+        {
+          headers: {token},
+          responseType: 'arraybuffer'
+        }
+      );
   }
 
   /*function for calling put Apis's*/
