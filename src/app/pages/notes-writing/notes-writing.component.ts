@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DomSanitizer, SafeHtml, Title } from '@angular/platform-browser';
 import { PipeTransform, Pipe } from '@angular/core';
 
 import { AngularEditorConfig } from '@kolkov/angular-editor';
@@ -41,7 +41,7 @@ export class SafeHtmlPipe implements PipeTransform  {
 
 
 
-export class NotesWritingComponent implements OnInit {
+export class NotesWritingComponent implements OnInit, OnDestroy {
   @ViewChild('container', { read: ElementRef })
   public readonly containerElement;
   form: FormGroup;
@@ -100,7 +100,13 @@ export class NotesWritingComponent implements OnInit {
     }
     this.getContent()
   }
-  constructor(private _router: Router, private toastr: ToastrService, private commonService: CommonService, private formBuilder: FormBuilder, private router: Router, private spinner: NgxSpinnerService) {
+  constructor(private _router: Router,
+              private toastr: ToastrService,
+              private commonService: CommonService,
+              private formBuilder: FormBuilder,
+              private router: Router,
+              private titleService: Title,
+              private spinner: NgxSpinnerService) {
     this.onlineOffline = merge(of(navigator.onLine),
       fromEvent(window, 'online').pipe(map(() => {
         this.internet = true;
@@ -151,7 +157,9 @@ export class NotesWritingComponent implements OnInit {
     });
   }
 
-  ngAfterViewInit() { }
+  ngOnDestroy(): void {
+    this.titleService.setTitle('MvpNotes');
+  }
 
 checkStyle(){
   $('#notes').delegate('*', 'click',function (e) {
@@ -353,6 +361,7 @@ checkStyle(){
         this.spinner.hide();
         $('#content').find('a').css({"color": "red", "border": "2px solid red"});
         // this.autoUpdate()
+        this.titleService.setTitle(this.notesName);
 
       } else {
         this.spinner.hide();
