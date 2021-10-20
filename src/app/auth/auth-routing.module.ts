@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthComponent } from './auth.component';
 import { LoginComponent, ResetPasswordComponent, ForgetPasswordComponent, RegisterComponent,NotesShareComponent } from './';
+import { VerifyEmailComponent } from './verify-email/verify-email.component';
 const routes: Routes = [
   {
     path: '',
@@ -22,6 +23,10 @@ const routes: Routes = [
       {
         path: 'register',
         component: RegisterComponent,
+      },
+      {
+        path: 'verify-email/:id',
+        component: VerifyEmailComponent
       },
       {
         path:'',

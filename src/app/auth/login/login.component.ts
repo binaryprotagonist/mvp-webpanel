@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from "ngx-spinner";
 import { SocialAuthService } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-login',
@@ -68,25 +69,38 @@ export class LoginComponent implements OnInit {
       password: this.loginForm.value.password,
     }
     this.commonService.post('login', body).subscribe((data: any) => {
+      this.spinner.hide();
       if (data.status == 200) {
         // this.toastr.success('Login Successfully', 'success');
-        let token = data.token;
+        if (!data.data.isveify) {
+          const createdAt = moment(data.data.createdAt);
+          const currentDay = moment().add(1, 'second');
+          const days = 7 - currentDay.diff(createdAt, 'days');
+          if (days < 0) {
+            this.toastr.error(
+              'Email is not verified, Please verify you email',
+              'Unauthorized',
+              {
+                timeOut: 3000
+              });
+            return;
+          }
+        }
+        const token = data.token;
         localStorage.setItem('token', token);
-        this.spinner.hide();
-        this._router.navigate(["quickAccess"]);
+        this._router.navigate(['quickAccess']);
       } else {
         this.spinner.hide();
-        //this.error='Invalid email or password';
-        this.toastr.warning('Invalid email or password', 'warning');
+        this.toastr.error('Invalid email or password', 'Unauthorized', {
+          timeOut: 3000
+        });
       }
-
     },
       (error) => {
         // this.error=error.error.error;
         // this.error='Invalid email or password';
         this.spinner.hide();
         this.toastr.warning('something went wrong', 'error');
-
       })
 
   }

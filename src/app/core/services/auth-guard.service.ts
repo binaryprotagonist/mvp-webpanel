@@ -16,10 +16,13 @@ export class AuthGuardService {
         return true;
       }
     }
-    else if( state.url.includes('note-share')){
+    else if ( state.url.includes('note-share')){
       return true;
     }
-    else if( state.url.includes('reset-password')){
+    else if ( state.url.includes('reset-password')){
+      return true;
+    }
+    else if ( state.url.includes('verify-email')){
       return true;
     }
     else {

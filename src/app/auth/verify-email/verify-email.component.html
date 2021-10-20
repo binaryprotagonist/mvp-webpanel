@@ -1,0 +1,16 @@
+<div class="verify-email">
+    <div class="box">
+        <ng-container *ngIf='!response'>
+            <p class="status">Verifing email...</p>
+        </ng-container>
+        <ng-container *ngIf='verificationSuccess'>
+            <p class="status">Verification Successfull</p>
+            <p class="message">You can now login to app, redirecting to login page in 3 seconds...</p>
+        </ng-container>
+        <ng-container *ngIf='verificationFailed'>
+            <p class="status">Verification Failed</p>
+            <p class="message error-message">Error: {{errorMessage}}</p>
+        </ng-container>
+    </div>
+</div>
+<ngx-spinner></ngx-spinner>

@@ -3,7 +3,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { PagesRoutingModule } from './pages.routing.module';
 import { PagesComponent } from './pages.component';
-import { NotesComponent, MyAccountComponent, DashboardComponent, QuickAcessComponent, NotesWritingComponent, TrashComponent, Subscription,HelpComponent,PaymentComponent } from './';
+import { NotesComponent,
+         MyAccountComponent,
+         DashboardComponent,
+         QuickAcessComponent,
+         NotesWritingComponent,
+         TrashComponent,
+         Subscription,
+         HelpComponent,
+         PaymentComponent } from './';
 import { FooterComponent, HeaderComponent } from '../shared';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
@@ -13,7 +21,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { NgxStripeModule } from 'ngx-stripe';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
-import { NgxSpinnerModule } from "ngx-spinner";
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { AngularResizeElementModule } from 'angular-resize-element';
 import { ImageCropperModule } from 'ngx-image-cropper';
 
@@ -22,10 +30,11 @@ import {NgxPrintModule} from 'ngx-print';
 import {AutoSizeInputModule} from 'ngx-autosize-input';
 // import { TrashComponent } from './trash/trash.component';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { NgxCleaveDirectiveModule } from "ngx-cleave-directive";
-import {SafeHtmlPipe} from "./notes-writing/notes-writing.component"
+import { NgxCleaveDirectiveModule } from 'ngx-cleave-directive';
+import {SafeHtmlPipe} from './notes-writing/notes-writing.component';
 import { TrainingComponent } from './training/training.component';
 import { UpdatesComponent } from './updates/updates.component';
+import { VerifyEmailReminderComponent } from './verify-email-reminder/verify-email-reminder.component';
 
 // import { MatMomentDateModule } from "@angular/material-moment-adapter";
 @NgModule({
@@ -45,7 +54,8 @@ import { UpdatesComponent } from './updates/updates.component';
     HelpComponent,
     SafeHtmlPipe,
     TrainingComponent,
-    UpdatesComponent
+    UpdatesComponent,
+    VerifyEmailReminderComponent
   ],
 
   imports: [
@@ -58,7 +68,8 @@ import { UpdatesComponent } from './updates/updates.component';
     SweetAlert2Module,
     NgxSpinnerModule,
     MatProgressBarModule,
-    AngularResizeElementModule,ImageCropperModule,
+    AngularResizeElementModule,
+    ImageCropperModule,
     AngularResizeElementModule,
     NgxMarkjsModule,
     NgSelectModule,

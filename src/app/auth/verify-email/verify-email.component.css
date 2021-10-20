@@ -1,0 +1,36 @@
+.verify-email {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+.box {
+    border-radius: 1.5rem;
+    background-color: #6B85F2;
+    padding: 1.5rem;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 400px;
+    min-height: 250px
+}
+
+.status {
+    font-size: x-large;
+    margin: 0;
+}
+
+.message {
+    font-size: large;
+    margin-top: 0.5rem;
+}
+
+.error-message {
+    color: #ca1a1a
+}
+.success-message {
+    color: #179612
+}
+

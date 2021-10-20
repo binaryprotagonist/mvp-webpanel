@@ -5,6 +5,7 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './auth.component';
 import { LoginComponent, ResetPasswordComponent, ForgetPasswordComponent, RegisterComponent,NotesShareComponent } from './';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { VerifyEmailComponent } from './verify-email/verify-email.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     RegisterComponent,
     ForgetPasswordComponent,
     ResetPasswordComponent,
-    NotesShareComponent
+    NotesShareComponent,
+    VerifyEmailComponent
   ],
   imports: [
     CommonModule,
