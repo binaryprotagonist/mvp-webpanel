@@ -461,6 +461,7 @@ checkStyle(){
         sendTo: this.email,
         noteId: this.noteId,
         userName: this.firstName,
+        notesName: this.notesName,
         url: `https://frontendformvp.herokuapp.com/note-share/${this.noteId}`
       };
       this.commonService.post(`shareNotesUrl`, body).subscribe((data: any) => {
