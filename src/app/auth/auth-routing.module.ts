@@ -1,13 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthComponent } from './auth.component';
-import { LoginComponent, ResetPasswordComponent, ForgetPasswordComponent, RegisterComponent,NotesShareComponent } from './';
+import { LoginComponent, ResetPasswordComponent, ForgetPasswordComponent, RegisterComponent, NotesShareComponent } from './';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
 const routes: Routes = [
   {
     path: '',
     component: AuthComponent,
     children: [
+      {
+        path: '',
+        redirectTo: 'login',
+      },
       {
         path: 'login',
         component: LoginComponent,
@@ -27,11 +31,6 @@ const routes: Routes = [
       {
         path: 'verify-email/:id',
         component: VerifyEmailComponent
-      },
-      {
-        path:'',
-        redirectTo: 'login',
-        pathMatch: 'full',
       },
       {
         path: 'note-share/:id',

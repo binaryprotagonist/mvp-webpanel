@@ -22,6 +22,7 @@ export class RegisterComponent implements OnInit {
   valueChanges: any;
   valueChanges1: any;
   passwordType: any = false;
+  year = new Date().getFullYear();
 
   constructor(private authService: SocialAuthService,
               private commonService: CommonService,

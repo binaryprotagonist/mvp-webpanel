@@ -314,7 +314,7 @@
 
                   </li>
 
-                  <li class="d-p"><button printSectionId="print-section" ngxPrint><a
+                  <li class="d-p"><button printSectionId="print-section" [useExistingCss]="true" ngxPrint><a
                         style="color: #fff !important; margin-left: -29px;">Print</a></button></li>
                 </ul>
               </li>
@@ -534,18 +534,18 @@
       </li>
     </ul>
     <div class="toolbar">
-      <button class="tool-items fa fa-undo" onclick="document.execCommand('undo',false,'')"></button>
+      <button class="tool-items fa fa-undo"  onclick="document.execCommand('undo',false,'')"></button>
       <button class="tool-items fa fa-repeat" onclick="document.execCommand('redo',false,'')"></button>
-      <button class="tool-items fa fa-bold" (click)="execCommand($event,'bold', false)"></button>
-      <button class="tool-items fa fa-italic" (click)="execCommand($event,'italic', false);"></button>
-      <button class="tool-items fa fa-underline" (click)="execCommand($event,'underline', false)"></button>
-      <button class="tool-items fa fa-strikethrough" (click)="execCommand($event,'strikeThrough', false);"></button>
+      <button class="tool-items fa fa-bold" data-tag-name="b" (click)="execCommand($event,'bold', false)"></button>
+      <button class="tool-items fa fa-italic" data-tag-name="i" (click)="execCommand($event,'italic', false);"></button>
+      <button class="tool-items fa fa-underline" data-tag-name="u" (click)="execCommand($event,'underline', false)"></button>
+      <button class="tool-items fa fa-strikethrough" data-tag-name="strike" (click)="execCommand($event,'strikeThrough', false);"></button>
       <!-- Jutify -->
-      <button class="tool-items fa fa-align-left" onclick="document.execCommand('justifyLeft',false,'')"></button>
-      <button class="tool-items fa fa-align-center" onclick="document.execCommand('justifyCenter',false,'')"></button>
-      <button class="tool-items fa fa-align-right" onclick="document.execCommand('justifyRight',false,'')"></button>
-      <button class="tool-items fa fa-list-ul" onclick="document.execCommand('insertUnorderedList',false,'')"></button>
-      <button class="tool-items fa fa-list-ol" onclick="document.execCommand('insertOrderedList',false,'')"></button>
+      <button class="tool-items fa fa-align-left" data-style="textAlign:left" onclick="document.execCommand('justifyLeft',false,'')"></button>
+      <button class="tool-items fa fa-align-center" data-style="textAlign:center" onclick="document.execCommand('justifyCenter',false,'')"></button>
+      <button class="tool-items fa fa-align-right"  data-style="textAlign:right" onclick="document.execCommand('justifyRight',false,'')"></button>
+      <button class="tool-items fa fa-list-ul" data-tag-name="ul" onclick="document.execCommand('insertUnorderedList',false,'')"></button>
+      <button class="tool-items fa fa-list-ol" data-tag-name="ol" onclick="document.execCommand('insertOrderedList',false,'')"></button>
       <button class="tool-items fa fa-indent" onclick="document.execCommand('indent',false,null)"></button>
       <button class="tool-items fa fa-outdent" onclick="document.execCommand('outdent',false,null)"></button>
       <button class="tool-items fa fa-link" (click)="link()"></button>

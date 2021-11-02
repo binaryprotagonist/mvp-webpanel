@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
   user: any;
   valueChanges: any;
   valueChanges1: any;
+  year = new Date().getFullYear();
   constructor(private authService: SocialAuthService, private commonService: CommonService, private _router: Router, private formBuilder: FormBuilder, private toastr: ToastrService, private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {

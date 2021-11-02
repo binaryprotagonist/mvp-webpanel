@@ -21,6 +21,7 @@ import { of } from 'rxjs/internal/observable/of';
 import { merge } from 'rxjs'
 import Swal from 'sweetalert2';
 import * as mark from 'mark.js';
+import { AnonymousSubject } from 'rxjs/internal/Subject';
 
 declare var $: any;
 @Pipe({ name: 'safeHtml'})
@@ -155,6 +156,8 @@ export class NotesWritingComponent implements OnInit, OnDestroy {
         document.getElementById('notes').contentEditable = 'true';
       }
     });
+
+    document.addEventListener('selectionchange', this.selectionChange.bind(this));
   }
 
   ngOnDestroy(): void {
@@ -314,7 +317,10 @@ checkStyle(){
   }
 
   link() {
-    const url = prompt('Enter the URL');
+    let url = prompt('Enter the URL');
+    if (!url.startsWith('https://') || !url.startsWith('http://')) {
+      url = `https://${url}`;
+    }
     document.execCommand('createLink', false, url);
     const aTag = window.getSelection().focusNode.parentNode as HTMLAnchorElement;
     console.log(aTag);
@@ -556,7 +562,7 @@ checkStyle(){
         'summaryTitle': this.summaryTitle,
         'summaryText': document.getElementById('summary').innerHTML
       }
-    }
+    };
     this.commonService.post('createNoteCopy', body).subscribe((data: any) => {
       if (data.status == 200) {
         this.spinner.hide();
@@ -572,7 +578,7 @@ checkStyle(){
     let body = {
       notesName: this.notesName,
       noteId: this.noteId
-    }
+    };
     this.commonService.post('updateNotes', body).subscribe((data: any) => {
       if (data.status == 200) {
         this.spinner.hide();
@@ -588,7 +594,7 @@ checkStyle(){
         this.spinner.hide();
         this._router.navigate(['quickAccess']);
       }
-    })
+    });
   }
   getDetails() {
     $('#exampleModalCenter5').modal('show');
@@ -687,5 +693,43 @@ checkStyle(){
       }
       this.jumpTo();
     }
+  }
+
+
+  selectionChange(): void {
+    const toolbar = document.getElementsByClassName('toolbar')[0];
+    const buttons = toolbar.querySelectorAll('.tool-items');
+    for (let i = 0; i < buttons.length; i++) {
+      buttons[i].classList.remove('tool-items-active');
+    }
+    console.log(typeof this.parentTagActive);
+    this.parentTagActive(window.getSelection().anchorNode.parentNode);
+    // this.test();
+  }
+
+  test(): void {
+    console.log('hi');
+  }
+
+  parentTagActive(elem): any {
+    if (elem.classList.contains('parentEditor')) { return false; }
+
+    let toolbarButton;
+
+    // active by tag names
+    const tagName = elem.tagName.toLowerCase();
+    toolbarButton = document.querySelectorAll(`.toolbar .tool-items[data-tag-name="${tagName}"]`)[0];
+    if (toolbarButton) {
+      toolbarButton.classList.add('tool-items-active');
+    }
+
+    // active by text-align
+    const textAlign = elem.style.textAlign;
+    toolbarButton = document.querySelectorAll(`.toolbar .tool-items[data-style="textAlign:${textAlign}"]`)[0];
+    if (toolbarButton) {
+      toolbarButton.classList.add('tool-items-active');
+    }
+
+    return this.parentTagActive(elem.parentNode);
   }
 }

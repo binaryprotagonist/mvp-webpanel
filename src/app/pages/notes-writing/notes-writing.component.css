@@ -198,13 +198,13 @@ html{
   color: #979797;
   border: none;
 }
+.tool-items-active{
+  background-color: lightgrey;
+  color: black;
+}
 .tool-items:hover{
-    box-shadow: none;
-    width: 25px;
-    height:25px;
-    background: #fae8e8;
-    border:1px solid black;
-
+    background-color: lightgrey;
+    color: black;
 }
 
 
@@ -439,14 +439,6 @@ z-index: 1020;
 top: 75px;
 background-color: #fff;
 }
-
-.mystyle {
-  box-shadow: none;
-  width: 25px;
- height:25px;
- background: #fff !important;
-}
-
 /*
 .border-dotted{
   border-style: dotted;
@@ -525,17 +517,9 @@ width: 25%;
     left: -18px;
     width: 100%;
 }
-.tool-items:hover{
-    width: 30px;
-    height: 30px;
-    background-color: lightgrey;
-   border: none;
-   color: black;
-}
 .tool-items{
   width: 30px;
   height: 30px;
-  color: #858688;
 }
 .toolbar{
   padding: 5px;

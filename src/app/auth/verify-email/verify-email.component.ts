@@ -19,6 +19,7 @@ export class VerifyEmailComponent implements OnInit {
   verificationFailed = false;
   response = false;
   errorMessage = 'Internal Server Error';
+  successMessage = 'You can now login to app, redirecting to login page in 3 seconds...';
   ngOnInit(): void {
     this.loadParams();
   }
@@ -50,9 +51,16 @@ export class VerifyEmailComponent implements OnInit {
 
   verificationSuccessHandler(): void {
     this.verificationSuccess = true;
-    setTimeout(() => {
-      this.router.navigate(['/login']);
-    }, 3000);
+    if (localStorage.getItem('token')) {
+      this.successMessage = 'Redirecting to quick access page in 3 seconds...';
+      setTimeout(() => {
+        this.router.navigate(['/quickAccess']);
+      }, 3000);
+    } else {
+      setTimeout(() => {
+        this.router.navigate(['/login']);
+      }, 3000);
+    }
   }
 
   verificationFailureHandler(message?): void {

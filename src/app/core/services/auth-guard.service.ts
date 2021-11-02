@@ -10,7 +10,7 @@ export class AuthGuardService {
   canActivate(route: ActivatedRouteSnapshot,state: RouterStateSnapshot): boolean {
     console.log('state url', state.url)
 
-    if (state.url === '/login'  || state.url === '/register') {
+    if (state.url === '/login'  || state.url === '/register' || state.url === '/') {
       if (this.isLoggedIn()) {
         this._router.navigate(["quickAccess"]);
         return true;

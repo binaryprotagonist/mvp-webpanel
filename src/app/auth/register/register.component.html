@@ -2,7 +2,9 @@
   <div class="col-lg-4 col-md-12 bg-auth-group">
        <img src="../../../assets/images/logo.png" class="logo_header"/>
        <p class="para_bg_login">
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+        MVP Notes is the best way to take Cornell Style
+        Notes online.  Cornell Style Notes are an effective study technique and can help
+        you learn some hard topics and improve your grades!
        </p>
   </div>
 
@@ -10,8 +12,8 @@
       <div class="login_auth_box d-flex align-items-center  " style="min-height: 94vh;">
 
         <div class="m-auto">
-          <h2 class="ProductSansBold login_heading text-center">Welcome back to MVP Notes.</h2>
-          <p class="text-center ProductSans400 login_para">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+          <h2 class="ProductSansBold login_heading text-center">Sign up to MVP Notes</h2>
+          <p class="text-center ProductSans400 login_para">If you don't have an account on MVP Notes, sign up below. Or you can login to your account!</p>
         <div class="social_login_box">
 
             <a (click)="signInWithGoogle()" class="social_anchor_login">
@@ -24,7 +26,7 @@
             </a>
 
             <div class="email_sign">
-                <p>or use your email for sign in</p>
+                <p>or use your email for sign up</p>
             </div>
         </div>
 
@@ -100,15 +102,15 @@
           <div class="row">
               <div class="col-lg-8 order-mobile-tab-1">
                  <ul class="footer_unders">
-                     <li><a href="#">@2020</a></li>
-                     <li><a routerLink='/terms-and-conditions'>Terms of use</a></li>
-                      <li><a routerLink='/privacy-policy'>Privacy policy</a></li>
-                     <li><a href="#">Trust & Safety</a></li>
+                    <li><a>@{{year}}</a></li>
+                    <li><a routerLink='/terms-and-conditions'>Terms of use</a></li>
+                    <li><a routerLink='/privacy-policy'>Privacy policy</a></li>
+                    <li><a >Trust & Safety</a></li>
                  </ul>
               </div>
               <div class="col-lg-4 tab_footer_view order-mobile-tab">
-                  <a href="#" class="new_class">Already have an account?</a>
-                  <a  [routerLink]="['/login']" class="btn_create">Sign in</a>
+                  <a class="new_class">Already have an account?</a>
+                  <a [routerLink]="['/login']" class="btn_create">Sign in</a>
               </div>
           </div>
       </footer>

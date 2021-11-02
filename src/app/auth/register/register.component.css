@@ -141,7 +141,7 @@ ul.footer_unders li {
 }
 
 ul.footer_unders li a {
-    font-size: 15px;
+    font-size: 14px;
     color: #979797;
     text-decoration: none;
     font-family: Productsans400;
@@ -187,6 +187,9 @@ p.para_bg_login {
     font-family: Productsans400;
     position: absolute;
     bottom: 25px;
+    font-size: 14px;
+    line-height: 30px;
+    opacity: 0.7;
 }
 .email_sign {
     max-width: 500px;
@@ -299,7 +302,7 @@ a.btn_create {
     padding-top: 10px;
     padding-bottom: 10px;
     color: #fff;
-    font-size: 16px;
+    font-size: 14px;
     margin-left: 15px;
     font-family: ProductSans400;
     text-decoration: none;

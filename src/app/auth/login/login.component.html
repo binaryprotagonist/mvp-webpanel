@@ -2,65 +2,54 @@
     <div class="col-lg-4 col-md-12 bg-auth-group">
          <img src="../../../assets/images/logo.png" class="logo_header"/>
          <p class="para_bg_login">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+          MVP Notes is the best way to take Cornell Style
+          Notes online.  Cornell Style Notes are an effective study technique and can help
+          you learn some hard topics and improve your grades!
          </p>
     </div>
 
     <div class="col-lg-8 col-md-12">
         <div class="login_auth_box d-flex align-items-center">
           <div class="m-auto">
-            <p class="ProductSansBold login_heading text-center">Welcome back to MVP Notes.</p>
-            <p class="text-center ProductSans400 login_para">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+            <p class="ProductSansBold login_heading text-center">Log in to MVP Notes</p>
+            <p class="text-center ProductSans400 login_para">If you have an account to MVP Notes, log in below. Or you can create a new account!</p>
           <div class="social_login_box">
-
             <a (click)="signInWithGoogle()" class="social_anchor_login">
-              <img src="../../../assets/images/google.svg" class="google_icon"/>
-            Continue with Google
-          </a>
-          <a (click)="signInWithFB()" class="social_anchor_login bg-blue">
-            <img src="../../../assets/images/facebook.svg" class="google_icon"/>
-            Continue with Facebook
-          </a>
-
-              <div class="email_sign">
-                  <p>or use your email for sign in</p>
-              </div>
+                <img src="../../../assets/images/google.svg" class="google_icon"/>
+              Continue with Google
+            </a>
+            <a (click)="signInWithFB()" class="social_anchor_login bg-blue">
+              <img src="../../../assets/images/facebook.svg" class="google_icon"/>
+              Continue with Facebook
+            </a>
+            <div class="email_sign"><p>or use your email for sign in</p></div>
           </div>
           <ngx-spinner ></ngx-spinner>
-
           <form class="form_login"  [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-              <div class="form-group">
-                  <input type="email" class="form_login_n" formControlName="email" placeholder="Email"  required [ngClass]="{ 'has-error': submitted && formControls.email.errors }"/>
-                  <div class="alert- mt-2" *ngIf=" submitted && formControls.email.errors || loginForm.controls['email'].dirty || loginForm.controls['email'].touched">
-                    <ng-container *ngIf="loginForm.controls['email'].hasError('required')">
-                      <span class="redColor">Email is required</span>
-                    </ng-container>
-                    <ng-container *ngIf="loginForm.controls['email'].hasError('pattern');">
-                      <span class="redColor">Please enter valid email</span>
-                    </ng-container>
-                  </div>
-
-                </div>
-
-              <div class="form-group">
-                <!-- <button id='showpass' class="showpass" (click)="onShowPass()">show</button> -->
-
-                <input [type]="passwordType ? 'text' : 'password'" class="form_login_n" placeholder="Password" formControlName="password" [ngClass]="{ 'has-error': submitted && formControls.password.errors }"
-                 />
-                 <a id='showpass' class="showpass" (click)="onShowPass()" type="button">show</a>
-
-
-
-                <div  class="alert- mt-2" *ngIf=" submitted && formControls.email.errors ||loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)">
-                  <ng-container *ngIf="loginForm.controls['password'].hasError('required');">
-                    <span class="redColor">Password is required</span>
-                  </ng-container>
-                  <ng-container *ngIf="loginForm.controls['password'].hasError('pattern');">
-                    <span class="redColor">Please enter valid password</span>
-                  </ng-container>
-                </div>
-
+            <div class="form-group">
+              <input type="email" class="form_login_n" formControlName="email" placeholder="Email"  required [ngClass]="{ 'has-error': submitted && formControls.email.errors }"/>
+              <div class="alert- mt-2" *ngIf=" submitted && formControls.email.errors || loginForm.controls['email'].dirty || loginForm.controls['email'].touched">
+                <ng-container *ngIf="loginForm.controls['email'].hasError('required')">
+                  <span class="redColor">Email is required</span>
+                </ng-container>
+                <ng-container *ngIf="loginForm.controls['email'].hasError('pattern');">
+                  <span class="redColor">Please enter valid email</span>
+                </ng-container>
               </div>
+            </div>
+
+            <div class="form-group">
+              <input [type]="passwordType ? 'text' : 'password'" class="form_login_n" placeholder="Password" formControlName="password" [ngClass]="{ 'has-error': submitted && formControls.password.errors }"/>
+                <a id='showpass' class="showpass" (click)="onShowPass()" type="button">show</a>
+              <div  class="alert- mt-2" *ngIf=" submitted && formControls.email.errors ||loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)">
+                <ng-container *ngIf="loginForm.controls['password'].hasError('required');">
+                  <span class="redColor">Password is required</span>
+                </ng-container>
+                <ng-container *ngIf="loginForm.controls['password'].hasError('pattern');">
+                  <span class="redColor">Please enter valid password</span>
+                </ng-container>
+              </div>
+            </div>
 
             <div class="form-group">
                 <div class="form-check">
@@ -70,36 +59,32 @@
                   </label>
                 </div>
                 <p class="para_forgot">
-                    <a [routerLink]="['/forget-password']" >
-                        Forgot your password?
-                    </a></p>
+                  <a [routerLink]="['/forget-password']" >Forgot your password?</a>
+                </p>
             </div>
 
             <div class="form-group">
                <input type="submit" value="Sign in" class="form_submit"/>
             </div>
           </form>
-
         </div>
-
       </div>
+      <footer class="footer_class">
+          <div class="row">
+              <div class="col-lg-8 order-mobile-tab-1">
+                  <ul class="footer_unders">
+                      <li><a>@{{year}}</a></li>
+                      <li><a routerLink='/terms-and-conditions'>Terms of use</a></li>
+                      <li><a routerLink='/privacy-policy'>Privacy policy</a></li>
+                      <li><a>Trust & Safety</a></li>
+                  </ul>
+              </div>
 
-        <footer class="footer_class">
-            <div class="row">
-                <div class="col-lg-8 order-mobile-tab-1">
-                   <ul class="footer_unders">
-                       <li><a>@2020</a></li>
-                       <li><a routerLink='/terms-and-conditions'>Terms of use</a></li>
-                       <li><a routerLink='/privacy-policy'>Privacy policy</a></li>
-                       <li><a>Trust & Safety</a></li>
-                   </ul>
-                </div>
-
-                <div class="col-lg-4 tab_footer_view order-mobile-tab">
-                         <a class="new_class">New here?</a>
-                         <a [routerLink]="['/register']" class="btn_create">Create New Account</a>
-                </div>
-            </div>
-        </footer>
+              <div class="col-lg-4 tab_footer_view order-mobile-tab">
+                <a class="new_class">New here?</a>
+                <a [routerLink]="['/register']" class="btn_create">Create New Account</a>
+              </div>
+          </div>
+      </footer>
     </div>
 </div>
