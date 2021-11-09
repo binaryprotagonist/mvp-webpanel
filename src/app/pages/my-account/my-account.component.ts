@@ -293,11 +293,13 @@ export class MyAccountComponent implements OnInit {
   }
   onDelete(){
   Swal.fire({
+    icon: 'warning',
     title: "Are you sure?",
-    text: "Once deleted, you will not be able to recover this imaginary file!",
+    text: "Are you sure you want to delete your account? Once deleted, all of your data will be unavailable and not possible to be recovered.",
     showConfirmButton: true,
     showCancelButton: true,
-    confirmButtonText: 'Yes, delete it!'
+    confirmButtonColor: '#F32013',
+    confirmButtonText: 'Yes'
   })
     .then((willDelete) => {
       if (willDelete.value) {
