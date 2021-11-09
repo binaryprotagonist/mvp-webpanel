@@ -318,7 +318,7 @@ checkStyle(){
 
   link() {
     let url = prompt('Enter the URL');
-    if (!url.startsWith('https://') || !url.startsWith('http://')) {
+    if (!url.startsWith('https://') && !url.startsWith('http://')) {
       url = `https://${url}`;
     }
     document.execCommand('createLink', false, url);
@@ -703,13 +703,11 @@ checkStyle(){
     for (let i = 0; i < buttons.length; i++) {
       buttons[i].classList.remove('tool-items-active');
     }
-    console.log(typeof this.parentTagActive);
-    this.parentTagActive(window.getSelection().anchorNode.parentNode);
-    // this.test();
-  }
-
-  test(): void {
-    console.log('hi');
+    if (window.getSelection().anchorNode.childNodes[0]) {
+      this.parentTagActive(window.getSelection().anchorNode);
+    } else {
+      this.parentTagActive(window.getSelection().anchorNode.parentNode);
+    }
   }
 
   parentTagActive(elem): any {
@@ -732,5 +730,9 @@ checkStyle(){
     }
 
     return this.parentTagActive(elem.parentNode);
+  }
+
+  onNotesSection(status): void {
+    this.clickedOnNotesSection = status; 
   }
 }

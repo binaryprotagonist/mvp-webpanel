@@ -652,13 +652,13 @@
         <div id="content" class="editor" id="print-section">
           <div class="d-flex parentEditor">
             
-            <div (click)='clickedOnNotesSection = false' class=" editor_45 ">
+            <div (click)='onNotesSection(false)' class=" editor_45 ">
               <input type="text" class="note-head1" placeholder="Cue points" (keyup)="getContent()"
                 [(ngModel)]="cuesTitle">
                 <div id="cues" class="cues" (keyup)="getContent()" [attr.contenteditable]=internet [innerHTML]="content | safeHtml"
                 [markjsHighlight]="findText" [markjsConfig]="content" [scrollToFirstMarked]="true"></div>
             </div>
-            <div (click)='clickedOnNotesSection = true'  class="editor_ab">
+            <div (click)='onNotesSection(true)'  class="editor_ab">
               <input type="text" class="note-head1" placeholder="Note" (keyup)="getContent()"
                 [(ngModel)]="noteTitle" />
               <div id="notes" class="notes" (keyup)="getContent()" [attr.contenteditable]=internet
@@ -669,7 +669,7 @@
             </div>
             
           </div>
-          <div (click)='clickedOnNotesSection = false' class="editor_3">
+          <div (click)='onNotesSection(false)' class="editor_3">
             <input type="text" [(ngModel)]="summaryTitle" (keyup)="getContent()" class="note-head1"
               placeholder="Summary">
             <div id="summary" class="summary" contenteditable (keyup)="getContent()" [attr.contenteditable]=internet
