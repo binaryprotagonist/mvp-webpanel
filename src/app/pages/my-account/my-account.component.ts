@@ -308,17 +308,17 @@ export class MyAccountComponent implements OnInit {
     })
   }
   deleteUsers(){
-  let body={
-    isStatus:2,
-   }
-   this.commonService.post('editProfile',body).subscribe((data: any)=>{
-    console.log(data)
-    if(data.status==200){
-      this.toastr.success('deleted', 'success');
-      localStorage.clear()
-      this._router.navigate(["login"]);
-    }else{
-    }
-})
+    let body={
+      isStatus:2,
+     }
+     this.commonService.delete('deleteUser','').subscribe((data: any)=>{
+      console.log(data)
+      if(data.status==200){
+        this.toastr.success('deleted', 'success');
+        localStorage.clear()
+        this._router.navigate(["login"]);
+      }else{
+      }
+  })
   }
 }
