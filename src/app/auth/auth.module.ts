@@ -6,6 +6,7 @@ import { AuthComponent } from './auth.component';
 import { LoginComponent, ResetPasswordComponent, ForgetPasswordComponent, RegisterComponent,NotesShareComponent } from './';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
+import { StripeCallbackComponent } from './stripe-callback/stripe-callback.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { VerifyEmailComponent } from './verify-email/verify-email.component';
     ForgetPasswordComponent,
     ResetPasswordComponent,
     NotesShareComponent,
-    VerifyEmailComponent
+    VerifyEmailComponent,
+    StripeCallbackComponent
   ],
   imports: [
     CommonModule,

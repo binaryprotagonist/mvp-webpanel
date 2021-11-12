@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthComponent } from './auth.component';
 import { LoginComponent, ResetPasswordComponent, ForgetPasswordComponent, RegisterComponent, NotesShareComponent } from './';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
+import { StripeCallbackComponent } from './stripe-callback/stripe-callback.component';
 const routes: Routes = [
   {
     path: '',
@@ -36,6 +37,10 @@ const routes: Routes = [
         path: 'note-share/:id',
         component: NotesShareComponent,
       },
+      {
+        path: 'stripe-callback',
+        component: StripeCallbackComponent
+      }
     ],
   },
 ];

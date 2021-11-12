@@ -13,6 +13,7 @@ import { NotesComponent,
          HelpComponent,
          PaymentComponent } from './';
 import { FooterComponent, HeaderComponent } from '../shared';
+import { SubscriptionsComponent } from './subscriptions/subscriptions.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 // import { AngularEditorModule } from '@kolkov/angular-editor';
@@ -55,7 +56,8 @@ import { VerifyEmailReminderComponent } from './verify-email-reminder/verify-ema
     SafeHtmlPipe,
     TrainingComponent,
     UpdatesComponent,
-    VerifyEmailReminderComponent
+    VerifyEmailReminderComponent,
+    SubscriptionsComponent
   ],
 
   imports: [

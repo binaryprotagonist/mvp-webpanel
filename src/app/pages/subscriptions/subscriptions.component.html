@@ -1,0 +1,87 @@
+<app-header></app-header>
+<ngx-spinner></ngx-spinner>
+
+<div style="width: 80%; margin-left: 10%;">
+    <div id="Subscription">
+        <div class="py-4">
+            <p class="Subs-Head">Subscription</p>
+            <div class="blue-box">
+                <p>Data Usage</p>
+                <div class="slidecontainer">
+                <input type="range" min="1" max="100" value="0" class="slider" id="myRange" disabled>
+                <span>Min</span>
+                <span style="float: right;">Max</span>
+                </div>
+                <p>Notes Usage</p>
+                <p class="value-box">{{plandata?.currentStatus?.noteUsage}}</p>
+                <div class="slidecontainer">
+                <input type="range" min="0" max={{plandata?.currentPlan?.noteUsage}} value={{plandata?.currentStatus?.noteUsage}}
+                    class="slider" id="myRange" disabled>
+                <span>0</span>
+                <span style="float: right;">{{plandata?.currentPlan?.noteUsage}}</span>
+                </div>
+                <p>Subject</p>
+                <p class="value-box">{{plandata?.currentStatus?.subjectUsage}}</p>
+                <div class="slidecontainer">
+                <input type="range" min="0" max={{plandata?.currentPlan?.subjectUsage}}
+                    value={{plandata?.currentStatus?.subjectUsage}} class="slider" id="myRange" disabled>
+                <span>0</span>
+                <span style="float: right;">{{plandata?.currentPlan?.subjectUsage}}</span>
+                </div>
+            </div>
+            <p class="Subs-Head pt-3">Flexible Plans</p>
+            <p class="Subs-subHead">Choose a plan that works best for you</p>
+            <div class="p-3 w-100 d-flex align-items-center justify-content-center">
+                <div class="row m-0 justify-content-center">
+                    <div  *ngFor="let plan of plans;" class="text-center">
+                        <div class="col-md-3" *ngIf="plan?.isActive==true || plan?._id==currentPlan">
+                            <div id={{plan?._id}} class="subs-card" >
+                                <p class="plan-name white">{{plan?.planName}}</p>
+                                <p class="plan-price white">${{plan?.planPrice}}
+                                    <span *ngIf="plan?.planDuration=='30'" class="plan-month white">/Monthly</span>
+                                    <span *ngIf="plan?.planDuration==90" class="plan-month white">/Quarterly</span>
+                                    <span *ngIf="plan?.planDuration==365" class="plan-month white">/Yearly</span>
+                                </p>
+                                <p class="plan-description white">{{plan.description}}</p>
+                                <div class="plan-spec-div">
+                                    <p class="plan-feature white" *ngFor='let spec of plan.specification'>
+                                        <span>
+                                            <img src="assets/images/right.png" class="tick" />
+                                        </span> {{spec}} 
+                                    </p>            
+                                    <p class="plan-feature white">
+                                        <span>
+                                            <img src="assets/images/right.png" class="tick" />
+                                        </span> {{plan?.configration?.subjectUsage}} Subject Usage
+                                    </p>
+                                    <p class="plan-feature white">
+                                        <span>
+                                            <img src="assets/images/right.png" class="tick" />
+                                        </span>
+                                        {{plan?.configration?.noteUsage}} Notes Usage
+                                    </p>
+                                    <p class="plan-feature white">
+                                        <span>
+                                            <img src="assets/images/right.png" class="tick" />
+                                        </span>
+                                        {{plan?.configration?.dataUsage}}MB cloud space
+                                    </p>
+                                </div>
+                                <div *ngIf="plan._id==currentPlan; else other_content">
+                                    <button *ngIf="plan.planPrice==0; else other_content1" class="plan-button white">Current Plan</button>
+                                    <ng-template #other_content1>
+                                        <button class="plan-button white" (click)="onCancel(plan._id)">Cancel plan</button>
+                                    </ng-template>
+                                </div>
+                                <ng-template #other_content>
+                                    <button class="plan-button white" (click)="onChoosePlan(plan)">Choose this plan</button>
+                                </ng-template>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

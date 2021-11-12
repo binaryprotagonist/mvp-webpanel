@@ -4,6 +4,7 @@ import { PagesComponent } from './pages.component';
 import { NotesComponent, MyAccountComponent, DashboardComponent, QuickAcessComponent, NotesWritingComponent, TrashComponent, Subscription, HelpComponent, PaymentComponent } from './';
 import { TrainingComponent } from './training/training.component';
 import { UpdatesComponent } from './updates/updates.component';
+import { SubscriptionsComponent } from './subscriptions/subscriptions.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,7 @@ const routes: Routes = [
       { path: 'notesWriting/:id', component: NotesWritingComponent },
       { path: 'trash', component: TrashComponent },
       { path: 'subscription', component: Subscription },
+      { path: 'subscriptions', component: SubscriptionsComponent },
       { path: 'helpSuport', component: HelpComponent },
       { path: 'payment', component: PaymentComponent },
       { path: 'training', component: TrainingComponent },

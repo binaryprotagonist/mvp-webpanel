@@ -1,0 +1,16 @@
+<div class="verify-email">
+    <div class="box">
+        <!-- <ng-container *ngIf='!response'>
+            <p class="status">Verifing subscription...</p>
+        </ng-container> -->
+        <ng-container *ngIf='subscriptionSuccess'>
+            <p class="status">Subscription Successfull</p>
+            <p class="message">{{successMessage}}</p>
+        </ng-container>
+        <ng-container *ngIf='subscriptionFailed'>
+            <p class="status">Verification Failed</p>
+            <p class="message error-message">Error: {{errorMessage}}</p>
+        </ng-container>
+    </div>
+</div>
+<ngx-spinner></ngx-spinner>
