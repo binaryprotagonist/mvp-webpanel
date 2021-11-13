@@ -1,10 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { StripeCardElementOptions, StripeElementsOptions } from '@stripe/stripe-js';
+import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { StripeCardComponent, StripeService } from 'ngx-stripe';
-import { CommonService, PaymentService } from 'src/app/core/services';
+import { forkJoin, Observable, of } from 'rxjs';
+import { catchError, map, mergeMap } from 'rxjs/operators';
+import { CommonService } from 'src/app/core/services';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -15,10 +13,6 @@ import Swal from 'sweetalert2';
 export class SubscriptionsComponent implements OnInit {
 
   constructor(private commonService: CommonService,
-    private router: Router,
-    private paymentService: PaymentService,
-    private fb: FormBuilder,
-    private stripeService: StripeService,
     private spinner: NgxSpinnerService) { }
 
   plans = [];
@@ -28,41 +22,69 @@ export class SubscriptionsComponent implements OnInit {
   userData: any;
 
   ngOnInit(): void {
-    this.getPlans();
-    this.getUser();
-    this.getTransparentPricing();
+    this.getData();
   }
-  getUser() {
-    this.commonService.get(`getUser`).subscribe((data: any) => {
-      if (data.status == 200) {
-        this.currentPlan = data.result.currentPlan
-        this.userId = data.result.id
-        this.userData = data.result
+  getData() {
+    const apiList = [
+      this.getPlans(),
+      this.getTransparentPricing()
+    ];
+    this.spinner.show();
+    forkJoin(apiList).subscribe((finalData) => {
+      this.spinner.hide();
+      if (finalData[0]) {
+        this.plans = finalData[0].plans;
+        this.currentPlan = finalData[0].currentPlan;
+        this.userId = finalData[0].userId;
+        this.userData = finalData[0].userData;
         setTimeout(() => {
           document.getElementById(this.currentPlan).classList.add('PayButton')
-        }, 1000);
+        }, 100);
       }
+      if (finalData[1]) {
+        this.plandata = finalData[1];
+      }
+    }, error => {
+      console.log(error);
+      this.spinner.hide();
     });
   }
-  getTransparentPricing() {
-    this.commonService.get(`getTransparentPricing`).subscribe((data: any) => {
+  getUser(plans?): Observable<any> {
+    return this.commonService.get(`getUser`)
+    .pipe(
+      map((userResponse: any) => {
+      if (userResponse.status == 200) {
+        return {
+          plans,
+          currentPlan: userResponse.result.currentPlan,
+          userId: userResponse.result.id,
+          userData: userResponse.result
+        }
+      }
+      return null;
+      }),
+      catchError(error => of(null))
+    )
+  }
+  getTransparentPricing(): Observable<any> {
+    return this.commonService.get(`getTransparentPricing`)
+    .pipe(map((data: any) => {
       if (data.status == 200) {
-        this.plandata = data.result
+        return data.result
       }
-    });
+      return null;
+    }));
   }
-  getPlans() {
-    this.commonService.get(`getSubscriptionPlan`).subscribe((data: any) => {
-      if (data.result.length > 0) {
-        this.plans = data.result
-        setTimeout(() => {
-          document.getElementById(this.currentPlan).classList.add('PayButton')
-        }, 500);
+  getPlans(): Observable<any> {
+    return this.commonService.get(`getSubscriptionPlan`)
+    .pipe(mergeMap((plansResponse: any) => {
+      if (plansResponse.result.length > 0) {
+        return this.getUser(plansResponse.result)
       }
-    });
+      return null;
+    }))
   }
   onChoosePlan(plan) { 
-    console.log(plan);
     const body = {
       planName: plan.planName,
       planPrice: plan.planPrice,
@@ -71,9 +93,10 @@ export class SubscriptionsComponent implements OnInit {
       stripePlanId: plan.stripeData.planId,
       stripePriceId: plan.stripeData.priceId
     }
+    this.spinner.show();
     this.commonService.post('checkoutApi', body).subscribe((data: any) => {
-      console.log(data);
-      open(data.data);
+      this.spinner.hide();
+      open(data.data, '_self');
     })
   }
   onCancel(planId) {
@@ -95,19 +118,26 @@ export class SubscriptionsComponent implements OnInit {
       planStatus: 1,
       subscriptionId: planId
     };
+    this.spinner.show();
     this.commonService.post(`planCancel`, body).subscribe((data: any) => {
-      this.spinner.hide();
       if (data.status == 200) {
-        this.getUser()
-        Swal.fire('Ssubscription cancel', 'You need to subscription again.', 'success');
-        document.getElementById(this.currentPlan).classList.remove('PayButton')
+        this.getUser().subscribe((user) => {
+          this.spinner.hide();
+          if (user) {
+            this.userId = user.userId,
+            this.userData = user.userData
+            Swal.fire('Subscription cancelled', 'success');
+            document.getElementById(this.currentPlan).classList.remove('PayButton');
+          }
+        })
       }
       if (data.status == 400) {
-        Swal.fire('Oh Snap', `Something went Wrong!`, 'error');
+        this.spinner.hide();
+        Swal.fire('Error', `Something went Wrong!`, 'error');
       }
     }, (error) => {
       this.spinner.hide();
-      Swal.fire('Oh Snap', `Something went Wrong!`, 'error');
+      Swal.fire('Error', `Something went Wrong!`, 'error');
     });
   }
 

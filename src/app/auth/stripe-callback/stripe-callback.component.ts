@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-stripe-callback',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StripeCallbackComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   subscriptionSuccess = true;
   subscriptionFailed = false;
@@ -15,6 +16,9 @@ export class StripeCallbackComponent implements OnInit {
   successMessage = 'Redirecting to subscriptions page in 3 seconds'
   errorMessage = ''
   ngOnInit(): void {
+    setTimeout(() => {
+      this.router.navigate(['subscription']);
+    }, 3000);
   }
 
 }
